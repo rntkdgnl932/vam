@@ -1,3 +1,9 @@
+import sys
+
+
+sys.path.append('C:/my_games/vam/data_vam/mymodule')
+
+
 # * QTabWidget 탭에 다양한 위젯 추가
 import numpy as np
 from PyQt5.QtWidgets import *
@@ -40,10 +46,7 @@ import ctypes
 import shutil
 import serial
 import pydirectinput
-import sys
 
-
-# sys.path.append('C:/my_games/basic_setting/data_basic/mymodule')
 
 # 나의 모듈 모두 표시해야함
 # from function import imgs_set, imgs_set_, click_pos_2, random_int, text_check_get_3, int_put_, text_check_get, \

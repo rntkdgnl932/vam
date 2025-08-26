@@ -19,7 +19,7 @@ def go_test():
 
     from massenger import line_to_me
     from character_select_and_game_start import character_change, game_ready
-    from clean_screen import skip_check
+    from clean_screen import all_skip
 
 
     cla = "one"
@@ -44,7 +44,14 @@ def go_test():
 
         print("test")
 
-        skip_check(cla)
+        all_skip(cla)
+
+        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\action\\confirm_all\\confirm_1.PNG"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
+        if imgs_ is not None and imgs_ != False:
+            print("confirm_1", imgs_)
 
     except Exception as e:
         print(e)

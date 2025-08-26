@@ -26,7 +26,7 @@ def confirm_all(cla):
 
         while is_action is False:
             is_action_count += 1
-            if is_action_count > 5:
+            if is_action_count > 3:
                 is_action = True
 
             is_confirm = False
@@ -38,12 +38,13 @@ def confirm_all(cla):
             if imgs_ is not None and imgs_ != False:
                 print("confirm_1", imgs_)
                 is_confirm = True
+                click_pos_reg(imgs_.x, imgs_.y, cla)
 
             if is_confirm == True:
                 QTest.qWait(1000)
             else:
                 is_action = True
-            QTest.qWait(1000)
+            QTest.qWait(100)
 
     except Exception as e:
         print(e)
@@ -51,3 +52,28 @@ def confirm_all(cla):
 
 def cancle_all(cla):
     print("cancle_all")
+
+
+def bag_open_check(cla):
+    import numpy as np
+    import cv2
+
+    from function_game import imgs_set_, click_pos_reg, click_pos_2, int_put_, change_number
+    from action import menu_open
+
+    try:
+        print("bag_open_check")
+
+        is_bag = False
+
+        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\action\\bag_open\\ilhwal_btn.PNG"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
+        if imgs_ is not None and imgs_ != False:
+            print("confirm_1", imgs_)
+            is_bag = True
+
+        return is_bag
+    except Exception as e:
+        print(e)

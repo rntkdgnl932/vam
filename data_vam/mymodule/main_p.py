@@ -9,6 +9,8 @@ import sys
 
 import variable as v_
 
+
+
 sys.path.append('C:/my_games/' + str(v_.game_folder) + '/' + str(v_.data_folder) + '/mymodule')
 import os
 import time
@@ -141,7 +143,25 @@ class MyApp(QDialog):
 
         # 풀버젼
         #  git config --global --add safe.directory C:/my_games/mbng
-        # pyinstaller --hidden-import PyQt5 --hidden-import pyserial --hidden-import requests --hidden-import chardet --add-data="C:\\my_games\\game_folder\\data_game;./data_game" --add-data="C:\\my_games\\game_folder\\mysettings;./mysettings" --name game_folder -i="game_folder_macro.ico" --add-data="game_folder_macro.ico;./" --icon="game_folder_macro.ico" --paths "C:\Users\1_S_3\AppData\Local\Programs\Python\Python311\Lib\site-packages\cv2" main.py
+
+        # cd C:\my_games\vam
+        # git init
+        # git remote add origin https://github.com/아이디/vam.git
+
+        # .gitignore
+        # dist/
+        # build/
+        # __pycache__/
+        # *.spec
+        # *.exe
+
+        # git add .
+        # git commit -m "ver 1.01"
+        # git push -u origin main
+
+
+        # pyinstaller --noconfirm --name vam --icon "C:\my_games\icon\vam_macro.ico" --hidden-import PyQt5 --hidden-import pyserial --hidden-import requests --hidden-import chardet --add-data "C:\my_games\vam\data_vam;data_vam" --add-data "C:\my_games\vam\mysettings;mysettings" --add-data "C:\my_games\icon\vam_macro.ico;." --paths "C:\Users\1_S_3\AppData\Local\Programs\Python\Python311\Lib\site-packages\cv2" .\main.py
+        # pyinstaller --noconfirm --name vam --icon "C:\my_games\icon\vam_macro.ico" --hidden-import PyQt5 --hidden-import pyserial --hidden-import requests --hidden-import chardet --add-data "C:\my_games\vam\data_vam;data_vam" --add-data "C:\my_games\vam\mysettings;mysettings" --add-data "C:\my_games\icon\vam_macro.ico;." --paths "C:\Users\1_S_3\AppData\Local\Programs\Python\Python311\Lib\site-packages\cv2" .\main.py
         # 업데이트버젼
         # pyinstaller --hidden-import PyQt5 --hidden-import pyserial --hidden-import requests --hidden-import chardet --add-data="C:\\my_games\\game_folder\\data_game;./data_game" --name game_folder -i="game_folder_macro.ico" --add-data="game_folder_macro.ico;./" --icon="game_folder_macro.ico" --paths "C:\Users\1_S_3\AppData\Local\Programs\Python\Python311\Lib\site-packages\cv2" main.py
 
@@ -178,8 +198,38 @@ class MyApp(QDialog):
         elif last_monitor_number == 3:
             x_reg = 960 * 4
 
+        monitor_position = "topleft"
+        if 1920 < x_reg <= 3840:
+            my_monitor = 1
+            if x_reg > 2880:
+                monitor_position = "topright"
+
+
+        elif 3840 < x_reg:
+            my_monitor = 2
+            if x_reg > 4800:
+                monitor_position = "topright"
+        else:
+            my_monitor = 0
+            if x_reg > 960:
+                monitor_position = "topright"
+
+        # "center" | "topleft" | "topright" | "bottomright" | "bottomleft"
+
         if line_[1] == "super_coob":
             x_reg = 960 * 3
+            my_monitor = 1
+            monitor_position = "topleft"
+
+        from console_position import set_console_on_monitor
+        ok = set_console_on_monitor(
+            monitor_index=1,
+            client_w=800, client_h=800,
+            anchor="bottomright", margin=(40, 40),
+            cols=None, lines=None
+        )
+
+        print("정확 적용:", ok)
 
         self.setGeometry(20 + x_reg, 200, 900, 700)
         self.show()
