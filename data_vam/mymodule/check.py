@@ -126,3 +126,29 @@ def jangsigan_check(cla):
 
     except Exception as e:
         print(e)
+
+
+def move_check(cla):
+    import numpy as np
+    import cv2
+
+    from function_game import imgs_set_, click_pos_reg, click_pos_2, int_put_, change_number
+    from action import menu_open
+
+    try:
+        print("move_check")
+
+        is_loding = False
+
+        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\check\\move\\move_2.PNG"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set_(30, 680, 300, 900, cla, img, 0.8)
+        if imgs_ is not None and imgs_ != False:
+            print("move_2", imgs_)
+            is_loding = True
+
+        return is_loding
+
+    except Exception as e:
+        print(e)
