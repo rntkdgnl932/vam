@@ -223,13 +223,13 @@ class MyApp(QDialog):
 
         from console_position import set_console_on_monitor
         ok = set_console_on_monitor(
-            monitor_index=1,
+            monitor_index=my_monitor,
             client_w=800, client_h=800,
-            anchor="bottomright", margin=(40, 40),
+            anchor=monitor_position, margin=(40, 40),
             cols=None, lines=None
         )
 
-        print("정확 적용:", ok)
+        # print("정확 적용:", ok)
 
         self.setGeometry(20 + x_reg, 200, 900, 700)
         self.show()

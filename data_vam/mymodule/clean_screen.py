@@ -7,18 +7,51 @@ import variable as v_
 
 sys.path.append('C:/my_games/' + str(v_.game_folder) + '/' + str(v_.data_folder) + '/mymodule')
 
+
+kind_skip = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\skip"
+kind_skip_list = os.listdir(kind_skip)
+
+kind_way = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\way_click"
+kind_way_list = os.listdir(kind_way)
+
+kind_close = "c:\\my_games\\vam\\data_vam\\imgs\\clean_screen\\close"
+kind_close_list = os.listdir(kind_close)
+
+
 def clean_screen_start(cla):
     import numpy as np
     import cv2
 
-    from function_game import imgs_set_, click_pos_reg, click_pos_2, int_put_, change_number
-    from action import menu_open
+    from action import juljun_off
+    from check import out_check, juljun_check
 
     try:
         print("clean_screen_start")
 
+        result_out = out_check(cla)
+        if result_out == False:
 
+            is_out = False
+            is_out_count = 0
 
+            while is_out is False:
+                is_out_count += 1
+                if is_out_count > 7:
+                    is_out = True
+
+                result_out = out_check(cla)
+                if result_out == False:
+                    result_juljun = juljun_check(cla)
+                    if result_juljun == True:
+                        juljun_off(cla)
+                    else:
+                        close_click(cla)
+                        QTest.qWait(100)
+                        all_skip(cla)
+                        QTest.qWait(100)
+                else:
+                    break
+                QTest.qWait(100)
     except Exception as e:
         print(e)
 
@@ -43,14 +76,15 @@ def close_click(cla):
 
             is_close = False
 
-            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\clean_screen\\close_1.PNG"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
-            if imgs_ is not None and imgs_ != False:
-                print("close_1", imgs_)
-                is_close = True
-                click_pos_reg(imgs_.x, imgs_.y, cla)
+            for i in range(len(kind_close_list)):
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\clean_screen\\close\\" + str(kind_close_list[i])
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
+                if imgs_ is not None and imgs_ != False:
+                    print("close_list", kind_close_list[i], imgs_)
+                    is_close = True
+                    click_pos_reg(imgs_.x, imgs_.y, cla)
 
             if is_close == True:
                 is_action_count = 0
@@ -99,13 +133,16 @@ def skip_check(cla):
 
         is_skip = False
 
-        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\skip_1.PNG"
-        img_array = np.fromfile(full_path, np.uint8)
-        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
-        if imgs_ is not None and imgs_ != False:
-            print("skip_1", imgs_)
-            is_skip = True
+        for i in range(len(kind_skip_list)):
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\skip\\" + str(kind_skip_list[i])
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
+            if imgs_ is not None and imgs_ != False:
+                print("skip_list", kind_skip_list[i], imgs_)
+                is_skip = True
+                break
         return is_skip
     except Exception as e:
         print(e)
@@ -131,25 +168,25 @@ def skip_start(cla):
 
             is_skip = False
 
-            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\skip_1.PNG"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
-            if imgs_ is not None and imgs_ != False:
-                print("skip_1", imgs_)
-                is_skip = True
+            for i in range(len(kind_skip_list)):
 
-                result_way = way_check(cla)
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\skip\\" + str(kind_skip_list[i])
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
+                if imgs_ is not None and imgs_ != False:
+                    print("skip_list", kind_skip_list[i], imgs_)
+                    is_skip = True
 
-                if result_way == True:
-                    way_start(cla)
-                else:
-                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\skip_1.PNG"
-                    img_array = np.fromfile(full_path, np.uint8)
-                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
-                    if imgs_ is not None and imgs_ != False:
+                    result_way = way_check(cla)
+
+                    if result_way == True:
+                        way_start(cla)
+                    else:
+                        print("클릭하자", imgs_.x, imgs_.y)
                         click_pos_reg(imgs_.x, imgs_.y, cla)
+
+
 
 
             if is_skip == True:
@@ -176,29 +213,17 @@ def way_check(cla):
 
         is_way = False
 
-        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\way_click\\up_right_1.PNG"
-        img_array = np.fromfile(full_path, np.uint8)
-        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
-        if imgs_ is not None and imgs_ != False:
-            print("up_right_1", imgs_)
-            is_way = True
-        else:
-            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\way_click\\down_left_1.PNG"
+        for i in range(len(kind_way_list)):
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\way_click\\" + str(kind_way_list[i])
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
             imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
             if imgs_ is not None and imgs_ != False:
-                print("down_left_1", imgs_)
+                print("kind_way_list", kind_way_list[i], imgs_)
                 is_way = True
-            else:
-                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\way_click\\down_right_1.PNG"
-                img_array = np.fromfile(full_path, np.uint8)
-                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
-                if imgs_ is not None and imgs_ != False:
-                    print("down_right_1", imgs_)
-                    is_way = True
+                break
+
         return is_way
     except Exception as e:
         print(e)
@@ -224,41 +249,56 @@ def way_start(cla):
 
             is_way = False
 
-            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\way_click\\up_right_1.PNG"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
-            if imgs_ is not None and imgs_ != False:
-                print("up_right_1", imgs_)
-                click_pos_reg(imgs_.x + 25, imgs_.y - 25, cla)
-                QTest.qWait(100)
-                click_pos_reg(imgs_.x + 30, imgs_.y - 30, cla)
-                is_action_count = 0
-                is_way = True
-            else:
-                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\way_click\\down_left_1.PNG"
+            for i in range(len(kind_way_list)):
+
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\way_click\\" + str(kind_way_list[i])
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                 imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
                 if imgs_ is not None and imgs_ != False:
-                    print("down_left_1", imgs_)
-                    click_pos_reg(imgs_.x - 25, imgs_.y + 25, cla)
-                    QTest.qWait(100)
-                    click_pos_reg(imgs_.x - 30, imgs_.y + 30, cla)
-                    is_action_count = 0
+                    print("kind_way_list", kind_way_list[i], imgs_)
                     is_way = True
+
+                    # up_right_1, down_right_1...
+
+                    # x
+                    # left = - 25, - 30
+                    # right = + 25, + 30
+
+                    # y
+                    # up = - 25, - 30
+                    # down = + 25, + 30
+                    #
+                    result_des = kind_way_list[i].split("_")
+                    if result_des[0] == "up":
+                        y_reg_1 = -25
+                        y_reg_2 = -30
+                    elif result_des[0] == "down":
+                        y_reg_1 = +25
+                        y_reg_2 = +30
+
+                    if result_des[1] == "left":
+                        x_reg_1 = -25
+                        x_reg_2 = -30
+                    elif result_des[1] == "right":
+                        x_reg_1 = +25
+                        x_reg_2 = +30
+
+
+                    click_pos_reg(imgs_.x + x_reg_1, imgs_.y + y_reg_1, cla)
+                    QTest.qWait(100)
+                    click_pos_reg(imgs_.x + x_reg_2, imgs_.y + y_reg_2, cla)
+                    is_action_count = 0
+
                 else:
-                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\way_click\\down_right_1.PNG"
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\way_click_bag.PNG"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                     imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
                     if imgs_ is not None and imgs_ != False:
-                        print("down_right_1", imgs_)
-                        click_pos_reg(imgs_.x + 25, imgs_.y + 25, cla)
-                        QTest.qWait(100)
-                        click_pos_reg(imgs_.x + 30, imgs_.y + 30, cla)
-                        is_action_count = 0
-                        is_way = True
+                        print("way_click_bag", imgs_)
+                        click_pos_2(880, 50, cla)
+
 
             if is_way == True:
                 QTest.qWait(1000)
@@ -267,7 +307,7 @@ def way_start(cla):
                 if result_confirm == True:
                     is_action_count = 0
                 else:
-                    is_action_count += 1
+                    is_action_count += 2
             QTest.qWait(1000)
 
     except Exception as e:

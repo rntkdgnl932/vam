@@ -19,8 +19,10 @@ def go_test():
 
     from massenger import line_to_me
     from character_select_and_game_start import character_change, game_ready
-    from clean_screen import all_skip
-
+    from clean_screen import all_skip, clean_screen_start
+    from potion import maul_potion
+    from action import juljun_off, juljun_on, menu_open
+    from get_item import get_post
 
     cla = "one"
 
@@ -44,7 +46,12 @@ def go_test():
 
         print("test")
 
-        all_skip(cla)
+        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\post\\all_get_btn.PNG"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set_(0, 50, 960, 1040, cla, img, 0.8)
+        if imgs_ is not None and imgs_ != False:
+            print("all_get_btn", imgs_)
 
         full_path = "c:\\my_games\\vam\\data_vam\\imgs\\action\\confirm_all\\confirm_1.PNG"
         img_array = np.fromfile(full_path, np.uint8)
