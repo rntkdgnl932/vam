@@ -199,9 +199,9 @@ class MyApp(QDialog):
             x_reg = 960 * 4
 
         monitor_position = "topleft"
-        if x_reg = 3840:
+        if x_reg == 3840:
             my_monitor = 2
-        elif x_reg = 1920:
+        elif x_reg == 1920:
             my_monitor = 1
         else:
             my_monitor = 0
