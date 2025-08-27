@@ -14,7 +14,7 @@ def tuto_start(cla):
     import cv2
 
 
-    from clean_screen import all_skip
+    from clean_screen import all_skip, clean_screen_start
     from check import out_check
     from function_game import click_pos_2, click_pos_reg, imgs_set_
 
@@ -43,15 +43,35 @@ def tuto_start(cla):
                     print("quest_btn", imgs_)
 
                 else:
-                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\tuto\\sub_q_1.PNG"
+                    click_pos_2(800, 100, cla)
+
+                    QTest.qWait(500)
+
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\tuto\\mainsub_q_1.PNG"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set_(660, 100, 720, 200, cla, img, 0.8)
+                    imgs_ = imgs_set_(660, 100, 720, 250, cla, img, 0.8)
                     if imgs_ is not None and imgs_ != False:
-                        print("sub_q_1", imgs_)
+                        print("mainsub_q_1", imgs_)
                         click_pos_reg(imgs_.x + 100, imgs_.y + 5, cla)
                     else:
-                        click_pos_2(800, 100, cla)
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\tuto\\sub_q_1.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(660, 100, 720, 250, cla, img, 0.8)
+                        if imgs_ is not None and imgs_ != False:
+                            print("sub_q_1", imgs_)
+                            click_pos_reg(imgs_.x + 100, imgs_.y + 5, cla)
+                        else:
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\tuto\\guide_q_1.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(660, 100, 720, 250, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
+                                print("guide_q_1", imgs_)
+                                click_pos_reg(imgs_.x + 100, imgs_.y + 5, cla)
+        else:
+            clean_screen_start(cla)
     except Exception as e:
         print(e)
 
