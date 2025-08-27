@@ -199,20 +199,12 @@ class MyApp(QDialog):
             x_reg = 960 * 4
 
         monitor_position = "topleft"
-        if 1920 < x_reg <= 3840:
-            my_monitor = 1
-            if x_reg > 2880:
-                monitor_position = "topright"
-
-
-        elif 3840 < x_reg:
+        if x_reg = 3840:
             my_monitor = 2
-            if x_reg > 4800:
-                monitor_position = "topright"
+        elif x_reg = 1920:
+            my_monitor = 1
         else:
             my_monitor = 0
-            if x_reg > 960:
-                monitor_position = "topright"
 
         # "center" | "topleft" | "topright" | "bottomright" | "bottomleft"
 
