@@ -19,15 +19,12 @@ kind_close_list = os.listdir(kind_close)
 
 
 def clean_screen_start(cla):
-    import numpy as np
-    import cv2
-
+    from schedule import myQuest_play_check
     from action import juljun_off
     from check import out_check, juljun_check
 
     try:
         print("clean_screen_start")
-
         result_out = out_check(cla)
         if result_out == False:
 
@@ -83,8 +80,19 @@ def close_click(cla):
                 imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
                 if imgs_ is not None and imgs_ != False:
                     print("close_list", kind_close_list[i], imgs_)
-                    is_close = True
-                    click_pos_reg(imgs_.x, imgs_.y, cla)
+
+
+                    if kind_close_list[i] == "server.PNG":
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\server.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(280, 320, 340, 360, cla, img, 0.85)
+                        if imgs_ is not None and imgs_ != False:
+                            click_pos_2(833, 333, cla)
+                            is_close = True
+                    else:
+                        is_close = True
+                        click_pos_reg(imgs_.x, imgs_.y, cla)
 
             if is_close == True:
                 is_action_count = 0
@@ -101,21 +109,26 @@ def all_skip(cla):
     import cv2
     from action import confirm_all
 
-    from function_game import imgs_set_, click_pos_reg, click_pos_2, int_put_, change_number
-    from action import menu_open
+    from schedule import myQuest_play_check
 
     try:
         print("skip_check")
+
+        result_schedule = myQuest_play_check(cla, "check")
+        result_schedule_ = result_schedule[0][2]
 
         result_skip = skip_check(cla)
         if result_skip == True:
             skip_start(cla)
         else:
-            result_way = way_start(cla)
-            if result_way == True:
-                way_start(cla)
-            else:
-                confirm_all(cla)
+
+            if result_schedule_ == "튜토육성":
+
+                result_way = way_start(cla)
+                if result_way == True:
+                    way_start(cla)
+                else:
+                    confirm_all(cla)
 
     except Exception as e:
         print(e)

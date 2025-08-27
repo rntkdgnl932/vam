@@ -1847,6 +1847,16 @@ def text_check_get_num(posX1, posY1, posX2, posY2, cla):
         return 0
 
 
+
+
+
+
+
+
+# 사용 예
+
+
+
 def text_check_get_reg_num(posX1, posY1, posX2, posY2):
     try:
         from PIL import Image

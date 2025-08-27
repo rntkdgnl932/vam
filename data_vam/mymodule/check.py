@@ -305,4 +305,48 @@ def menu_open_check(cla):
         print(e)
 
 
+def attack_check(cla):
+    import numpy as np
+    import cv2
+    import pyautogui
+    import random
+
+    from clean_screen import all_skip
+    from check import out_check, maul_check, move_check, move_ing
+    from function_game import click_pos_2, click_pos_reg, imgs_set_
+    from action import go_maul
+
+    try:
+        print("attack_check")
+
+        is_attack = False
+
+        result_out = out_check(cla)
+        if result_out == True:
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\check\\attack_check\\out_attack.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(900, 900, 960, 1000, cla, img, 0.8)
+            if imgs_ is not None and imgs_ != False:
+                print("out_attack", imgs_)
+
+                is_attack = True
+        else:
+            result_juljun = juljun_check(cla)
+
+            if result_juljun == True:
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\check\\attack_check\\juljun_attack.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(400, 900, 550, 1000, cla, img, 0.8)
+                if imgs_ is not None and imgs_ != False:
+                    print("juljun_attack", imgs_)
+                    is_attack = True
+
+        return is_attack
+    except Exception as e:
+        print(e)
+
+
 

@@ -232,3 +232,62 @@ def juljun_on(cla):
 
     except Exception as e:
         print(e)
+
+
+
+def attack_on(cla):
+    import numpy as np
+    import cv2
+    import pyautogui
+    import random
+
+    from clean_screen import clean_screen_start
+    from check import out_check, juljun_check
+    from function_game import click_pos_2
+
+
+    try:
+        print("attack_on")
+
+        is_data = False
+        is_data_count = 0
+        while is_data is False:
+            is_data_count += 1
+            if is_data_count > 7:
+                is_data = True
+
+            result_out = out_check(cla)
+            if result_out == True:
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\check\\attack_check\\out_attack.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(900, 900, 960, 1000, cla, img, 0.8)
+                if imgs_ is not None and imgs_ != False:
+                    is_data = True
+                else:
+                    click_pos_2(930, 830, cla)
+            else:
+                clean_screen_start(cla)
+                click_pos_2(930, 830, cla)
+                for i in range(5):
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\check\\attack_check\\out_attack.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(900, 900, 960, 1000, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        is_data = True
+                        break
+                    QTest.qWait(200)
+
+    except Exception as e:
+        print(e)
+
+
+
+
+
+
+
+
+
+

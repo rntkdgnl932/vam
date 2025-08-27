@@ -415,7 +415,7 @@ def game_ready(cla):
                         imgs_ = imgs_set_(0, 800, 300, 1040, cla, img, 0.8)
                         if imgs_ is not None and imgs_ != False:
                             print("boan", imgs_)
-                            click_pos_reg(500, 400, cla)
+                            click_pos_2(500, 400, cla)
                         else:
                             full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\character_select.PNG"
                             img_array = np.fromfile(full_path, np.uint8)
