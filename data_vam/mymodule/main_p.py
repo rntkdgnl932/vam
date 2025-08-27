@@ -209,8 +209,8 @@ class MyApp(QDialog):
         # "center" | "topleft" | "topright" | "bottomright" | "bottomleft"
 
         if line_[1] == "super_coob":
-            x_reg = 960 * 3
-            my_monitor = 1
+            x_reg = 960 * 4
+            my_monitor = 2
             monitor_position = "topleft"
 
         from console_position import set_console_on_monitor
