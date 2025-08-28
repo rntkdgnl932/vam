@@ -27,6 +27,7 @@ def go_test():
     from boonhae_collection import boonhae_start, collection_setting
     from jadong import jadong_start
     from dead_die import dead_check
+    from dungeon import dun_get_x_y
 
 
     cla = "one"
@@ -51,20 +52,27 @@ def go_test():
 
         print("test")
 
-        kind_num = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\number\\"
-        kind_num_list = os.listdir(kind_num)
+        data = "던전_일반_창조의심연_1_하"
 
-        # result_num_ready = text_check_get_num(402, 673, 418, 689, cla)
+        result = dun_get_x_y(data)
+        print(result)
+        print(result[0])
 
-        for i in range(len(kind_num_list)):
-            is_num = kind_num_list[i].split("_")
 
-            full_path = str(kind_num) + str(kind_num_list[i])
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set_(402, 673, 418, 689, cla, img, 0.85)
-            if imgs_ is not None and imgs_ != False:
-                print("is_num[0] : ", is_num[0], imgs_)
+        # kind_num = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\number\\"
+        # kind_num_list = os.listdir(kind_num)
+        #
+        # # result_num_ready = text_check_get_num(402, 673, 418, 689, cla)
+        #
+        # for i in range(len(kind_num_list)):
+        #     is_num = kind_num_list[i].split("_")
+        #
+        #     full_path = str(kind_num) + str(kind_num_list[i])
+        #     img_array = np.fromfile(full_path, np.uint8)
+        #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        #     imgs_ = imgs_set_(402, 673, 418, 689, cla, img, 0.85)
+        #     if imgs_ is not None and imgs_ != False:
+        #         print("is_num[0] : ", is_num[0], imgs_)
 
         # collection_setting(cla)
 

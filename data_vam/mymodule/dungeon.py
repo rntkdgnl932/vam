@@ -48,9 +48,9 @@ def dun_start(cla, data):
         if result_juljun == True:
 
             # 해당 장소에 있는지....
-            # 던전_일반_창조의심연_1
-            # 던전_일반_빛바랜유산_1
-            # 던전_일반_고대의공방_1
+            # 던전_일반_창조의심연_1_하
+            # 던전_일반_빛바랜유산_1_중
+            # 던전_일반_고대의공방_1_상
             full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\" + str(dun_name) + "\\juljun_title.PNG"
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -107,13 +107,14 @@ def dun_spot(cla, data):
             if imgs_ is not None and imgs_ != False:
                 print("dungeon", imgs_)
 
-                # 던전_일반_창조의심연_1 // simyun
-                # 던전_일반_빛바랜유산_1 // yousan
-                # 던전_일반_고대의공방_1 // gongbang
+                # 던전_일반_창조의심연_1_하 // simyun
+                # 던전_일반_빛바랜유산_1_중 // yousan
+                # 던전_일반_고대의공방_1_상 // gongbang
                 split_data = data.split("_")
                 dun_1 = split_data[1]
                 dun_2 = split_data[2]
                 dun_3 = split_data[3]
+                dun_4 = split_data[4]
 
                 if dun_1 == "일반":
                     click_pos_2(60, 90, cla)
@@ -168,7 +169,9 @@ def dun_spot(cla, data):
                         break
                     QTest.qWait(1000)
                 # 랜덤이동 추가
-                go_random(cla)
+                QTest.qWait(1000)
+                result_reg = dun_get_x_y(data)
+                dun_spot_difficulty(cla, result_reg)
                 attack_on(cla)
                 juljun_on(cla)
             else:
@@ -183,5 +186,310 @@ def dun_spot(cla, data):
                     menu_open(cla)
             QTest.qWait(1000)
 
+    except Exception as e:
+        print(e)
+
+
+def dun_spot_difficulty(cla, data):
+    import numpy as np
+    import cv2
+    import pyautogui
+    import random
+
+    from action import attack_on, juljun_on, menu_open, confirm_all, go_random
+    from function_game import click_pos_2, click_pos_reg, imgs_set_, imgs_set_for
+    from clean_screen import clean_screen_start
+    from potion import maul_potion
+    from check import confirm_all_check
+    # kind_skip = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\skip"
+    # kind_skip_list = os.listdir(kind_skip)
+
+    try:
+        print("dun_spot_difficulty", data)
+
+
+
+        is_check = False
+        is_check_count = 0
+
+        while is_check is False:
+            is_check_count += 1
+            if is_check_count > 15:
+                is_check = True
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\dungeon_map.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(600, 30, 960, 250, cla, img, 0.8)
+            if imgs_ is not None and imgs_ != False:
+                print("dungeon_map", imgs_)
+
+                for i in range(10):
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\dungeon_map.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(600, 30, 960, 250, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\82_move.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(60, 100, 900, 950, cla, img, 0.8)
+                        if imgs_ is not None and imgs_ != False:
+                            print("82_move", imgs_)
+                            click_pos_reg(imgs_.x, imgs_.y, cla)
+
+                        else:
+                            click_pos_2(int(data[0]), int(data[1]), cla)
+                    else:
+                        is_check = True
+                        break
+                    QTest.qWait(1000)
+
+
+
+            else:
+                click_pos_2(100, 130, cla)
+            QTest.qWait(1000)
+
+    except Exception as e:
+        print(e)
+
+
+def dun_get_x_y(data):
+
+    try:
+        print("dun_spot_difficulty", data)
+
+        # 던전_일반_창조의심연_1_하 // simyun
+        # 던전_일반_빛바랜유산_1_중 // yousan
+        # 던전_일반_고대의공방_1_상 // gongbang
+        split_data = data.split("_")
+        dun_1 = split_data[1]
+        dun_2 = split_data[2]
+        dun_3 = split_data[3]
+        dun_4 = split_data[4]
+
+        x_reg = 250
+        y_reg = 410
+
+        yet_data_1 = 250
+        yet_data_2 = 410
+
+        if dun_2 == "창조의심연":
+            if dun_3 == "1":
+                if dun_4 == "상":
+                    x_reg = 545
+                    y_reg = 645
+                elif dun_4 == "중":
+                    x_reg = 560
+                    y_reg = 320
+                elif dun_4 == "하":
+                    x_reg = 251
+                    y_reg = 410
+            elif dun_3 == "2":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+            elif dun_3 == "3":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+            elif dun_3 == "4":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+            elif dun_3 == "5":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+            elif dun_3 == "6":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+            elif dun_3 == "7":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+        if dun_2 == "빛바랜유산":
+            if dun_3 == "1":
+                if dun_4 == "상":
+                    x_reg = 545
+                    y_reg = 645
+                elif dun_4 == "중":
+                    x_reg = 560
+                    y_reg = 320
+                elif dun_4 == "하":
+                    x_reg = 251
+                    y_reg = 410
+            elif dun_3 == "2":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+            elif dun_3 == "3":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+            elif dun_3 == "4":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+            elif dun_3 == "5":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+            elif dun_3 == "6":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+            elif dun_3 == "7":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+
+        if dun_2 == "고대의공방":
+            if dun_3 == "1":
+                if dun_4 == "상":
+                    x_reg = 350
+                    y_reg = 375
+                elif dun_4 == "중":
+                    x_reg = 735
+                    y_reg = 355
+                elif dun_4 == "하":
+                    x_reg = 500
+                    y_reg = 580
+            elif dun_3 == "2":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+            elif dun_3 == "3":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+            elif dun_3 == "4":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+            elif dun_3 == "5":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+            elif dun_3 == "6":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+            elif dun_3 == "7":
+                if dun_4 == "상":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "중":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+                elif dun_4 == "하":
+                    x_reg = yet_data_1
+                    y_reg = yet_data_2
+        return x_reg, y_reg
     except Exception as e:
         print(e)

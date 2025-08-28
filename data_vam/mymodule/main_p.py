@@ -1107,14 +1107,14 @@ class FirstTab(QWidget):
         dun_g1_stair_list = ['층', '1', '2', '3', '4', '5', '6', '7']
         dun_g1_stair.addItems(dun_g1_stair_list)
 
-        # dun_g1_step = QComboBox()
-        # dun_g1_step_list = ['lv', '1', '2', '3', '4', '5']
-        # dun_g1_step.addItems(dun_g1_step_list)
+        dun_gi_difficulty = QComboBox()
+        dun_gi_difficulty_list = ['lv', '상', '중', '하']
+        dun_gi_difficulty.addItems(dun_gi_difficulty_list)
 
         dun_box_1 = QHBoxLayout()
         dun_box_1.addWidget(dun_g1_name)
         dun_box_1.addWidget(dun_g1_stair)
-        # dun_box_1.addWidget(dun_g1_step)
+        dun_box_1.addWidget(dun_gi_difficulty)
 
         dungeon_1 = QPushButton('일반던전 추가')
         dungeon_1.clicked.connect(self.onActivated_dunjeon_1_add)
