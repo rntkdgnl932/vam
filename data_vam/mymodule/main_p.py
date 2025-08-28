@@ -50,8 +50,11 @@ from massenger import line_monitor, line_to_me
 from schedule import myQuest_play_check, myQuest_play_add
 from character_select_and_game_start import game_start_screen
 from tuto import tuto_start
-
+from dead_die import dead_check
 from stop_event18 import _stop_please
+from get_item import get_start
+from jadong import jadong_start
+
 
 from test_ import go_test
 
@@ -209,9 +212,9 @@ class MyApp(QDialog):
         # "center" | "topleft" | "topright" | "bottomright" | "bottomleft"
 
         if line_[1] == "super_coob":
-            x_reg = 960 * 4
+            x_reg = 960 * 3
             my_monitor = 2
-            monitor_position = "topleft"
+            monitor_position = "topright"
 
         from console_position import set_console_on_monitor
         ok = set_console_on_monitor(
@@ -1081,7 +1084,7 @@ class FirstTab(QWidget):
         # 마을 의뢰
         self.com_group6 = QGroupBox('육성, 각종템받기, 거래소등록하기, 의뢰')
         cb6 = QComboBox()
-        list6 = ['스케쥴 선택', '캐릭터바꾸기', '각종템받기', '버프와물약사기', '거래소등록', '튜토육성', '의뢰_세라보그', '의뢰_바란', '의뢰_국경지대', '의뢰_유로키나산맥']
+        list6 = ['스케쥴 선택', '각종템받기', '거래소등록', '튜토육성', '자동사냥']
         cb6.addItems(list6)
         vbox6 = QHBoxLayout()
         vbox6.addWidget(cb6)
@@ -1096,7 +1099,7 @@ class FirstTab(QWidget):
         self.dun_group_1 = QGroupBox('균열')
         dun_g1_name = QComboBox()
         # list4 = ['던전 선택', '일반_업보', '일반_지옥', '일반_죄악', '일반_저주', '특수_마족', '특수_아르카스', '파티_묘지']
-        dun_g1_list = ['균열의 땅 선택', '홍염의신전', '얼음유적지', '마리아스의동굴']
+        dun_g1_list = ['일반던전', '창조의심연', '빛바랜유산', '고대의공방']
         dun_g1_name.addItems(dun_g1_list)
 
         dun_g1_stair = QComboBox()
@@ -3933,7 +3936,7 @@ class game_Playing(QThread):
 
 
                                 # 죽었는지 파악
-                                # dead_die(v_.now_cla, result_schedule_)
+                                dead_check(v_.now_cla)
 
 
 
@@ -3947,7 +3950,11 @@ class game_Playing(QThread):
 
                                 if result_schedule_ == "튜토육성":
                                     tuto_start(v_.now_cla)
-                                    print("start")
+                                elif result_schedule_ == "각종템받기":
+                                    get_start(v_.now_cla)
+                                    myQuest_play_add(v_.now_cla, result_schedule_)
+                                elif result_schedule_ == "자동사냥":
+                                    jadong_start(v_.now_cla)
 
 
 

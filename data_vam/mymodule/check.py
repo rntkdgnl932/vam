@@ -231,7 +231,7 @@ def maul_check(cla):
         full_path = "c:\\my_games\\vam\\data_vam\\imgs\\action\\go_maul\\jabhwa.PNG"
         img_array = np.fromfile(full_path, np.uint8)
         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        imgs_ = imgs_set_(600, 30, 960, 300, cla, img, 0.8)
+        imgs_ = imgs_set_(600, 800, 960, 1040, cla, img, 0.8)
         if imgs_ is not None and imgs_ != False:
             print("jabhwa", imgs_)
             is_data = True
@@ -239,7 +239,7 @@ def maul_check(cla):
             full_path = "c:\\my_games\\vam\\data_vam\\imgs\\action\\go_maul\\jangbi.PNG"
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set_(600, 30, 960, 300, cla, img, 0.8)
+            imgs_ = imgs_set_(600, 800, 960, 1040, cla, img, 0.8)
             if imgs_ is not None and imgs_ != False:
                 print("jangbi", imgs_)
                 is_data = True
@@ -266,10 +266,18 @@ def juljun_check(cla):
         full_path = "c:\\my_games\\vam\\data_vam\\imgs\\check\\juljun\\juljun_check.PNG"
         img_array = np.fromfile(full_path, np.uint8)
         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        imgs_ = imgs_set_(350, 30, 650, 100, cla, img, 0.8)
+        imgs_ = imgs_set_(350, 30, 650, 100, cla, img, 0.75)
         if imgs_ is not None and imgs_ != False:
-            print("juljun_check", imgs_)
+            print("juljun_ing", imgs_)
             is_data = True
+        else:
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\check\\juljun\\juljun_check_potion.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(350, 30, 650, 100, cla, img, 0.75)
+            if imgs_ is not None and imgs_ != False:
+                print("juljun_check_potion", imgs_)
+                is_data = True
 
         return is_data
     except Exception as e:
@@ -343,10 +351,50 @@ def attack_check(cla):
                 if imgs_ is not None and imgs_ != False:
                     print("juljun_attack", imgs_)
                     is_attack = True
+                else:
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\check\\attack_check\\juljun_attack_potion.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(400, 900, 550, 1000, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("juljun_attack_potion", imgs_)
+                        is_attack = True
 
         return is_attack
     except Exception as e:
         print(e)
 
 
+def auto_check(cla):
+    import numpy as np
+    import cv2
+
+    from function_game import imgs_set_, click_pos_reg, click_pos_2, int_put_, change_number
+    from action import menu_open
+
+    try:
+        print("auto_check")
+
+        is_on = False
+
+        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\check\\auto\\auto_on.PNG"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set_(900, 800, 960, 860, cla, img, 0.8)
+        if imgs_ is not None and imgs_ != False:
+            print("auto_on", imgs_)
+            is_on = True
+        else:
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\check\\auto\\auto_off.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(900, 800, 960, 860, cla, img, 0.8)
+            if imgs_ is not None and imgs_ != False:
+                print("auto_off", imgs_)
+                is_on = True
+
+        return is_on
+
+    except Exception as e:
+        print(e)
 

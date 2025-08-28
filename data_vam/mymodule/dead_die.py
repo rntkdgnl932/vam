@@ -39,7 +39,9 @@ def dead_check(cla):
         if imgs_ is not None and imgs_ != False:
             print("boohwal_btn", imgs_)
             is_dead = True
-        return is_dead
+
+        if is_dead == True:
+            dead_recovery(cla)
     except Exception as e:
         print(e)
 
@@ -48,44 +50,20 @@ def dead_recovery(cla):
     import numpy as np
     import cv2
 
-    from check import maul_check
+    from schedule import myQuest_play_add, myQuest_play_check
     from function_game import click_pos_2, click_pos_reg, imgs_set_
     from potion import maul_potion
 
     try:
         print("dead_recovery")
+        maul_potion(cla)
 
-        is_open = False
-        is_open_count = 0
-        while is_open is False:
-            is_open_count += 1
-            if is_open_count > 7:
-                is_open = True
+        result_schedule = myQuest_play_check(cla, "check")
+        result_schedule_ = result_schedule[0][2]
 
-            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\post.PNG"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set_(600, 30, 960, 100, cla, img, 0.8)
-            if imgs_ is not None and imgs_ != False:
-                print("post", imgs_)
+        if result_schedule_ == "튜토육성":
+            myQuest_play_add(cla, result_schedule_)
 
 
-            else:
-                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dead_die\\boohwal_btn.PNG"
-                img_array = np.fromfile(full_path, np.uint8)
-                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.8)
-                if imgs_ is not None and imgs_ != False:
-                    print("boohwal_btn", imgs_)
-                    click_pos_reg(imgs_.x, imgs_.y, cla)
-
-                    for i in range(5):
-                        result_maul = maul_check(cla)
-                        if result_maul == True:
-                            maul_potion(cla)
-                            break
-                        QTest.qWait(500)
-
-            QTest.qWait(500)
     except Exception as e:
         print(e)

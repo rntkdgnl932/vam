@@ -196,8 +196,12 @@ def skip_start(cla):
                     if result_way == True:
                         way_start(cla)
                     else:
-                        print("클릭하자", imgs_.x, imgs_.y)
-                        click_pos_reg(imgs_.x, imgs_.y, cla)
+
+                        if kind_skip_list[i] == "space.PNG" and imgs_.y > 1000:
+                            print("넘어가자")
+                        else:
+                            print("클릭하자", imgs_.x, imgs_.y)
+                            click_pos_reg(imgs_.x, imgs_.y, cla)
 
 
 

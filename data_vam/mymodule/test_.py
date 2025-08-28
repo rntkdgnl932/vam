@@ -15,15 +15,18 @@ def go_test():
     import pyautogui
     import random
 
-    from function_game import imgs_set_, click_pos_2, click_pos_reg, text_check_get_num, change_number
+    from function_game import imgs_set_, click_pos_2, click_pos_reg, text_check_get_num, imgs_set_for
 
     from massenger import line_to_me
     from character_select_and_game_start import character_change, game_ready
     from clean_screen import all_skip, clean_screen_start
     from potion import maul_potion
     from action import juljun_off, juljun_on, menu_open
-    from get_item import get_post, get_event, get_special
-    from check import attack_check
+    from get_item import get_post, get_event, get_chosanghwa, get_inmool
+    from check import attack_check, juljun_check
+    from boonhae_collection import boonhae_start, collection_setting
+    from jadong import jadong_start, jadong_spot
+
 
     cla = "one"
 
@@ -47,7 +50,11 @@ def go_test():
 
         print("test")
 
-        get_special(cla)
+        attack_check(cla)
+
+        # collection_setting(cla)
+
+
 
         # kind_close = "c:\\my_games\\vam\\data_vam\\imgs\\clean_screen\\close"
         # kind_close_list = os.listdir(kind_close)
@@ -62,4 +69,3 @@ def go_test():
 
     except Exception as e:
         print(e)
-

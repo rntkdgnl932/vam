@@ -82,11 +82,12 @@ def confirm_all(cla):
                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\action\\confirm_all\\" + str(kind_confirm_list[i])
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
+                imgs_ = imgs_set_(0, 30, 960, 1000, cla, img, 0.85)
                 if imgs_ is not None and imgs_ != False:
                     print("confirm_1", imgs_)
                     is_confirm = True
                     click_pos_reg(imgs_.x, imgs_.y, cla)
+                    break
 
             if is_confirm == True:
                 QTest.qWait(1000)
@@ -110,7 +111,7 @@ def go_maul(cla):
     import random
 
     from clean_screen import clean_screen_start
-    from check import out_check, loading_check, loading_start
+    from check import out_check, loading_check, loading_start, bag_open_check
     from function_game import click_pos_2, click_pos_reg, imgs_set_
 
 
@@ -130,7 +131,7 @@ def go_maul(cla):
                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\action\\go_maul\\jabhwa.PNG"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(600, 30, 960, 300, cla, img, 0.8)
+                imgs_ = imgs_set_(600, 800, 960, 1040, cla, img, 0.8)
                 if imgs_ is not None and imgs_ != False:
                     print("jabhwa", imgs_)
                     is_data = True
@@ -138,7 +139,7 @@ def go_maul(cla):
                     full_path = "c:\\my_games\\vam\\data_vam\\imgs\\action\\go_maul\\jangbi.PNG"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set_(600, 30, 960, 300, cla, img, 0.8)
+                    imgs_ = imgs_set_(600, 800, 960, 1040, cla, img, 0.8)
                     if imgs_ is not None and imgs_ != False:
                         print("jangbi", imgs_)
                         is_data = True
@@ -150,6 +151,12 @@ def go_maul(cla):
                         imgs_ = imgs_set_(890, 960, 960, 1040, cla, img, 0.8)
                         if imgs_ is not None and imgs_ != False:
                             print("guihwan", imgs_)
+
+                            result_bag_open = bag_open_check(cla)
+                            if result_bag_open == True:
+                                click_pos_2(880, 50, cla)
+                                QTest.qWait(500)
+
                             click_pos_reg(imgs_.x, imgs_.y, cla)
                             for i in range(5):
                                 result_loading = loading_check(cla)
@@ -242,8 +249,8 @@ def attack_on(cla):
     import random
 
     from clean_screen import clean_screen_start
-    from check import out_check, juljun_check
-    from function_game import click_pos_2
+    from check import out_check, auto_check
+    from function_game import click_pos_2, imgs_set_
 
 
     try:
@@ -265,7 +272,9 @@ def attack_on(cla):
                 if imgs_ is not None and imgs_ != False:
                     is_data = True
                 else:
-                    click_pos_2(930, 830, cla)
+                    result_auto = auto_check(cla)
+                    if result_auto == True:
+                        click_pos_2(930, 830, cla)
             else:
                 clean_screen_start(cla)
                 click_pos_2(930, 830, cla)
