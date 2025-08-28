@@ -54,6 +54,7 @@ from dead_die import dead_check
 from stop_event18 import _stop_please
 from get_item import get_start
 from jadong import jadong_start
+from dungeon import dun_start
 
 
 from test_ import go_test
@@ -214,7 +215,7 @@ class MyApp(QDialog):
         if line_[1] == "super_coob":
             x_reg = 960 * 3
             my_monitor = 2
-            monitor_position = "topright"
+            monitor_position = "topleft"
 
         from console_position import set_console_on_monitor
         ok = set_console_on_monitor(
@@ -3953,6 +3954,10 @@ class game_Playing(QThread):
                                 elif result_schedule_ == "각종템받기":
                                     get_start(v_.now_cla)
                                     myQuest_play_add(v_.now_cla, result_schedule_)
+
+                                elif '던전' in result_schedule_:
+                                    dun_start(v_.now_cla, result_schedule_)
+
                                 elif result_schedule_ == "자동사냥":
                                     jadong_start(v_.now_cla)
 

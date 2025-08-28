@@ -144,8 +144,7 @@ def myQuest_play_check(cla, data):
                             #     file.write(reset_schedule_)
                 refresh_ = True
                 # 초기화 할때 변경해야할 전역 변수
-                v_.dead_count = 0
-                v_.daily_mission_ready = True
+                chogihwa()
 
 
         else:
@@ -542,8 +541,7 @@ def myQuest_play_add(cla, data):
 
 
             # 초기화 할때 변경해야할 전역 변수
-            v_.dead_count = 0
-            v_.daily_mission_ready = True
+            chogihwa()
 
 
         add_result = 'check'
@@ -553,5 +551,8 @@ def myQuest_play_add(cla, data):
         print(e)
         return 0
 
-
+def chogihwa():
+    v_.dead_count = 0
+    v_.daily_mission_ready = True
+    v_.recovery = True
 
