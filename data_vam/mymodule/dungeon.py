@@ -97,7 +97,7 @@ def dun_spot(cla, data):
 
         while is_check is False:
             is_check_count += 1
-            if is_check_count > 5:
+            if is_check_count > 15:
                 is_check = True
 
             full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\dungeon.PNG"
@@ -169,6 +169,7 @@ def dun_spot(cla, data):
                 imgs_ = imgs_set_(660, 30, 960, 1040, cla, img, 0.8)
                 if imgs_ is not None and imgs_ != False:
                     print("dungeon", imgs_)
+                    click_pos_reg(imgs_.x, imgs_.y, cla)
                 else:
                     menu_open(cla)
             QTest.qWait(1000)
