@@ -1096,7 +1096,7 @@ class FirstTab(QWidget):
 
 
         # 던전 종류
-        self.dun_group_1 = QGroupBox('균열')
+        self.dun_group_1 = QGroupBox('일반던전')
         dun_g1_name = QComboBox()
         # list4 = ['던전 선택', '일반_업보', '일반_지옥', '일반_죄악', '일반_저주', '특수_마족', '특수_아르카스', '파티_묘지']
         dun_g1_list = ['일반던전', '창조의심연', '빛바랜유산', '고대의공방']
@@ -1115,7 +1115,7 @@ class FirstTab(QWidget):
         dun_box_1.addWidget(dun_g1_stair)
         # dun_box_1.addWidget(dun_g1_step)
 
-        dungeon_1 = QPushButton('균열 추가')
+        dungeon_1 = QPushButton('일반던전 추가')
         dungeon_1.clicked.connect(self.onActivated_dunjeon_1_add)
 
         dun_box_1.addWidget(dungeon_1)
@@ -1803,7 +1803,7 @@ class FirstTab(QWidget):
 
     def onActivated_dunjeon_1_add(self):
         char_ = onCharacter
-        dun_ = "던전/균열/" + str(onDunjeon_1) + "_" + str(onDunjeon_1_level)
+        dun_ = "던전_일반_" + str(onDunjeon_1) + "_" + str(onDunjeon_1_level)
         if onCharacter == 0:
             pyautogui.alert(button='넵', text='캐릭터를 선택해 주시지예', title='뭐합니꺼')
         elif onCla == 'none':

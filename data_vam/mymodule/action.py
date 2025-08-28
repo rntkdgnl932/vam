@@ -19,7 +19,6 @@ def menu_open(cla):
     from clean_screen import clean_screen_start
     from check import out_check, maul_check, move_check, move_ing
     from function_game import click_pos_2, click_pos_reg, imgs_set_
-    from action import go_maul
 
     try:
         print("menu_open")
@@ -103,6 +102,49 @@ def cancle_all(cla):
     print("cancle_all")
 
 
+
+
+def go_random(cla):
+    import numpy as np
+    import cv2
+    import pyautogui
+    import random
+
+    from clean_screen import clean_screen_start
+    from check import out_check, loading_check, loading_start, bag_open_check
+    from function_game import click_pos_2, click_pos_reg, imgs_set_
+
+
+    try:
+        print("go_random")
+
+        is_data = False
+        is_data_count = 0
+        while is_data is False:
+            is_data_count +=1
+            if is_data_count > 7:
+                is_data = True
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\action\\go_random\\random_page.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(840, 960, 900, 1040, cla, img, 0.8)
+            if imgs_ is not None and imgs_ != False:
+                print("random_page", imgs_)
+                click_pos_reg(imgs_.x, imgs_.y, cla)
+                QTest.qWait(1000)
+                result_loading = loading_check(cla)
+                if result_loading == True:
+                    loading_start(cla)
+                result_out = out_check(cla)
+                if result_out == True:
+                    is_data = True
+
+            else:
+                clean_screen_start(cla)
+            QTest.qWait(200)
+    except Exception as e:
+        print(e)
 
 def go_maul(cla):
     import numpy as np

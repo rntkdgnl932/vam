@@ -287,13 +287,8 @@ def juljun_check(cla):
 def menu_open_check(cla):
     import numpy as np
     import cv2
-    import pyautogui
-    import random
 
-    from clean_screen import all_skip
-    from check import out_check, maul_check, move_check, move_ing
     from function_game import click_pos_2, click_pos_reg, imgs_set_
-    from action import go_maul
 
     try:
         print("menu_open_check")
@@ -398,3 +393,32 @@ def auto_check(cla):
     except Exception as e:
         print(e)
 
+
+def confirm_all_check(cla):
+    import numpy as np
+    import cv2
+
+    from function_game import imgs_set_, click_pos_reg, click_pos_2, int_put_, change_number
+    from action import menu_open
+
+    kind_confirm = "c:\\my_games\\vam\\data_vam\\imgs\\action\\confirm_all"
+    kind_confirm_list = os.listdir(kind_confirm)
+    try:
+        print("confirm_all_check")
+
+        is_confirm = False
+
+        for i in range(len(kind_confirm_list)):
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\action\\confirm_all\\" + str(kind_confirm_list[i])
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(0, 30, 960, 1000, cla, img, 0.85)
+            if imgs_ is not None and imgs_ != False:
+                print("confirm_1", imgs_)
+                is_confirm = True
+                break
+
+        return is_confirm
+    except Exception as e:
+        print(e)

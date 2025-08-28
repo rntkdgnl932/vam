@@ -1,0 +1,177 @@
+
+
+
+
+import sys
+import os
+import time
+import requests
+from PyQt5.QtTest import *
+import variable as v_
+
+sys.path.append('C:/my_games/' + str(v_.game_folder) + '/' + str(v_.data_folder) + '/mymodule')
+
+
+
+
+
+def dun_start(cla, data):
+    import numpy as np
+    import cv2
+    import pyautogui
+    import random
+
+    from clean_screen import clean_screen_start
+    from check import out_check, juljun_check, attack_check, move_ing
+    from function_game import click_pos_2, click_pos_reg, imgs_set_, change_number, text_check_get_num , int_put_, in_number_check
+    from action import go_maul
+    from potion import potion_check
+    try:
+        print("dun_start", data)
+
+        # 던전_일반_창조의심연_1 // simyun
+        # 던전_일반_빛바랜유산_1 // yousan
+        # 던전_일반_고대의공방_1 // gongbang
+        split_data = data.split("_")
+
+        dun_2 = split_data[2]
+
+        if dun_2 == "창조의심연":
+            dun_name = "simyun"
+        elif dun_2 == "빛바랜유산":
+            dun_name = "yousan"
+        elif dun_2 == "고대의공방":
+            dun_name = "gongbang"
+
+        result_juljun = juljun_check(cla)
+
+        if result_juljun == True:
+
+            # 해당 장소에 있는지....
+            # 던전_일반_창조의심연_1
+            # 던전_일반_빛바랜유산_1
+            # 던전_일반_고대의공방_1
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\" + str(dun_name) + "\\juljun_title.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(0, 60, 150, 150, cla, img, 0.8)
+            if imgs_ is not None and imgs_ != False:
+                print("juljun_title", str(dun_name), imgs_)
+
+                result_attack = attack_check(cla)
+                if result_attack == True:
+                    potion_check(cla)
+                else:
+                    dun_spot(cla)
+            else:
+                dun_spot(cla, data)
+        else:
+            dun_spot(cla)
+
+    except Exception as e:
+        print(e)
+
+
+def dun_spot(cla, data):
+    import numpy as np
+    import cv2
+    import pyautogui
+    import random
+
+    from action import attack_on, juljun_on, menu_open, confirm_all, go_random
+    from function_game import click_pos_2, click_pos_reg, imgs_set_, imgs_set_for
+    from massenger import line_to_me
+    from potion import maul_potion
+    from check import confirm_all_check
+    # kind_skip = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\skip"
+    # kind_skip_list = os.listdir(kind_skip)
+
+    try:
+        print("dun_spot")
+
+        maul_potion(cla)
+
+
+        is_check = False
+        is_check_count = 0
+
+        while is_check is False:
+            is_check_count += 1
+            if is_check_count > 5:
+                is_check = True
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\dungeon.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(600, 30, 960, 250, cla, img, 0.8)
+            if imgs_ is not None and imgs_ != False:
+                print("dungeon", imgs_)
+
+                # 던전_일반_창조의심연_1 // simyun
+                # 던전_일반_빛바랜유산_1 // yousan
+                # 던전_일반_고대의공방_1 // gongbang
+                split_data = data.split("_")
+                dun_1 = split_data[1]
+                dun_2 = split_data[2]
+                dun_3 = split_data[3]
+
+                if dun_1 == "일반":
+                    click_pos_2(60, 90, cla)
+                elif dun_1 == "에픽":
+                    click_pos_2(180, 90, cla)
+
+                if dun_2== "창조의심연":
+                    dun_name = "simyun"
+                    click_title_y = 160
+                elif dun_2 == "빛바랜유산":
+                    dun_name = "yousan"
+                    click_title_y = 245
+                elif dun_2 == "고대의공방":
+                    dun_name = "gongbang"
+                    click_title_y = 330
+                # 145, 195....(+50...)
+
+                click_step_y = 95 + (int(dun_3) * 50)
+
+                for i in range(9):
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\dungeon.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(600, 30, 960, 250, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("dungeon", imgs_)
+
+                        result_confirm = confirm_all_check(cla)
+                        if result_confirm == True:
+                            confirm_all(cla)
+                        else:
+
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\" + str(dun_name) + "\\click_title.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(185, 135, 385, 195, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
+                                print("click_title", str(dun_name), imgs_)
+                                click_pos_2(840, click_step_y, cla)
+                            else:
+                                click_pos_2(100, click_title_y, cla)
+                    else:
+                        break
+                    QTest.qWait(1000)
+                # 랜덤이동 추가
+                go_random(cla)
+                attack_on(cla)
+                juljun_on(cla)
+            else:
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\dungeon.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(660, 30, 960, 1040, cla, img, 0.8)
+                if imgs_ is not None and imgs_ != False:
+                    print("dungeon", imgs_)
+                else:
+                    menu_open(cla)
+            QTest.qWait(1000)
+
+    except Exception as e:
+        print(e)
