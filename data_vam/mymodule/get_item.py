@@ -749,10 +749,18 @@ def get_chosanghwa(cla):
                         print("bogwon", imgs_)
                         click_pos_reg(imgs_.x, imgs_.y, cla)
 
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\chosanghwa\\get.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(700, 900, 960, 1040, cla, img, 0.85)
+                    if imgs_ is not None and imgs_ != False:
+                        print("get", imgs_)
+                        click_pos_reg(imgs_.x, imgs_.y, cla)
 
-                        result_skip = skip_check(cla)
-                        if result_skip == True:
-                            skip_start(cla)
+
+                    result_skip = skip_check(cla)
+                    if result_skip == True:
+                        skip_start(cla)
 
 
 

@@ -7,7 +7,8 @@ import variable as v_
 
 sys.path.append('C:/my_games/' + str(v_.game_folder) + '/' + str(v_.data_folder) + '/mymodule')
 
-
+kind_num = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\number\\"
+kind_num_list = os.listdir(kind_num)
 
 def potion_check(cla):
     import numpy as np
@@ -67,23 +68,32 @@ def potion_check(cla):
                 if imgs_ is not None and imgs_ != False:
                     print("potion_setting", imgs_)
 
-                    result_num_ready = text_check_get_num(404, 673, 440, 685, cla)
-                    print("result_num_ready", result_num_ready)
-                    result_num = change_number(result_num_ready)
-                    print("result_num", result_num)
+                    is_check = True
 
-                    int_num = int_put_(result_num)
+                    # result_num_ready = text_check_get_num(402, 673, 418, 689, cla)
 
-                    result_bool = in_number_check(int_num)
-                    if result_bool == True:
+                    how_num = False
 
-                        is_check = True
+                    for i in range(len(kind_num_list)):
+                        is_num = kind_num_list[i].split("_")
 
-                        if int(int_num) < 100:
-                            v_.potion_count += 1
+                        full_path = str(kind_num) + str(kind_num_list[i])
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(402, 673, 418, 689, cla, img, 0.85)
+                        if imgs_ is not None and imgs_ != False:
+                            print("is_num[0] : ", is_num[0], imgs_)
+                            how_num = True
 
-                            if v_.potion_count > 2:
-                                maul_potion(cla)
+                            break
+
+                    if how_num == False:
+                        v_.potion_count += 1
+
+                        if v_.potion_count > 1:
+                            maul_potion(cla)
+                    else:
+                        v_.potion_count = 0
 
                 else:
                     click_pos_2(x_reg, 1000, cla)
