@@ -216,12 +216,10 @@ def go_maul(cla):
 def juljun_off(cla):
     import numpy as np
     import cv2
-    import pyautogui
-    import random
 
-    from clean_screen import clean_screen_start
+    from clean_screen import close_click
     from check import out_check, juljun_check
-    from function_game import drag_pos
+    from function_game import drag_pos, imgs_set_
 
 
     try:
@@ -240,6 +238,15 @@ def juljun_off(cla):
             else:
                 result_juljun = juljun_check(cla)
                 if result_juljun == True:
+
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\potion_setting.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(400, 350, 550, 410, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("potion_setting", imgs_)
+                        close_click(cla)
+
                     drag_pos(425, 535, 800, 535, cla)
                     QTest.qWait(200)
             QTest.qWait(200)

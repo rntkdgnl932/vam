@@ -167,6 +167,7 @@ def skip_start(cla):
 
     from function_game import imgs_set_, click_pos_reg, click_pos_2, int_put_, change_number
     from action import menu_open
+    from dead_die import dead_check
 
     try:
         print("skip_start")
@@ -198,7 +199,12 @@ def skip_start(cla):
                     else:
 
                         if kind_skip_list[i] == "space.PNG" and imgs_.y > 1000:
-                            print("넘어가자")
+                            print("죽었는지 체크하자")
+                            result_dead = dead_check(cla)
+                            if result_dead == True:
+                                is_action = True
+                                break
+
                         else:
                             print("클릭하자", imgs_.x, imgs_.y)
                             click_pos_reg(imgs_.x, imgs_.y, cla)

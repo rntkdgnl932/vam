@@ -82,7 +82,7 @@ def dead_check(cla):
                             click_pos_reg(imgs_.x, imgs_.y, cla)
                 QTest.qWait(1000)
             dead_recovery(cla)
-
+        return is_dead
     except Exception as e:
         print(e)
 
