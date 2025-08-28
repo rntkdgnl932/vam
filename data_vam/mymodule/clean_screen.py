@@ -57,8 +57,7 @@ def close_click(cla):
     import numpy as np
     import cv2
 
-    from function_game import imgs_set_, click_pos_reg, click_pos_2, int_put_, change_number
-    from action import menu_open
+    from function_game import imgs_set_, click_pos_reg, click_pos_2
 
     try:
         print("close_click")
@@ -92,7 +91,12 @@ def close_click(cla):
                             is_close = True
                     else:
                         is_close = True
-                        click_pos_reg(imgs_.x, imgs_.y, cla)
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\clean_screen\\close\\" + str(kind_close_list[i])
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
+                        if imgs_ is not None and imgs_ != False:
+                            click_pos_reg(imgs_.x, imgs_.y, cla)
 
             if is_close == True:
                 is_action_count = 0
@@ -138,8 +142,7 @@ def skip_check(cla):
     import numpy as np
     import cv2
 
-    from function_game import imgs_set_, click_pos_reg, click_pos_2, int_put_, change_number
-    from action import menu_open
+    from function_game import imgs_set_
 
     try:
         print("skip_check")
@@ -165,8 +168,7 @@ def skip_start(cla):
     import cv2
     from action import confirm_all
 
-    from function_game import imgs_set_, click_pos_reg, click_pos_2, int_put_, change_number
-    from action import menu_open
+    from function_game import imgs_set_, click_pos_reg
     from dead_die import dead_check
 
     try:
@@ -228,8 +230,7 @@ def way_check(cla):
     import numpy as np
     import cv2
 
-    from function_game import imgs_set_, click_pos_reg, click_pos_2, int_put_, change_number
-    from action import menu_open
+    from function_game import imgs_set_
 
     try:
         print("way_check")
@@ -256,8 +257,7 @@ def way_start(cla):
     import cv2
     from action import confirm_all
 
-    from function_game import imgs_set_, click_pos_reg, click_pos_2, int_put_, change_number
-    from action import menu_open
+    from function_game import imgs_set_, click_pos_reg, click_pos_2
 
     try:
         print("way_start")
