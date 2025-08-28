@@ -62,11 +62,11 @@ def dun_start(cla, data):
                 if result_attack == True:
                     potion_check(cla)
                 else:
-                    dun_spot(cla)
+                    dun_spot(cla, data)
             else:
                 dun_spot(cla, data)
         else:
-            dun_spot(cla)
+            dun_spot(cla, data)
 
     except Exception as e:
         print(e)
