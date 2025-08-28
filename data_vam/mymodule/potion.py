@@ -100,7 +100,7 @@ def maul_potion(cla):
     import pyautogui
     import random
 
-    from clean_screen import all_skip
+    from boonhae_collection import boonhae_collection_start
     from check import out_check, maul_check, move_check, move_ing
     from function_game import click_pos_2, click_pos_reg, imgs_set_
     from action import go_maul
@@ -121,6 +121,9 @@ def maul_potion(cla):
             if imgs_ is not None and imgs_ != False:
                 print("jabhwa", imgs_)
                 ilgwal_buy(cla)
+
+                # boonhae_collection_start(cla)
+
                 is_buy = True
                 v_.potion_count = 0
             else:

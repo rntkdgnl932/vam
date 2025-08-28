@@ -8,7 +8,7 @@ import variable as v_
 sys.path.append('C:/my_games/' + str(v_.game_folder) + '/' + str(v_.data_folder) + '/mymodule')
 
 def get_start(cla):
-
+    from boonhae_collection import boonhae_collection_start
     try:
         print("get_start")
 
@@ -19,6 +19,7 @@ def get_start(cla):
         get_inmool(cla)
         get_chosanghwa(cla)
 
+        boonhae_collection_start(cla)
 
     except Exception as e:
         print(e)
