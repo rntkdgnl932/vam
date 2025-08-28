@@ -38,6 +38,7 @@ def dead_check(cla):
         imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.8)
         if imgs_ is not None and imgs_ != False:
             print("boohwal_btn", imgs_)
+            click_pos_reg(imgs_.x, imgs_.y, cla)
             is_dead = True
         else:
             full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dead_die\\boohwal_btn_2.PNG"
@@ -46,6 +47,7 @@ def dead_check(cla):
             imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.8)
             if imgs_ is not None and imgs_ != False:
                 print("boohwal_btn_2", imgs_)
+                click_pos_reg(imgs_.x, imgs_.y, cla)
                 is_dead = True
             else:
                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dead_die\\recovery_btn.PNG"
@@ -57,7 +59,30 @@ def dead_check(cla):
                     is_dead = True
 
         if is_dead == True:
+            for i in range(10):
+                result_out = result_out(cla)
+                if result_out == True:
+
+                    break
+                else:
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dead_die\\boohwal_btn.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("boohwal_btn", imgs_)
+                        click_pos_reg(imgs_.x, imgs_.y, cla)
+                    else:
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dead_die\\boohwal_btn_2.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.8)
+                        if imgs_ is not None and imgs_ != False:
+                            print("boohwal_btn_2", imgs_)
+                            click_pos_reg(imgs_.x, imgs_.y, cla)
+                QTest.qWait(1000)
             dead_recovery(cla)
+
     except Exception as e:
         print(e)
 
@@ -69,9 +94,12 @@ def dead_recovery(cla):
     from schedule import myQuest_play_add, myQuest_play_check
     from function_game import click_pos_2, click_pos_reg, imgs_set_
     from potion import maul_potion
+    from check import out_check
 
     try:
         print("dead_recovery")
+
+
 
         if v_.recovery == True:
             full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dead_die\\recovery_btn.PNG"
