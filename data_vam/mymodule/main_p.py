@@ -77,6 +77,7 @@ onCharacter = 0
 onRefresh_time = 0
 onDunjeon_1 = "none"
 onDunjeon_1_level = 0
+onDunjeon_1_step = "none"
 onDunjeon_2 = "none"
 onDunjeon_2_level = 0
 onDunjeon_3 = "none"
@@ -1282,7 +1283,7 @@ class FirstTab(QWidget):
         #던전
         dun_g1_name.activated[str].connect(self.onActivated_dunjeon_1)  # 던전1 이름
         dun_g1_stair.activated[str].connect(self.onActivated_dunjeon_1_level)  # 던전1 층수
-        # dun_g1_step.activated[str].connect(self.onActivated_dunjeon_1_step)  # 던전1 난이도
+        dun_gi_difficulty.activated[str].connect(self.onActivated_dunjeon_1_step)  # 던전1 난이도
 
         dun_g2_name.activated[str].connect(self.onActivated_dunjeon_2)  # 던전2 이름
         dun_g2_stair.activated[str].connect(self.onActivated_dunjeon_2_level)  # 던전2 층수
@@ -1680,6 +1681,14 @@ class FirstTab(QWidget):
         else:
             onDunjeon_1_level = 0
             print("던전 층수를 선택해 주세요.")
+    def onActivated_dunjeon_1_step(self, text):
+        global onDunjeon_1_step
+        if text != 0 and text != 'none':
+            onDunjeon_1_step = text
+            print('onDunjeon_1_step', onDunjeon_1_step)
+        else:
+            onDunjeon_1_step = "none"
+            print("던전 층수를 선택해 주세요.")
 
 
 
@@ -1804,14 +1813,14 @@ class FirstTab(QWidget):
 
     def onActivated_dunjeon_1_add(self):
         char_ = onCharacter
-        dun_ = "던전_일반_" + str(onDunjeon_1) + "_" + str(onDunjeon_1_level)
+        dun_ = "던전_일반_" + str(onDunjeon_1) + "_" + str(onDunjeon_1_level) + "_" + str(onDunjeon_1_step)
         if onCharacter == 0:
             pyautogui.alert(button='넵', text='캐릭터를 선택해 주시지예', title='뭐합니꺼')
         elif onCla == 'none':
             pyautogui.alert(button='넵', text='몇 클라인지 선택해 주시지예', title='뭐합니꺼')
-        elif onDunjeon_1 == '던전 선택' or onDunjeon_1 == 'none' or onDunjeon_1_level == 0 or onDunjeon_1_level == "층":
-            pyautogui.alert(button='넵', text='던전 및 층수를 선택해 주시지예', title='아 진짜 뭐합니꺼')
-        elif onCharacter != 0 and (onDunjeon_1 != '던전 선택' or onDunjeon_1 != 'none'):
+        elif onDunjeon_1 == '던전 선택' or onDunjeon_1 == 'none' or onDunjeon_1_level == 0 or onDunjeon_1_step == "none":
+            pyautogui.alert(button='넵', text='던전 및 난이도를 선택해 주시지예', title='아 진짜 뭐합니꺼')
+        elif onCharacter != 0 and (onDunjeon_1 != '던전 선택' or onDunjeon_1 != 'none' or onDunjeon_1_step != 'none' or onDunjeon_1_level != 0 ):
             print('char_', char_)
             print('dun_', dun_)
 

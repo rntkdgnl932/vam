@@ -91,6 +91,33 @@ def dun_spot(cla, data):
 
         maul_potion(cla)
 
+        # 던전_일반_창조의심연_1_하 // simyun
+        # 던전_일반_빛바랜유산_1_중 // yousan
+        # 던전_일반_고대의공방_1_상 // gongbang
+        split_data = data.split("_")
+        dun_1 = split_data[1]
+        dun_2 = split_data[2]
+        dun_3 = split_data[3]
+        dun_4 = split_data[4]
+
+        if dun_1 == "일반":
+            click_pos_2(60, 90, cla)
+        elif dun_1 == "에픽":
+            click_pos_2(180, 90, cla)
+
+        if dun_2 == "창조의심연":
+            dun_name = "simyun"
+            click_title_y = 160
+        elif dun_2 == "빛바랜유산":
+            dun_name = "yousan"
+            click_title_y = 245
+        elif dun_2 == "고대의공방":
+            dun_name = "gongbang"
+            click_title_y = 330
+        # 145, 195....(+50...)
+
+        click_step_y = 95 + (int(dun_3) * 50)
+
 
         is_check = False
         is_check_count = 0
@@ -107,32 +134,7 @@ def dun_spot(cla, data):
             if imgs_ is not None and imgs_ != False:
                 print("dungeon", imgs_)
 
-                # 던전_일반_창조의심연_1_하 // simyun
-                # 던전_일반_빛바랜유산_1_중 // yousan
-                # 던전_일반_고대의공방_1_상 // gongbang
-                split_data = data.split("_")
-                dun_1 = split_data[1]
-                dun_2 = split_data[2]
-                dun_3 = split_data[3]
-                dun_4 = split_data[4]
 
-                if dun_1 == "일반":
-                    click_pos_2(60, 90, cla)
-                elif dun_1 == "에픽":
-                    click_pos_2(180, 90, cla)
-
-                if dun_2== "창조의심연":
-                    dun_name = "simyun"
-                    click_title_y = 160
-                elif dun_2 == "빛바랜유산":
-                    dun_name = "yousan"
-                    click_title_y = 245
-                elif dun_2 == "고대의공방":
-                    dun_name = "gongbang"
-                    click_title_y = 330
-                # 145, 195....(+50...)
-
-                click_step_y = 95 + (int(dun_3) * 50)
 
                 for i in range(9):
                     full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\dungeon.PNG"
