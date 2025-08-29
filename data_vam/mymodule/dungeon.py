@@ -349,14 +349,14 @@ def dun_get_x_y(data):
         if dun_2 == "빛바랜유산":
             if dun_3 == "1":
                 if dun_4 == "상":
-                    x_reg = 545
-                    y_reg = 645
+                    x_reg = 251
+                    y_reg = 410
                 elif dun_4 == "중":
                     x_reg = 560
                     y_reg = 320
                 elif dun_4 == "하":
-                    x_reg = 251
-                    y_reg = 410
+                    x_reg = 600
+                    y_reg = 580
             elif dun_3 == "2":
                 if dun_4 == "상":
                     x_reg = yet_data_1
