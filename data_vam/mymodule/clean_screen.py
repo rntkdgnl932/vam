@@ -208,8 +208,13 @@ def skip_start(cla):
                                 break
 
                         else:
-                            print("클릭하자", imgs_.x, imgs_.y)
-                            click_pos_reg(imgs_.x, imgs_.y, cla)
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\skip\\" + str(kind_skip_list[i])
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
+                            if imgs_ is not None and imgs_ != False:
+                                print("클릭하자", imgs_.x, imgs_.y)
+                                click_pos_reg(imgs_.x, imgs_.y, cla)
 
 
 

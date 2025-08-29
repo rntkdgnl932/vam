@@ -18,13 +18,8 @@ sys.path.append('C:/my_games/' + str(v_.game_folder) + '/' + str(v_.data_folder)
 def dun_start(cla, data):
     import numpy as np
     import cv2
-    import pyautogui
-    import random
-
-    from clean_screen import clean_screen_start
-    from check import out_check, juljun_check, attack_check, move_ing
-    from function_game import click_pos_2, click_pos_reg, imgs_set_, change_number, text_check_get_num , int_put_, in_number_check
-    from action import go_maul
+    from check import juljun_check, attack_check
+    from function_game import imgs_set_
     from potion import potion_check
     try:
         print("dun_start", data)
@@ -100,10 +95,7 @@ def dun_spot(cla, data):
         dun_3 = split_data[3]
         dun_4 = split_data[4]
 
-        if dun_1 == "일반":
-            click_pos_2(60, 90, cla)
-        elif dun_1 == "에픽":
-            click_pos_2(180, 90, cla)
+
 
         if dun_2 == "창조의심연":
             dun_name = "simyun"
@@ -133,6 +125,11 @@ def dun_spot(cla, data):
             imgs_ = imgs_set_(600, 30, 960, 250, cla, img, 0.8)
             if imgs_ is not None and imgs_ != False:
                 print("dungeon", imgs_)
+
+                if dun_1 == "일반":
+                    click_pos_2(60, 90, cla)
+                elif dun_1 == "에픽":
+                    click_pos_2(180, 90, cla)
 
 
 
