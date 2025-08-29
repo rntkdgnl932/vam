@@ -59,6 +59,7 @@ def dun_start(cla, data):
                 else:
                     dun_spot(cla, data)
             else:
+                print("v_.now_dun_name", v_.now_dun_name)
                 if v_.now_dun_name == "none":
                     dun_spot(cla, data)
                 else:
