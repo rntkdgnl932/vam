@@ -284,6 +284,7 @@ def juljun_check(cla):
                 if imgs_ is not None and imgs_ != False:
                     print("juljun_dun_list", str(v_.dun_list[i]), imgs_)
                     v_.now_dun_name = str(v_.dun_list[i])
+                    break
 
         else:
             full_path = "c:\\my_games\\vam\\data_vam\\imgs\\check\\juljun\\juljun_check_potion.PNG"

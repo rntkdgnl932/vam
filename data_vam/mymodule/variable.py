@@ -8,7 +8,7 @@ now_arduino = "none"
 potion_count = 0
 recovery = True
 now_dun_name = "none"
-dun_list = ["simyun", "yousan", "gongbang"]
+dun_list = ["simyun", "yousan"]
 
 # 게임 및 폴더 관련
 this_game = "뱀피르"
