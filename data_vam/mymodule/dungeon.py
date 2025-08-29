@@ -77,6 +77,7 @@ def dun_spot(cla, data):
     import pyautogui
     import random
 
+    from schedule import myQuest_play_add
     from action import attack_on, juljun_on, menu_open, confirm_all, go_random
     from function_game import click_pos_2, click_pos_reg, imgs_set_, imgs_set_for
     from clean_screen import clean_screen_start
@@ -87,6 +88,9 @@ def dun_spot(cla, data):
 
     try:
         print("dun_spot")
+
+        complete = False
+        is_dun = False
 
         maul_potion(cla)
 
@@ -130,60 +134,85 @@ def dun_spot(cla, data):
             if imgs_ is not None and imgs_ != False:
                 print("dungeon", imgs_)
 
-                if dun_1 == "일반":
-                    click_pos_2(60, 90, cla)
-                elif dun_1 == "에픽":
-                    click_pos_2(180, 90, cla)
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\complete.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(250, 200, 320, 270, cla, img, 0.8)
+                if imgs_ is not None and imgs_ != False:
+                    print("complete", imgs_)
+                    complete = True
+                else:
+                    if dun_1 == "일반":
+                        click_pos_2(60, 90, cla)
+                    elif dun_1 == "에픽":
+                        click_pos_2(180, 90, cla)
 
 
 
-                for i in range(9):
-                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\dungeon.PNG"
-                    img_array = np.fromfile(full_path, np.uint8)
-                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set_(600, 30, 960, 250, cla, img, 0.8)
-                    if imgs_ is not None and imgs_ != False:
-                        print("dungeon", imgs_)
+                    for i in range(9):
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\dungeon.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(600, 30, 960, 250, cla, img, 0.8)
+                        if imgs_ is not None and imgs_ != False:
+                            print("dungeon", imgs_)
 
 
-                        result_confirm = confirm_all_check(cla)
-                        if result_confirm == True:
-                            confirm_all(cla)
+                            result_confirm = confirm_all_check(cla)
+                            if result_confirm == True:
+                                confirm_all(cla)
 
-                            is_dun = False
-                            for x in range(5):
-                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\already_join_notice.PNG"
+
+                                for x in range(5):
+                                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\already_join_notice.PNG"
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set_(340, 70, 650, 140, cla, img, 0.8)
+                                    if imgs_ is not None and imgs_ != False:
+                                        print("already_join_notice", str(dun_name), imgs_)
+                                        is_dun = True
+                                        clean_screen_start(cla)
+                                        break
+                                    QTest.qWait(200)
+                                if is_dun == True:
+                                    break
+                            else:
+
+                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\" + str(dun_name) + "\\click_title.PNG"
                                 img_array = np.fromfile(full_path, np.uint8)
                                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set_(360, 70, 650, 140, cla, img, 0.8)
+                                imgs_ = imgs_set_(185, 135, 385, 195, cla, img, 0.8)
                                 if imgs_ is not None and imgs_ != False:
-                                    print("already_join_notice", str(dun_name), imgs_)
-                                    is_dun = True
-                                    clean_screen_start(cla)
-                                    break
-                                QTest.qWait(200)
-                            if is_dun == True:
-                                break
-                        else:
+                                    print("click_title", str(dun_name), imgs_)
+                                    click_pos_2(840, click_step_y, cla)
+                                    for x in range(5):
+                                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\notime_notice.PNG"
+                                        img_array = np.fromfile(full_path, np.uint8)
+                                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                        imgs_ = imgs_set_(340, 70, 650, 140, cla, img, 0.8)
+                                        if imgs_ is not None and imgs_ != False:
+                                            print("notime_notice", str(dun_name), imgs_)
+                                            complete = True
+                                            break
+                                    QTest.qWait(200)
 
-                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\" + str(dun_name) + "\\click_title.PNG"
-                            img_array = np.fromfile(full_path, np.uint8)
-                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                            imgs_ = imgs_set_(185, 135, 385, 195, cla, img, 0.8)
-                            if imgs_ is not None and imgs_ != False:
-                                print("click_title", str(dun_name), imgs_)
-                                click_pos_2(840, click_step_y, cla)
-                            else:
-                                click_pos_2(100, click_title_y, cla)
-                    else:
-                        break
-                    QTest.qWait(1000)
-                # 랜덤이동 추가
-                QTest.qWait(1000)
-                result_reg = dun_get_x_y(data)
-                dun_spot_difficulty(cla, result_reg)
-                attack_on(cla)
-                juljun_on(cla)
+                                else:
+                                    click_pos_2(100, click_title_y, cla)
+                        else:
+                            break
+                        QTest.qWait(1000)
+                if complete == True:
+                    myQuest_play_add(cla, data)
+                    clean_screen_start(cla)
+                else:
+
+                    if is_dun == True:
+                        # 랜덤이동 추가
+                        QTest.qWait(1000)
+                        result_reg = dun_get_x_y(data)
+                        dun_spot_difficulty(cla, result_reg)
+                        attack_on(cla)
+                        juljun_on(cla)
                 is_check = True
             else:
                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\dungeon.PNG"
