@@ -59,7 +59,10 @@ def dun_start(cla, data):
                 else:
                     dun_spot(cla, data)
             else:
-                dun_spot(cla, data)
+                if v_.now_dun_name == "none":
+                    dun_spot(cla, data)
+                else:
+                    potion_check(cla)
         else:
             dun_spot(cla, data)
 
