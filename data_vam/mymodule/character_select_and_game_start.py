@@ -307,7 +307,7 @@ def game_ready(cla):
         full_path = "c:\\my_games\\vam\\data_vam\\imgs\\game_start\\game_ready.PNG"
         img_array = np.fromfile(full_path, np.uint8)
         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        imgs_ = imgs_set_(400, 500, 600, 700, cla, img, 0.8)
+        imgs_ = imgs_set_(300, 400, 960, 1040, cla, img, 0.8)
         if imgs_ is not None and imgs_ != False:
             game_ready = True
             game_ready_count = 0
@@ -324,21 +324,29 @@ def game_ready(cla):
                     game_ready_count = 0
                     print("기다리는중", game_ready_count, "초")
                 else:
-                    # 로딩중 확인
-                    result_loading = loading_check(cla)
-                    if result_loading == True:
-                        loading_start(cla)
-
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\check\\game_out_check\\boan.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(0, 800, 300, 1040, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("boan", imgs_)
+                        game_ready = False
                     else:
-                        result_out = out_check(cla)
-                        if result_out == False:
-                            game_ready = True
+                        # 로딩중 확인
+                        result_loading = loading_check(cla)
+                        if result_loading == True:
+                            loading_start(cla)
 
                         else:
-                            game_play_count += 1
-                            print("게임 3초 대기", game_ready_count)
-                            if game_play_count > 2:
-                                game_ready = False
+                            result_out = out_check(cla)
+                            if result_out == False:
+                                game_ready = True
+
+                            else:
+                                game_play_count += 1
+                                print("게임 3초 대기", game_ready_count)
+                                if game_play_count > 2:
+                                    game_ready = False
                 time.sleep(1)
 
         else:
@@ -391,16 +399,26 @@ def game_ready(cla):
                         print(f"{count}초 경과!")
 
 
-            # 완전 바깥 화면
-            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\check\\game_out_check\\boan.PNG"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set_(0, 800, 300, 1040, cla, img, 0.8)
-            if imgs_ is not None and imgs_ != False:
-                print("boan", imgs_)
-                is_path = True
-                count = 0
-                while is_path is True:
+        # 완전 바깥 화면
+        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\check\\game_out_check\\boan.PNG"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set_(0, 800, 300, 1040, cla, img, 0.8)
+        if imgs_ is not None and imgs_ != False:
+            print("boan", imgs_)
+            is_path = True
+            count = 0
+            while is_path is True:
+
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\game_start\\game_ready.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(400, 500, 600, 700, cla, img, 0.8)
+                if imgs_ is not None and imgs_ != False:
+                    print("game_ready", imgs_)
+                    is_path = False
+                    game_ready(cla)
+                else:
                     full_path = "c:\\my_games\\vam\\data_vam\\imgs\\game_start\\download_btn.PNG"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -432,10 +450,10 @@ def game_ready(cla):
                                 imgs_ = imgs_set_(300, 800, 800, 1040, cla, img, 0.8)
                                 if imgs_ is not None and imgs_ != False:
                                     print("path_downloading", imgs_)
-                    QTest.qWait(1000)
-                    count += 1
-                    if count % 5 == 0:
-                        print(f"{count}초 경과!")
+                QTest.qWait(1000)
+                count += 1
+                if count % 5 == 0:
+                    print(f"{count}초 경과!")
 
 
     except Exception as e:
