@@ -160,6 +160,7 @@ def dun_spot(cla, data):
 
                             result_confirm = confirm_all_check(cla)
                             if result_confirm == True:
+                                is_dun = True
                                 confirm_all(cla)
 
 
@@ -170,12 +171,10 @@ def dun_spot(cla, data):
                                     imgs_ = imgs_set_(340, 70, 650, 140, cla, img, 0.8)
                                     if imgs_ is not None and imgs_ != False:
                                         print("already_join_notice", str(dun_name), imgs_)
-                                        is_dun = True
                                         clean_screen_start(cla)
                                         break
                                     QTest.qWait(200)
-                                if is_dun == True:
-                                    break
+                                break
                             else:
 
                                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\" + str(dun_name) + "\\click_title.PNG"
