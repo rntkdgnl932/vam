@@ -15,14 +15,14 @@ def go_test():
     import pyautogui
     import random
 
-    from function_game import imgs_set_, click_pos_2, click_pos_reg, text_check_get_num, imgs_set_for
+    from function_game import imgs_set_, click_pos_2, click_pos_reg, text_check_get_num, imgs_set_for, imgs_set_reg
 
     from massenger import line_to_me
     from character_select_and_game_start import character_change, game_ready
     from clean_screen import all_skip, clean_screen_start
     from potion import maul_potion
     from action import juljun_off, juljun_on, menu_open
-    from get_item import get_post, get_event, get_chosanghwa, get_inmool
+    from get_item import get_post, get_event, get_chosanghwa, get_inmool, get_acave, get_special
     from check import attack_check, juljun_check
     from boonhae_collection import boonhae_start, collection_setting
     from jadong import jadong_start
@@ -52,11 +52,7 @@ def go_test():
 
         print("test")
 
-        data = "던전_일반_창조의심연_1_하"
-
-        result = dun_get_x_y(data)
-        print(result)
-        print(result[0])
+        get_special(cla)
 
 
         # kind_num = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\number\\"

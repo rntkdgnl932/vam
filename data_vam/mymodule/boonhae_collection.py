@@ -132,20 +132,26 @@ def collection_setting(cla):
             imgs_ = imgs_set_(700, 30, 960, 150, cla, img, 0.85)
             if imgs_ is not None and imgs_ != False:
                 print("title : collection", imgs_)
+
                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\list.PNG"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                 imgs_ = imgs_set_(400, 340, 550, 400, cla, img, 0.85)
                 if imgs_ is not None and imgs_ != False:
                     print("list", imgs_)
+                    setting_ready = True
                 else:
                     click_pos_2(890, 90, cla)
-            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\list.PNG"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set_(400, 340, 550, 400, cla, img, 0.8)
-            if imgs_ is not None and imgs_ != False:
-                setting_ready = True
+
+
+                    for i in range(4):
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\list.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(400, 340, 550, 400, cla, img, 0.8)
+                        if imgs_ is not None and imgs_ != False:
+                            setting_ready = True
+                        QTest.qWait(500)
 
             if setting_ready == True:
 
@@ -324,6 +330,7 @@ def boonhae_start(cla):
                 imgs_ = imgs_set_(465, 65, 600, 120, cla, img, 0.8)
                 if imgs_ is not None and imgs_ != False:
                     print("ilgwal_boonhae_title", imgs_)
+                    setting_ready = True
                 else:
                     full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\bag_ilgwalboonhae_btn.PNG"
                     img_array = np.fromfile(full_path, np.uint8)
@@ -334,12 +341,15 @@ def boonhae_start(cla):
                         click_pos_reg(imgs_.x, imgs_.y, cla)
                         QTest.qWait(500)
 
-            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\ilgwal_boonhae_title.PNG"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set_(465, 65, 600, 120, cla, img, 0.8)
-            if imgs_ is not None and imgs_ != False:
-                setting_ready = True
+                        for i in range(5):
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\ilgwal_boonhae_title.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(465, 65, 600, 120, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
+                                setting_ready = True
+                                break
+                            QTest.qWait(400)
 
             if setting_ready == True:
 
@@ -356,28 +366,39 @@ def boonhae_start(cla):
                     imgs_ = imgs_set_(450, 880, 495, 920, cla, img, 0.75)
                     if imgs_ is not None and imgs_ != False:
                         print("고급 o", imgs_)
-                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\not_checked_boonhae.PNG"
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\checked_boonhae_collection.PNG"
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set_(525, 880, 570, 920, cla, img, 0.75)
+                        imgs_ = imgs_set_(375, 915, 420, 960, cla, img, 0.7)
                         if imgs_ is not None and imgs_ != False:
-                            print("희귀 x", imgs_)
+                            print("컬렉션 o", imgs_)
+
                             full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\checked_boonhae_collection.PNG"
                             img_array = np.fromfile(full_path, np.uint8)
                             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                            imgs_ = imgs_set_(375, 915, 420, 960, cla, img, 0.7)
+                            imgs_ = imgs_set_(440, 915, 490, 960, cla, img, 0.75)
                             if imgs_ is not None and imgs_ != False:
-                                print("컬렉션 o", imgs_)
+                                print("거래 o", imgs_)
+
+
                                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\checked_boonhae.PNG"
                                 img_array = np.fromfile(full_path, np.uint8)
                                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set_(450, 915, 650, 960, cla, img, 0.7)
+                                imgs_ = imgs_set_(525, 880, 570, 920, cla, img, 0.75)
                                 if imgs_ is not None and imgs_ != False:
-                                    print("거래, 암거래, 잡화 0", imgs_)
+                                    print("희귀 o", imgs_)
 
                                 else:
-                                    print("거래, 암거래, 잡화 x", imgs_)
-                                    is_open = True
+                                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\checked_boonhae.PNG"
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set_(520, 915, 650, 960, cla, img, 0.7)
+                                    if imgs_ is not None and imgs_ != False:
+                                        print("거래, 암거래, 잡화 o", imgs_)
+
+                                    else:
+                                        print("거래, 암거래, 잡화 x", imgs_)
+                                        is_open = True
 
 
                 # 아래는 체크
@@ -477,6 +498,26 @@ def boonhae_start(cla):
                                 click_pos_reg(imgs_.x, imgs_.y, cla)
                         QTest.qWait(500)
 
+                    # 거래
+                    print("거래 체크중")
+                    for i in range(3):
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\checked_boonhae_collection.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(440, 915, 490, 960, cla, img, 0.75)
+                        if imgs_ is not None and imgs_ != False:
+                            print("checked", imgs_)
+                            break
+                        else:
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\not_checked_boonhae_collection.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(440, 915, 490, 960, cla, img, 0.7)
+                            if imgs_ is not None and imgs_ != False:
+                                print("not_checked", imgs_)
+                                click_pos_reg(imgs_.x, imgs_.y, cla)
+                        QTest.qWait(500)
+
                     # 고급까지만....(이하 다 지우기)
                     # 첫째줄
                     print("첫째줄 해제중(희귀)")
@@ -498,13 +539,13 @@ def boonhae_start(cla):
                                 print("not_checked", imgs_)
                                 break
                         QTest.qWait(500)
-                    # 둘째줄 거래, 암거래, 잡화 x
+                    # 둘째줄 암거래, 잡화 x
                     print("둘째줄 해제중")
                     for i in range(10):
                         full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\checked_boonhae.PNG"
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set_(450, 915, 650, 960, cla, img, 0.7)
+                        imgs_ = imgs_set_(520, 915, 650, 960, cla, img, 0.7)
                         if imgs_ is not None and imgs_ != False:
                             print("checked", imgs_)
                             click_pos_reg(imgs_.x, imgs_.y, cla)
@@ -512,7 +553,7 @@ def boonhae_start(cla):
                             full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\not_checked_boonhae.PNG"
                             img_array = np.fromfile(full_path, np.uint8)
                             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                            imgs_ = imgs_set_(450, 915, 650, 960, cla, img, 0.65)
+                            imgs_ = imgs_set_(520, 915, 650, 960, cla, img, 0.65)
                             if imgs_ is not None and imgs_ != False:
                                 print("not_checked", imgs_)
                                 break

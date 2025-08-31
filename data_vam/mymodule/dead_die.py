@@ -25,7 +25,7 @@ def dead_check(cla):
 
     from clean_screen import skip_start
     from function_game import click_pos_2, click_pos_reg, imgs_set_
-    from action import menu_open
+    from check import out_check
     from clean_screen import clean_screen_start
 
     try:
@@ -60,7 +60,7 @@ def dead_check(cla):
 
         if is_dead == True:
             for i in range(10):
-                result_out = result_out(cla)
+                result_out = out_check(cla)
                 if result_out == True:
 
                     break

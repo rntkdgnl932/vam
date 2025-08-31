@@ -9,16 +9,20 @@ sys.path.append('C:/my_games/' + str(v_.game_folder) + '/' + str(v_.data_folder)
 
 def get_start(cla):
     from boonhae_collection import boonhae_collection_start
+    from klan import klan_donation
     try:
         print("get_start")
 
         get_post(cla)
         get_upjuk(cla)
         get_event(cla)
+        get_special(cla)
         get_sangjum_start(cla)
         get_inmool(cla)
         get_chosanghwa(cla)
+        get_acave(cla)
 
+        klan_donation(cla)
         boonhae_collection_start(cla)
 
     except Exception as e:
@@ -154,7 +158,6 @@ def get_upjuk(cla):
         print(e)
 
 def get_event(cla):
-    print("get_event")
     import numpy as np
     import cv2
 
@@ -238,6 +241,8 @@ def get_event(cla):
             QTest.qWait(500)
     except Exception as e:
         print(e)
+
+
 
 
 def get_special(cla):
@@ -777,6 +782,227 @@ def get_chosanghwa(cla):
                 if imgs_ is not None and imgs_ != False:
                     print("chosanghwa", imgs_)
                     click_pos_reg(imgs_.x, imgs_.y, cla)
+                    QTest.qWait(500)
+                else:
+                    menu_open(cla)
+
+            QTest.qWait(500)
+    except Exception as e:
+        print(e)
+
+
+
+
+def get_acave(cla):
+    import numpy as np
+    import cv2
+
+    from clean_screen import skip_start, skip_check
+    from function_game import imgs_set_reg, click_pos_reg, imgs_set_, click_pos_2
+    from action import menu_open
+    from clean_screen import clean_screen_start
+
+    try:
+        print("get_acave")
+
+        is_open = False
+        is_open_count = 0
+        while is_open is False:
+            is_open_count += 1
+            if is_open_count > 12:
+                is_open = True
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\acave.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(700, 30, 960, 150, cla, img, 0.85)
+            if imgs_ is not None and imgs_ != False:
+                print("title : acave", imgs_)
+
+                is_point = False
+
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\acave\\bottom_point__1.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(180, 790, 800, 900, cla, img, 0.85)
+                if imgs_ is not None and imgs_ != False:
+                    print("bottom_point__1", imgs_)
+                    is_point = True
+                    click_pos_reg(imgs_.x - 15, imgs_.y - 300, cla)
+                    QTest.qWait(500)
+
+                if is_point == True:
+
+                    for i in range(5):
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\acave\\yundagi.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(0, 30, 150, 150, cla, img, 0.85)
+                        if imgs_ is not None and imgs_ != False:
+                            print("yundagi", imgs_)
+                            break
+                        else:
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\acave\\hero.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(0, 30, 150, 150, cla, img, 0.85)
+                            if imgs_ is not None and imgs_ != False:
+                                print("hero", imgs_)
+                                break
+                        QTest.qWait(300)
+
+
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\acave\\left_point_1.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(100, 100, 160, 990, cla, img, 0.85)
+                    if imgs_ is not None and imgs_ != False:
+                        click_pos_reg(imgs_.x - 50, imgs_.y + 15, cla)
+                        QTest.qWait(500)
+
+                        for i in range(5):
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\acave\\get_click_ready_btn.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(470, 100, 550, 990, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
+                                click_pos_reg(imgs_.x - 50, imgs_.y + 15, cla)
+                                QTest.qWait(500)
+                                click_pos_2(850, 1010, cla)
+                                QTest.qWait(500)
+                                click_pos_2(850, 1010, cla)
+                                QTest.qWait(500)
+                                click_pos_2(850, 1010, cla)
+                                QTest.qWait(500)
+                            else:
+                                break
+                            QTest.qWait(500)
+                        for i in range(5):
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\acave\\complete_btn.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(770, 980, 930, 1030, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
+                                break
+                            else:
+                                result_skip = skip_check(cla)
+                                if result_skip == True:
+                                    skip_start(cla)
+                                    break
+                                else:
+                                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\acave\\get_click_ready_btn.PNG"
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set_(470, 100, 550, 990, cla, img, 0.8)
+                                    if imgs_ is not None and imgs_ != False:
+                                        click_pos_reg(imgs_.x - 50, imgs_.y + 15, cla)
+                                        QTest.qWait(500)
+                                        click_pos_2(850, 1010, cla)
+                            QTest.qWait(500)
+                    else:
+
+                        click_pos_2(105, 1010, cla)
+
+
+                        for i in range(5):
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\acave\\yundagi.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(0, 30, 150, 150, cla, img, 0.85)
+                            if imgs_ is not None and imgs_ != False:
+                                print("yundagi", imgs_)
+                                break
+                            else:
+                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\acave\\hero.PNG"
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set_(0, 30, 150, 150, cla, img, 0.85)
+                                if imgs_ is not None and imgs_ != False:
+                                    print("hero", imgs_)
+                                    break
+                            QTest.qWait(300)
+
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\acave\\left_point_1.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(100, 100, 160, 990, cla, img, 0.85)
+                        if imgs_ is not None and imgs_ != False:
+                            click_pos_reg(imgs_.x - 50, imgs_.y + 15, cla)
+                            QTest.qWait(500)
+
+                            for i in range(5):
+                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\acave\\get_click_ready_btn.PNG"
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set_(470, 100, 550, 990, cla, img, 0.8)
+                                if imgs_ is not None and imgs_ != False:
+                                    click_pos_reg(imgs_.x - 50, imgs_.y + 15, cla)
+                                    QTest.qWait(500)
+                                    click_pos_2(850, 1010, cla)
+                                    QTest.qWait(500)
+                                    click_pos_2(850, 1010, cla)
+                                    QTest.qWait(500)
+                                    click_pos_2(850, 1010, cla)
+                                    QTest.qWait(500)
+                                else:
+                                    break
+                                QTest.qWait(500)
+
+                            for i in range(5):
+                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\acave\\complete_btn.PNG"
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set_(770, 980, 930, 1030, cla, img, 0.8)
+                                if imgs_ is not None and imgs_ != False:
+                                    break
+                                else:
+                                    result_skip = skip_check(cla)
+                                    if result_skip == True:
+                                        skip_start(cla)
+                                        break
+                                    else:
+                                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\acave\\get_click_ready_btn.PNG"
+                                        img_array = np.fromfile(full_path, np.uint8)
+                                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                        imgs_ = imgs_set_(470, 100, 550, 990, cla, img, 0.8)
+                                        if imgs_ is not None and imgs_ != False:
+                                            click_pos_reg(imgs_.x - 50, imgs_.y + 15, cla)
+                                            QTest.qWait(500)
+                                            click_pos_2(850, 1010, cla)
+                                QTest.qWait(500)
+                        else:
+                            is_open = True
+                    result_skip = skip_check(cla)
+                    if result_skip == True:
+                        skip_start(cla)
+
+
+
+                else:
+                    is_open = True
+
+                if is_open == True:
+                    clean_screen_start(cla)
+            else:
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\acave.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(600, 30, 960, 1040, cla, img, 0.8)
+                if imgs_ is not None and imgs_ != False:
+                    print("acave", imgs_)
+
+                    x_reg = imgs_.x
+                    y_reg = imgs_.y
+
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\point_1.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_reg(x_reg, y_reg - 50, x_reg + 30, y_reg, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("point_1", imgs_)
+
+                        click_pos_reg(x_reg, y_reg, cla)
+
                     QTest.qWait(500)
                 else:
                     menu_open(cla)
