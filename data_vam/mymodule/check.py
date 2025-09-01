@@ -375,6 +375,37 @@ def attack_check(cla):
     except Exception as e:
         print(e)
 
+def quest_check(cla):
+    import numpy as np
+    import cv2
+    import pyautogui
+    import random
+
+    from clean_screen import all_skip
+    from check import out_check, maul_check, move_check, move_ing
+    from function_game import click_pos_2, click_pos_reg, imgs_set_
+    from action import go_maul
+
+    try:
+        print("quest_check")
+
+        is_quest = False
+
+        result_juljun = juljun_check(cla)
+
+        if result_juljun == True:
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\juljun_quest_ing.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(400, 900, 550, 1000, cla, img, 0.8)
+            if imgs_ is not None and imgs_ != False:
+                print("juljun_quest_ing", imgs_)
+                is_quest = True
+
+
+        return is_quest
+    except Exception as e:
+        print(e)
 
 def auto_check(cla):
     import numpy as np

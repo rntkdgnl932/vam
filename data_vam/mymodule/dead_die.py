@@ -57,6 +57,16 @@ def dead_check(cla):
                 if imgs_ is not None and imgs_ != False:
                     print("recovery_btn", imgs_)
                     is_dead = True
+                else:
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dead_die\\failed.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(0, 30, 300, 1040, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("failed", imgs_)
+                        is_dead = True
+                        click_pos_reg(imgs_.x, imgs_.y, cla)
+
 
         if is_dead == True:
             for i in range(10):
@@ -80,6 +90,14 @@ def dead_check(cla):
                         if imgs_ is not None and imgs_ != False:
                             print("boohwal_btn_2", imgs_)
                             click_pos_reg(imgs_.x, imgs_.y, cla)
+                        else:
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dead_die\\failed.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(0, 30, 300, 1040, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
+                                print("failed", imgs_)
+                                click_pos_reg(imgs_.x, imgs_.y, cla)
                 QTest.qWait(1000)
             dead_recovery(cla)
         return is_dead
@@ -117,7 +135,7 @@ def dead_recovery(cla):
         result_schedule = myQuest_play_check(cla, "check")
         result_schedule_ = result_schedule[0][2]
 
-        if result_schedule_ == "튜토육성":
+        if result_schedule_ == "튜토육성" or "메인" in result_schedule_ or "서브" in result_schedule_:
             myQuest_play_add(cla, result_schedule_)
 
 

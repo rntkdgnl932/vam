@@ -353,7 +353,8 @@ def get_sangjum_gyohwan(cla):
                 print("title : sangjum", imgs_)
 
                 for i in range(10):
-                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\clicked.PNG"
+
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\clicked.PNG"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                     imgs_ = imgs_set_(330, 80, 480, 140, cla, img, 0.85)
@@ -433,7 +434,7 @@ def get_sangjum_start(cla):
                 print("title : sangjum", imgs_)
 
                 for i in range(10):
-                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\clicked.PNG"
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\clicked.PNG"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                     imgs_ = imgs_set_(330, 80, 480, 140, cla, img, 0.85)

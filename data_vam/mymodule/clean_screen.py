@@ -158,6 +158,7 @@ def skip_check(cla):
             if imgs_ is not None and imgs_ != False:
                 print("skip_list", kind_skip_list[i], imgs_)
                 is_skip = True
+
                 break
         return is_skip
     except Exception as e:
@@ -200,7 +201,7 @@ def skip_start(cla):
                         way_start(cla)
                     else:
 
-                        if kind_skip_list[i] == "space.PNG" and imgs_.y > 1000:
+                        if (kind_skip_list[i] == "space.PNG" or kind_skip_list[i] == "touch_me_screen.PNG")and imgs_.y > 990:
                             print("죽었는지 체크하자")
                             result_dead = dead_check(cla)
                             if result_dead == True:
