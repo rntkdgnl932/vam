@@ -52,17 +52,12 @@ def go_test():
 
         print("test")
 
-        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\daily_trinity.PNG"
+        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\game_start\\download_btn.PNG"
         img_array = np.fromfile(full_path, np.uint8)
         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        imgs_ = imgs_set_for(450, 150, 700, 1020, cla, img, 0.85)
+        imgs_ = imgs_set_(0, 580, 960, 1040, cla, img, 0.85)
         if imgs_ is not None and imgs_ != False:
-            print("daily_trinity", imgs_)
-
-            x_reg = imgs_[len(imgs_) - 1][0]
-            y_reg = imgs_[len(imgs_) - 1][1]
-
-            print("result", x_reg, y_reg)
+            print("download_btn", imgs_)
 
 
         # kind_num = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\number\\"

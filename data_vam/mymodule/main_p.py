@@ -1099,10 +1099,13 @@ class FirstTab(QWidget):
 
 
         # 던전 종류
-        self.dun_group_1 = QGroupBox('퀘스트')
+        self.dun_group_1 = QGroupBox('던전')
         dun_g1_name = QComboBox()
+        # 던전_일반_창조의심연_1_하 // simyun
+        # 던전_일반_빛바랜유산_1_중 // yousan
+        # 던전_일반_고대의공방_1_상 // gongbang
         # list4 = ['던전 선택', '일반_업보', '일반_지옥', '일반_죄악', '일반_저주', '특수_마족', '특수_아르카스', '파티_묘지']
-        dun_g1_list = ['퀘스트', '메인', '서브', '일일']
+        dun_g1_list = ['던전', '창조의심연', '빛바랜유산', '고대의공방']
         dun_g1_name.addItems(dun_g1_list)
 
         dun_g1_stair = QComboBox()
@@ -1115,21 +1118,21 @@ class FirstTab(QWidget):
 
         dun_box_1 = QHBoxLayout()
         dun_box_1.addWidget(dun_g1_name)
-        # dun_box_1.addWidget(dun_g1_stair)
-        # dun_box_1.addWidget(dun_gi_difficulty)
+        dun_box_1.addWidget(dun_g1_stair)
+        dun_box_1.addWidget(dun_gi_difficulty)
 
-        dungeon_1 = QPushButton('퀘스트 추가')
+        dungeon_1 = QPushButton('던전 추가')
         dungeon_1.clicked.connect(self.onActivated_dunjeon_1_add)
 
         dun_box_1.addWidget(dungeon_1)
         self.dun_group_1.setLayout(dun_box_1)
 
         # 던전 종류
-        self.dun_group_2 = QGroupBox('심연')
+        self.dun_group_2 = QGroupBox('퀘스트')
         dun_g2_name = QComboBox()
         # list4 = ['던전 선택', '일반_업보', '일반_지옥', '일반_죄악', '일반_저주', '특수_마족', '특수_아르카스', '파티_묘지']
         # dun_g2_list = ['던전 선택', '다크디멘젼', '레이드', '기간토마키아']
-        dun_g2_list = ['뒤틀린 심연 선택', '뒤틀린심연']
+        dun_g2_list = ['퀘스트', '일일', '서브', '메인']
         dun_g2_name.addItems(dun_g2_list)
 
         dun_g2_stair = QComboBox()
@@ -1142,10 +1145,10 @@ class FirstTab(QWidget):
 
         dun_box_2 = QHBoxLayout()
         dun_box_2.addWidget(dun_g2_name)
-        dun_box_2.addWidget(dun_g2_stair)
+        # dun_box_2.addWidget(dun_g2_stair)
         # dun_box_2.addWidget(dun_g2_step)
 
-        dungeon_2 = QPushButton('심연 추가')
+        dungeon_2 = QPushButton('퀘스트 추가')
         dungeon_2.clicked.connect(self.onActivated_dunjeon_2_add)
 
         dun_box_2.addWidget(dungeon_2)
@@ -1667,12 +1670,12 @@ class FirstTab(QWidget):
 
     def onActivated_dunjeon_1(self, text):
         global onDunjeon_1
-        if text != 0 and text != '퀘스트':
+        if text != 0 and text != '던전':
             onDunjeon_1 = text
             print('onDunjeon_1', onDunjeon_1)
         else:
             onDunjeon_1 = 'none'
-            print("퀘스트를 선택해 주세요.")
+            print("던전을 선택해 주세요.")
 
     def onActivated_dunjeon_1_level(self, text):
         global onDunjeon_1_level
@@ -1814,14 +1817,14 @@ class FirstTab(QWidget):
 
     def onActivated_dunjeon_1_add(self):
         char_ = onCharacter
-        dun_ = "퀘스트_" + str(onDunjeon_1) #  + "_" + str(onDunjeon_1_level) + "_" + str(onDunjeon_1_step)
+        dun_ = "던전_일반_" + str(onDunjeon_1) + "_" + str(onDunjeon_1_level) + "_" + str(onDunjeon_1_step)
         if onCharacter == 0:
             pyautogui.alert(button='넵', text='캐릭터를 선택해 주시지예', title='뭐합니꺼')
         elif onCla == 'none':
             pyautogui.alert(button='넵', text='몇 클라인지 선택해 주시지예', title='뭐합니꺼')
-        elif onDunjeon_1 == '퀘스트' or onDunjeon_1 == 'none':
+        elif onDunjeon_1 == '던전' or onDunjeon_1 == 'none':
             pyautogui.alert(button='넵', text='퀘스트 및 난이도를 선택해 주시지예', title='아 진짜 뭐합니꺼')
-        elif onCharacter != 0 and (onDunjeon_1 != '퀘스트' or onDunjeon_1 != 'none'):
+        elif onCharacter != 0 and (onDunjeon_1 != '던전' or onDunjeon_1 != 'none'):
             print('char_', char_)
             print('dun_', dun_)
 
@@ -1837,14 +1840,14 @@ class FirstTab(QWidget):
             self.onActivated_dunjeon_add2(data)
     def onActivated_dunjeon_2_add(self):
         char_ = onCharacter
-        dun_ = "던전/심연/" + str(onDunjeon_2) + "_" + str(onDunjeon_2_level)
+        dun_ = "퀘스트_" + str(onDunjeon_2) # + "_" + str(onDunjeon_2_level)
         if onCharacter == 0:
             pyautogui.alert(button='넵', text='캐릭터를 선택해 주시지예', title='뭐합니꺼')
         elif onCla == 'none':
             pyautogui.alert(button='넵', text='몇 클라인지 선택해 주시지예', title='뭐합니꺼')
-        elif onDunjeon_2 == '던전 선택' or onDunjeon_2 == 'none' or onDunjeon_2_level == 0 or onDunjeon_2_level == "층":
+        elif onDunjeon_2 == '퀘스트' or onDunjeon_2 == 'none':
             pyautogui.alert(button='넵', text='던전 및 층수를 선택해 주시지예', title='아 진짜 뭐합니꺼')
-        elif onCharacter != 0 and (onDunjeon_2 != '던전 선택' or onDunjeon_2 != 'none'):
+        elif onCharacter != 0 and (onDunjeon_2 != '퀘스트' or onDunjeon_2 != 'none'):
             print('char_', char_)
             print('dun_', dun_)
 
