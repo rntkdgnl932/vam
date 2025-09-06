@@ -350,6 +350,7 @@ def game_ready(cla):
                 time.sleep(1)
 
         else:
+            is_download = False
             # 다운로드 화면
             full_path = "c:\\my_games\\vam\\data_vam\\imgs\\game_start\\download_btn.PNG"
             img_array = np.fromfile(full_path, np.uint8)
@@ -358,10 +359,29 @@ def game_ready(cla):
             if imgs_ is not None and imgs_ != False:
                 print("download_btn", imgs_)
                 click_pos_reg(imgs_.x, imgs_.y, cla)
+                is_download = True
 
+
+            else:
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\game_start\\download_ing.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(200, 900, 800, 1040, cla, img, 0.85)
+                if imgs_ is not None and imgs_ != False:
+                    print("download_ing", imgs_)
+                    is_download = True
+            if is_download == True:
                 is_path = True
                 count = 0
                 while is_path is True:
+
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\game_start\\download_ing.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(200, 900, 800, 1040, cla, img, 0.85)
+                    if imgs_ is not None and imgs_ != False:
+                        print("download_ing", imgs_)
+
                     full_path = "c:\\my_games\\vam\\data_vam\\imgs\\game_start\\download_btn.PNG"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -397,7 +417,6 @@ def game_ready(cla):
                     count += 1
                     if count % 5 == 0:
                         print(f"{count}초 경과!")
-
 
         # 완전 바깥 화면
         full_path = "c:\\my_games\\vam\\data_vam\\imgs\\check\\game_out_check\\boan.PNG"

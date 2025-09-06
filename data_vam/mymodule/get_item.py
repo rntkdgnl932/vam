@@ -170,6 +170,8 @@ def get_event(cla):
 
     get_ready = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\get_ready\\"
     get_ready_list = os.listdir(get_ready)
+    get_e_ready = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\e_point\\"
+    get_e_ready_list = os.listdir(get_e_ready)
 
 
 
@@ -192,26 +194,47 @@ def get_event(cla):
 
 
                 is_point = False
-                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\e_point_1.PNG"
-                img_array = np.fromfile(full_path, np.uint8)
-                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(240, 310, 300, 750, cla, img, 0.8)
-                if imgs_ is not None and imgs_ != False:
-                    print("e_point_1", imgs_)
-                    click_pos_reg(imgs_.x - 50, imgs_.y + 20, cla)
-                    is_point = True
-                else:
-                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\e_point_2.PNG"
+
+                for i in range(len(get_e_ready_list)):
+                    full_path = str(get_e_ready) + str(get_e_ready_list[i])
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                     imgs_ = imgs_set_(240, 310, 300, 750, cla, img, 0.8)
                     if imgs_ is not None and imgs_ != False:
-                        print("e_point_2", imgs_)
+                        print("get_e_ready_list", get_e_ready_list[i], imgs_)
                         click_pos_reg(imgs_.x - 50, imgs_.y + 20, cla)
                         is_point = True
 
+                # full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\e_point_1.PNG"
+                # img_array = np.fromfile(full_path, np.uint8)
+                # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                # imgs_ = imgs_set_(240, 310, 300, 750, cla, img, 0.8)
+                # if imgs_ is not None and imgs_ != False:
+                #     print("e_point_1", imgs_)
+                #     click_pos_reg(imgs_.x - 50, imgs_.y + 20, cla)
+                #     is_point = True
+                # else:
+                #     full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\e_point_2.PNG"
+                #     img_array = np.fromfile(full_path, np.uint8)
+                #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                #     imgs_ = imgs_set_(240, 310, 300, 750, cla, img, 0.8)
+                #     if imgs_ is not None and imgs_ != False:
+                #         print("e_point_2", imgs_)
+                #         click_pos_reg(imgs_.x - 50, imgs_.y + 20, cla)
+                #         is_point = True
+
                 if is_point == True:
                     QTest.qWait(500)
+
+                    for i in range(len(get_e_ready_list)):
+                        full_path = str(get_e_ready) + str(get_e_ready_list[i])
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(290, 400, 850, 450, cla, img, 0.8)
+                        if imgs_ is not None and imgs_ != False:
+                            print("get_e_ready_list", get_e_ready_list[i], imgs_)
+                            click_pos_reg(imgs_.x - 20, imgs_.y + 10, cla)
+                            QTest.qWait(500)
 
                     for i in range(len(get_ready_list)):
                         full_path = str(get_ready) + str(get_ready_list[i])
