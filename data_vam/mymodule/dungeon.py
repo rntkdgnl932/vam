@@ -21,6 +21,8 @@ def dun_start(cla, data):
     from check import juljun_check, attack_check
     from function_game import imgs_set_
     from potion import potion_check
+    from boonhae_collection import boonhae_collection_start
+    from action import juljun_on
     try:
         print("dun_start", data)
 
@@ -55,6 +57,11 @@ def dun_start(cla, data):
 
                 result_attack = attack_check(cla)
                 if result_attack == True:
+                    v_.collection_boonhae += 1
+                    if v_.collection_boonhae > 700:
+                        boonhae_collection_start(cla)
+                        juljun_on(cla)
+
                     potion_check(cla)
                 else:
                     dun_spot(cla, data)
@@ -461,14 +468,14 @@ def dun_get_x_y(data):
         if dun_2 == "고대의공방":
             if dun_3 == "1":
                 if dun_4 == "상":
-                    x_reg = 350
-                    y_reg = 375
+                    x_reg = 170
+                    y_reg = 470
                 elif dun_4 == "중":
-                    x_reg = 735
-                    y_reg = 355
+                    x_reg = 660
+                    y_reg = 380
                 elif dun_4 == "하":
-                    x_reg = 500
-                    y_reg = 580
+                    x_reg = 520
+                    y_reg = 700
             elif dun_3 == "2":
                 if dun_4 == "상":
                     x_reg = yet_data_1

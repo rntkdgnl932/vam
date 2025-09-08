@@ -10,6 +10,7 @@ recovery = True
 now_dun_name = "none"
 dun_list = ["simyun", "yousan"]
 quest_count = 0
+collection_boonhae = 0
 
 # 게임 및 폴더 관련
 this_game = "뱀피르"

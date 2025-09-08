@@ -13,6 +13,8 @@ def get_start(cla):
     try:
         print("get_start")
 
+        boonhae_collection_start(cla)
+
         get_post(cla)
         get_upjuk(cla)
         get_event(cla)
@@ -23,7 +25,7 @@ def get_start(cla):
         get_acave(cla)
 
         klan_donation(cla)
-        boonhae_collection_start(cla)
+
 
     except Exception as e:
         print(e)

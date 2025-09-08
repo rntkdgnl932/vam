@@ -12,6 +12,7 @@ def boonhae_collection_start(cla):
         print("boonhae_collection_start")
         collection_start(cla)
         boonhae_start(cla)
+        v_.collection_boonhae = 0
     except Exception as e:
         print(e)
 
