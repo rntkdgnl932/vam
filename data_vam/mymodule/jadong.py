@@ -23,8 +23,8 @@ def jadong_start(cla):
 
     from clean_screen import clean_screen_start
     from check import out_check, juljun_check, attack_check, move_ing
-    from function_game import click_pos_2, click_pos_reg, imgs_set_, change_number, text_check_get_num , int_put_, in_number_check
-    from action import go_maul
+    from boonhae_collection import boonhae_collection_start
+    from action import juljun_on
     from potion import potion_check
     try:
         print("jadong_start")
@@ -34,6 +34,10 @@ def jadong_start(cla):
         if result_juljun == True:
             result_attack = attack_check(cla)
             if result_attack == True:
+                v_.collection_boonhae += 1
+                if v_.collection_boonhae > 700:
+                    boonhae_collection_start(cla)
+                    juljun_on(cla)
                 potion_check(cla)
             else:
                 jadong_spot(cla)
