@@ -8,7 +8,7 @@ now_arduino = "none"
 potion_count = 0
 recovery = True
 now_dun_name = "none"
-dun_list = ["simyun", "yousan"]
+dun_list = ["simyun", "yousan", "gongbang"]
 quest_count = 0
 collection_boonhae = 0
 

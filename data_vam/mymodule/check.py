@@ -310,7 +310,7 @@ def juljun_check(cla):
                             else:
                                 break
                             QTest.qWait(500)
-                        for i in range(len(v_.dun_list)):
+                        for c in range(len(v_.dun_list)):
                             full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\" + str(
                                 v_.dun_list[i]) + "\\juljun_title.PNG"
                             img_array = np.fromfile(full_path, np.uint8)

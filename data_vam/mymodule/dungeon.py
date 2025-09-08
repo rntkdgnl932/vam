@@ -44,6 +44,8 @@ def dun_start(cla, data):
 
         if result_juljun == True:
 
+            print("v_.now_dun_name", v_.now_dun_name)
+
             # 해당 장소에 있는지....
             # 던전_일반_창조의심연_1_하
             # 던전_일반_빛바랜유산_1_중
@@ -66,7 +68,7 @@ def dun_start(cla, data):
                 else:
                     dun_spot(cla, data)
             else:
-                print("v_.now_dun_name", v_.now_dun_name)
+
                 if v_.now_dun_name == "none":
                     dun_spot(cla, data)
                 else:
