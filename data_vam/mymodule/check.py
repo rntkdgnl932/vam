@@ -255,7 +255,7 @@ def juljun_check(cla):
     import random
 
     from clean_screen import all_skip
-    from check import out_check, loading_check, loading_start
+    from schedule import myQuest_play_check
     from function_game import click_pos_2, click_pos_reg, imgs_set_
 
 
@@ -294,6 +294,33 @@ def juljun_check(cla):
             if imgs_ is not None and imgs_ != False:
                 print("juljun_check_potion", imgs_)
                 is_data = True
+
+                if v_.now_dun_name == "none":
+                    result_schedule = myQuest_play_check(cla, "check")
+                    result_schedule_ = result_schedule[0][2]
+                    if '던전' in result_schedule_:
+                        for i in range(4):
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\potion_setting.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(400, 350, 550, 410, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
+                                print("potion_setting", imgs_)
+                                click_pos_2(600, 385, cla)
+                            else:
+                                break
+                            QTest.qWait(500)
+                        for i in range(len(v_.dun_list)):
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\" + str(
+                                v_.dun_list[i]) + "\\juljun_title.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(0, 60, 150, 150, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
+                                print("juljun_dun_list", str(v_.dun_list[i]), imgs_)
+                                v_.now_dun_name = str(v_.dun_list[i])
+                                break
+
 
         return is_data
     except Exception as e:

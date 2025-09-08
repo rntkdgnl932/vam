@@ -8,10 +8,11 @@ def go_test(cla):
 
 
 def myQuest_play_check(cla, data):
+    import os.path
+    from datetime import datetime
+    from datetime import date, timedelta
     try:
-        import os.path
-        from datetime import datetime
-        from datetime import date, timedelta
+        print("myQuest_play_check", data)
 
         refresh_ = False
 
