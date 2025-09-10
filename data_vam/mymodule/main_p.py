@@ -56,7 +56,7 @@ from get_item import get_start
 from jadong import jadong_start
 from dungeon import dun_start
 from quest import quest_start
-
+from auction_game import auction_start
 
 from test_ import go_test
 
@@ -3966,6 +3966,10 @@ class game_Playing(QThread):
                                     tuto_start(v_.now_cla)
                                 elif result_schedule_ == "각종템받기":
                                     get_start(v_.now_cla)
+                                    myQuest_play_add(v_.now_cla, result_schedule_)
+
+                                elif result_schedule_ == "거래소등록":
+                                    auction_start(v_.now_cla)
                                     myQuest_play_add(v_.now_cla, result_schedule_)
 
                                 elif '던전' in result_schedule_:
