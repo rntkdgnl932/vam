@@ -95,8 +95,8 @@ def auction_in(cla):
     import numpy as np
     import cv2
 
-    from function_game import imgs_set_, click_pos_reg, click_pos_2, int_put_, change_number
-    from action import menu_open
+    from function_game import imgs_set_, click_pos_reg, click_pos_2
+    from action import menu_open, confirm_all
 
     try:
         print("auction_in")
@@ -121,6 +121,12 @@ def auction_in(cla):
                 imgs_ = imgs_set_(0, 970, 120, 1040, cla, img, 0.85)
                 if imgs_ is not None and imgs_ != False:
                     is_action = True
+
+                    click_pos_2(480, 1010, cla)
+                    time.sleep(0.5)
+                    confirm_all(cla)
+                    click_pos_2(610, 1010, cla)
+
 
                 else:
                     click_pos_2(175, 95, cla)
