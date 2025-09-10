@@ -7,7 +7,8 @@ import variable as v_
 
 sys.path.append('C:/my_games/' + str(v_.game_folder) + '/' + str(v_.data_folder) + '/mymodule')
 
-
+get_list_ready = "c:\\my_games\\vam\\data_vam\\imgs\\auction\\list\\"
+get_list = os.listdir(get_list_ready)
 
 
 def mine_check(cla):
@@ -54,15 +55,10 @@ def mine_check(cla):
 
 
 def auction_start(cla):
-    import numpy as np
-    import cv2
-
-    from function_game import imgs_set_, text_check_get_reg, in_number_check, int_put_, click_pos_2
-    from chango import chango_maul_auction, chango_maul_spot
-    from boonhae_collection import boonhae_collection_start
+    from clean_screen import clean_screen_start
     try:
         # 창고에 가서 물품 꺼내고
-        chango_maul_auction(cla)
+        # chango_maul_auction(cla)
         # 거래소 들어가서
         # 정산 후
         # 아이템 판매 등록 활성화하고
@@ -84,10 +80,12 @@ def auction_start(cla):
         auction_sell(cla)
 
         # 마무리 전 컬렉에 박아버리고, 장비는 분해하고
-        boonhae_collection_start(cla)
+        # boonhae_collection_start(cla)
 
         # 마무리로 창고에 다시 넣는다다
-        chango_maul_spot(cla)
+        # chango_maul_spot(cla)
+
+        clean_screen_start(cla)
 
     except Exception as e:
         print(e)
@@ -111,43 +109,34 @@ def auction_in(cla):
             if is_action_count > 10:
                 is_action = True
 
-            full_path = "c:\\my_games\\ymir\\data_ymir\\imgs\\title\\auction.PNG"
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\auction.PNG"
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set_(30, 30, 200, 90, cla, img, 0.85)
+            imgs_ = imgs_set_(500, 30, 960, 300, cla, img, 0.85)
             if imgs_ is not None and imgs_ != False:
                 print("auction", imgs_)
-                full_path = "c:\\my_games\\ymir\\data_ymir\\imgs\\auction\\jungsan_in.PNG"
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\auction\\auction_in.PNG"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(40, 980, 120, 1040, cla, img, 0.85)
+                imgs_ = imgs_set_(0, 970, 120, 1040, cla, img, 0.85)
                 if imgs_ is not None and imgs_ != False:
-                    full_path = "c:\\my_games\\ymir\\data_ymir\\imgs\\auction\\anymore_sell_notice.PNG"
-                    img_array = np.fromfile(full_path, np.uint8)
-                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set_(300, 400, 600, 650, cla, img, 0.85)
-                    if imgs_ is not None and imgs_ != False:
-                        print("menu_auction", imgs_)
-                        is_action = True
-                    else:
-                        click_pos_2(880, 1015, cla)
-                        time.sleep(0.5)
+                    is_action = True
 
                 else:
-                    click_pos_2(235, 85, cla)
+                    click_pos_2(175, 95, cla)
                     time.sleep(0.5)
 
 
             else:
-                menu_open(cla)
-                time.sleep(0.3)
-                full_path = "c:\\my_games\\ymir\\data_ymir\\imgs\\auction\\menu_auction.PNG"
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\auction.PNG"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(650, 430, 750, 520, cla, img, 0.85)
+                imgs_ = imgs_set_(650, 30, 960, 1040, cla, img, 0.85)
                 if imgs_ is not None and imgs_ != False:
                     print("menu_auction", imgs_)
                     click_pos_reg(imgs_.x, imgs_.y, cla)
+                else:
+                    menu_open(cla)
             QTest.qWait(1000)
 
     except Exception as e:
@@ -159,7 +148,7 @@ def auction_sell(cla):
     import cv2
 
     from function_game import imgs_set_, click_pos_reg, click_pos_2, int_put_, change_number
-    from action import menu_open, confirm_all
+    from action import menu_open, cancle_all
 
     try:
         print("auction_sell")
@@ -172,57 +161,113 @@ def auction_sell(cla):
             if is_action_count > 10:
                 is_action = True
 
-            full_path = "c:\\my_games\\ymir\\data_ymir\\imgs\\title\\auction.PNG"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set_(30, 30, 200, 90, cla, img, 0.85)
-            if imgs_ is not None and imgs_ != False:
-                print("auction", imgs_)
-                full_path = "c:\\my_games\\ymir\\data_ymir\\imgs\\auction\\sell_status_title.PNG"
+            is_action = False
+            is_action_count = 0
+
+            while is_action is False:
+                is_action_count += 1
+                if is_action_count > 10:
+                    is_action = True
+
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\auction.PNG"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(580, 110, 680, 160, cla, img, 0.85)
+                imgs_ = imgs_set_(500, 30, 960, 300, cla, img, 0.85)
                 if imgs_ is not None and imgs_ != False:
+                    print("auction", imgs_)
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\auction\\auction_in.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(0, 970, 120, 1040, cla, img, 0.85)
+                    if imgs_ is not None and imgs_ != False:
 
-                    is_recall = False
-
-                    for i in range(10):
-                        full_path = "c:\\my_games\\ymir\\data_ymir\\imgs\\auction\\recall_btn.PNG"
-                        img_array = np.fromfile(full_path, np.uint8)
-                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set_(555, 150, 700, 900, cla, img, 0.85)
-                        if imgs_ is not None and imgs_ != False:
-                            print("recall_btn", imgs_)
-                            click_pos_reg(imgs_.x, imgs_.y, cla)
-                            is_recall = True
-                            time.sleep(0.5)
-                            confirm_all(cla)
-                        else:
-                            break
-                        QTest.qWait(500)
-
-                    if is_recall == False:
                         is_action = True
-                        # 팔아버리자
-                        auction_sell_item(cla)
+
+                        for i in range(len(get_list)):
+                            full_path = str(get_list_ready) + str(get_list[i])
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(680, 100, 910, 1000, cla, img, 0.85)
+                            if imgs_ is not None and imgs_ != False:
+                                print("get_list", get_list[i], imgs_)
+
+                                x_reg = imgs_.x
+                                y_reg = imgs_.y
+
+                                sell = False
+
+                                for s in range(10):
+
+                                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\auction\\auction_sell_title.PNG"
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set_(530, 300, 660, 360, cla, img, 0.85)
+                                    if imgs_ is not None and imgs_ != False:
+                                        print("auction_sell_title", imgs_)
+
+                                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\auction\\ten.PNG"
+                                        img_array = np.fromfile(full_path, np.uint8)
+                                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                        imgs_ = imgs_set_(765, 395, 840, 440, cla, img, 0.95)
+                                        if imgs_ is not None and imgs_ != False:
+                                            print("ten", imgs_)
+                                            break
+                                        else:
+                                            for l in range(5):
+                                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\auction\\auction_sell_title_2.PNG"
+                                                img_array = np.fromfile(full_path, np.uint8)
+                                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                                imgs_ = imgs_set_(400, 350, 545, 405, cla, img, 0.85)
+                                                if imgs_ is not None and imgs_ != False:
+                                                    print("auction_sell_title2", imgs_)
+                                                    click_pos_2(540, 680, cla)
+                                                    sell = True
+                                                    break
+                                                else:
+                                                    click_pos_2(680, 720, cla)
+                                                QTest.qWait(500)
+
+                                    else:
+                                        click_pos_reg(x_reg, y_reg, cla)
+                                    if sell == True:
+                                        break
+                                    QTest.qWait(1000)
+                                for c in range(5):
+                                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\auction\\auction_sell_title_2.PNG"
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set_(400, 350, 545, 405, cla, img, 0.85)
+                                    if imgs_ is not None and imgs_ != False:
+                                        cancle_all(cla)
+                                    else:
+                                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\auction\\auction_sell_title.PNG"
+                                        img_array = np.fromfile(full_path, np.uint8)
+                                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                        imgs_ = imgs_set_(530, 300, 660, 360, cla, img, 0.85)
+                                        if imgs_ is not None and imgs_ != False:
+                                            cancle_all(cla)
+                                        else:
+                                            break
+                                    QTest.qWait(500)
+
+
+
+                    else:
+                        click_pos_2(175, 95, cla)
+                        time.sleep(0.5)
 
 
                 else:
-                    click_pos_2(140, 85, cla)
-                    time.sleep(0.5)
-
-
-            else:
-                menu_open(cla)
-                time.sleep(0.3)
-                full_path = "c:\\my_games\\ymir\\data_ymir\\imgs\\auction\\menu_auction.PNG"
-                img_array = np.fromfile(full_path, np.uint8)
-                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(650, 430, 750, 520, cla, img, 0.85)
-                if imgs_ is not None and imgs_ != False:
-                    print("menu_auction", imgs_)
-                    click_pos_reg(imgs_.x, imgs_.y, cla)
-            QTest.qWait(1000)
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\auction.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(650, 30, 960, 1040, cla, img, 0.85)
+                    if imgs_ is not None and imgs_ != False:
+                        print("menu_auction", imgs_)
+                        click_pos_reg(imgs_.x, imgs_.y, cla)
+                    else:
+                        menu_open(cla)
+                QTest.qWait(1000)
 
     except Exception as e:
         print(e)

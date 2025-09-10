@@ -19,9 +19,10 @@ def go_test():
 
     from massenger import line_to_me
     from character_select_and_game_start import character_change, game_ready
-    from clean_screen import all_skip, clean_screen_start
+    from clean_screen import all_skip, clean_screen_start, skip_start
     from potion import maul_potion
     from action import juljun_off, juljun_on, menu_open
+    from auction_game import auction_start
     from get_item import get_post, get_event, get_chosanghwa, get_inmool, get_acave, get_special
     from check import attack_check, juljun_check
     from boonhae_collection import boonhae_start, collection_setting
@@ -52,7 +53,14 @@ def go_test():
 
         print("test")
 
-        get_event(cla)
+        auction_start(cla)
+
+        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\point_2.PNG"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set_(700, 20, 750, 45, cla, img, 0.8)
+        if imgs_ is not None and imgs_ != False:
+            print("point_2", imgs_)
 
 
         # kind_num = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\number\\"

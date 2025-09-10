@@ -7,6 +7,13 @@ import variable as v_
 
 sys.path.append('C:/my_games/' + str(v_.game_folder) + '/' + str(v_.data_folder) + '/mymodule')
 
+get_ready = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\get_ready\\"
+get_ready_list = os.listdir(get_ready)
+get_e_ready = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\e_point\\"
+get_e_ready_list = os.listdir(get_e_ready)
+get_e_title = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\title\\"
+get_e_title_list = os.listdir(get_e_title)
+
 def get_start(cla):
     from boonhae_collection import boonhae_collection_start
     from klan import klan_donation
@@ -164,27 +171,26 @@ def get_event(cla):
     import cv2
 
     from clean_screen import skip_start
-    from function_game import click_pos_2, click_pos_reg, imgs_set_
+    from function_game import drag_pos, click_pos_reg, imgs_set_
     from action import menu_open
     from clean_screen import clean_screen_start
 
 
 
-    get_ready = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\get_ready\\"
-    get_ready_list = os.listdir(get_ready)
-    get_e_ready = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\e_point\\"
-    get_e_ready_list = os.listdir(get_e_ready)
+
 
 
 
     try:
         print("get_event")
 
+        draged = False
+
         is_open = False
         is_open_count = 0
         while is_open is False:
             is_open_count += 1
-            if is_open_count > 7:
+            if is_open_count > 15:
                 is_open = True
 
             full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\server.PNG"
@@ -197,62 +203,63 @@ def get_event(cla):
 
                 is_point = False
 
-                for i in range(len(get_e_ready_list)):
-                    full_path = str(get_e_ready) + str(get_e_ready_list[i])
-                    img_array = np.fromfile(full_path, np.uint8)
-                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set_(240, 310, 300, 750, cla, img, 0.8)
-                    if imgs_ is not None and imgs_ != False:
-                        print("get_e_ready_list", get_e_ready_list[i], imgs_)
-                        click_pos_reg(imgs_.x - 50, imgs_.y + 20, cla)
-                        is_point = True
+                e_x_reg = 0
+                e_y_reg = 0
 
-                # full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\e_point_1.PNG"
-                # img_array = np.fromfile(full_path, np.uint8)
-                # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                # imgs_ = imgs_set_(240, 310, 300, 750, cla, img, 0.8)
-                # if imgs_ is not None and imgs_ != False:
-                #     print("e_point_1", imgs_)
-                #     click_pos_reg(imgs_.x - 50, imgs_.y + 20, cla)
-                #     is_point = True
-                # else:
-                #     full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\e_point_2.PNG"
-                #     img_array = np.fromfile(full_path, np.uint8)
-                #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                #     imgs_ = imgs_set_(240, 310, 300, 750, cla, img, 0.8)
-                #     if imgs_ is not None and imgs_ != False:
-                #         print("e_point_2", imgs_)
-                #         click_pos_reg(imgs_.x - 50, imgs_.y + 20, cla)
-                #         is_point = True
+                point_kind = "none"
 
-                if is_point == True:
-                    QTest.qWait(500)
+                for n in range(2):
 
                     for i in range(len(get_e_ready_list)):
                         full_path = str(get_e_ready) + str(get_e_ready_list[i])
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set_(290, 400, 850, 450, cla, img, 0.8)
+                        imgs_ = imgs_set_(240, 310, 300, 750, cla, img, 0.8)
                         if imgs_ is not None and imgs_ != False:
                             print("get_e_ready_list", get_e_ready_list[i], imgs_)
-                            click_pos_reg(imgs_.x - 20, imgs_.y + 10, cla)
-                            QTest.qWait(500)
+                            click_pos_reg(imgs_.x - 50, imgs_.y + 20, cla)
+                            is_point = True
 
-                    for i in range(len(get_ready_list)):
-                        full_path = str(get_ready) + str(get_ready_list[i])
+                            point_kind = get_e_ready_list[i]
+
+                            e_x_reg = imgs_.x
+                            e_y_reg = imgs_.y
+
+                            break
+
+                    if draged == False and is_point == False:
+                        draged = True
+                        drag_pos(220, 720, 220, 350, cla)
+                    QTest.qWait(500)
+
+                if is_point == True:
+                    # 번호 붙여서 ㄱㄱ
+
+                    for i in range(len(get_e_title_list)):
+                        full_path = str(get_e_title) + str(get_e_title_list[i])
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
+                        imgs_ = imgs_set_(270, 300, 860, 760, cla, img, 0.8)
                         if imgs_ is not None and imgs_ != False:
-                            print("get_ready_list", get_ready_list[i], imgs_)
-                            click_pos_reg(imgs_.x - 15, imgs_.y, cla)
-                            QTest.qWait(1000)
-                            skip_start(cla)
+                            print("get_e_title_list", get_e_title_list[i], imgs_)
+                            get_event_start(cla, get_e_title_list[i], e_x_reg, e_y_reg, point_kind)
+                            QTest.qWait(500)
+                            break
+
+
 
                 else:
                     is_open = True
                     clean_screen_start(cla)
             else:
+
+                # full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\point_2.PNG"
+                # img_array = np.fromfile(full_path, np.uint8)
+                # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                # imgs_ = imgs_set_(700, 20, 750, 45, cla, img, 0.8)
+                # if imgs_ is not None and imgs_ != False:
+                #     print("point_2", imgs_)
+
                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\event.PNG"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -268,6 +275,195 @@ def get_event(cla):
         print(e)
 
 
+def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
+    import numpy as np
+    import cv2
+
+    from clean_screen import skip_start
+    from function_game import click_pos_2, click_pos_reg, imgs_set_, imgs_set_for
+    from action import menu_open
+    from clean_screen import clean_screen_start
+
+    plus = 0
+
+    if cla == "one":
+        plus = 0
+    elif cla == "two":
+        plus = 960
+    elif cla == "three":
+        plus = 960 * 2
+    elif cla == "four":
+        plus = 960 * 3
+    elif cla == "five":
+        plus = 960 * 4
+    elif cla == "six":
+        plus = 960 * 5
+
+    reg = 15
+
+    try:
+        print("get_event_start", data)
+
+
+        num_ready = data.split(".")
+        num = num_ready[0]
+
+        # 삭제 :
+
+        # 1 : 위대한시작!영웅의서약(seven_five_eight)
+
+        # 2 : 사용하고강해져라!(common)
+
+        # 3 : 강화의길!출석이벤트(common)
+
+        # 4 : 삼위일체!(common)
+
+        # 5 : 다미르의의뢰(common)
+
+        # 6 : 데일리출석(common)
+
+        # 7 : 트리니티사용!(common)
+
+        # 8 : 황금!(common)
+
+        # 9 : 적들을사냥하라!(common)
+
+        # 10 : 출석이벤트(common)
+
+        # 11 : 클랜생활시작!(common)
+
+        # 12 : 아이템성장!(common)
+
+        # new
+
+        # ? :
+
+
+        if num == "1":
+            kind = "seven_five_eight"
+
+        else:
+            kind = "common"
+
+
+
+        is_open = False
+        is_open_count = 0
+        while is_open is False:
+            is_open_count += 1
+            if is_open_count > 15:
+                is_open = True
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\title\\" + str(data)
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(270, 300, 860, 760, cla, img, 0.8)
+            if imgs_ is not None and imgs_ != False:
+                print("get_e_title_list", str(data), imgs_)
+                QTest.qWait(500)
+
+                is_point = False
+                # 왼쪽 포인트
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\e_point\\" + str(point_kind)
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(e_x_reg - reg, e_y_reg - reg, e_x_reg + reg, e_y_reg + reg, cla, img, 0.8)
+                if imgs_ is not None and imgs_ != False:
+                    print("get_event_start: get_e_ready_list", str(point_kind), imgs_)
+                    click_pos_reg(imgs_.x - 50, imgs_.y + 20, cla)
+                    is_point = True
+
+                if is_point == True:
+                    QTest.qWait(500)
+                    # seven_five_eight point
+                    if kind == "seven_five_eight":
+                        for i in range(len(get_e_ready_list)):
+                            full_path = str(get_e_ready) + str(get_e_ready_list[i])
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(290, 400, 850, 450, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
+                                print("get_e_ready_list", get_e_ready_list[i], imgs_)
+                                click_pos_reg(imgs_.x - 20, imgs_.y + 10, cla)
+                                QTest.qWait(500)
+                                break
+                        # common point
+                        for i in range(len(get_ready_list)):
+                            full_path = str(get_ready) + str(get_ready_list[i])
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
+                            if imgs_ is not None and imgs_ != False:
+                                print("get_ready_list", get_ready_list[i], imgs_)
+                                click_pos_reg(imgs_.x - 15, imgs_.y, cla)
+                                QTest.qWait(1000)
+                                skip_start(cla)
+                        # 435, 490, 545, 600...
+                        # 690
+
+                        is_checked = False
+
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\checked.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_for(380, 650, 860, 730, cla, img, 0.8)
+                        if imgs_ is not None and imgs_ != False:
+                            print("checked", imgs_)
+                            if len(imgs_) > 0:
+                                is_checked = True
+                                print("g", imgs_[len(imgs_) - 1][0], imgs_[len(imgs_) - 1][1])
+                                x_reg = imgs_[len(imgs_) - 1][0]
+                                y_reg = imgs_[len(imgs_) - 1][1]
+                                if x_reg < 790 + plus:
+
+                                    click_pos_reg(x_reg + 55, y_reg, cla)
+                                    QTest.qWait(1000)
+                                    skip_start(cla)
+                        if is_checked == False:
+                            click_pos_2(435, 690, cla)
+                            QTest.qWait(1000)
+                            skip_start(cla)
+                    if kind == "common":
+                        # common point
+                        for i in range(len(get_ready_list)):
+                            full_path = str(get_ready) + str(get_ready_list[i])
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
+                            if imgs_ is not None and imgs_ != False:
+                                print("get_ready_list", get_ready_list[i], imgs_)
+                                click_pos_reg(imgs_.x - 15, imgs_.y, cla)
+                                QTest.qWait(1000)
+                                skip_start(cla)
+                else:
+                    is_open = True
+            else:
+
+                is_title = False
+
+                for i in range(len(get_e_title_list)):
+                    full_path = str(get_e_title) + str(get_e_title_list[i])
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(270, 300, 860, 760, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("get_e_title_list", get_e_title_list[i], imgs_)
+                        is_title = True
+                        break
+                if is_title == False:
+                    skip_start(cla)
+                else:
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\title\\" + str(data)
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(270, 300, 860, 760, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("get_event_start ready", str(data), imgs_)
+                    else:
+                        is_open = True
+            QTest.qWait(500)
+    except Exception as e:
+        print(e)
 
 
 def get_special(cla):

@@ -9,6 +9,8 @@ sys.path.append('C:/my_games/' + str(v_.game_folder) + '/' + str(v_.data_folder)
 
 kind_confirm = "c:\\my_games\\vam\\data_vam\\imgs\\action\\confirm_all"
 kind_confirm_list = os.listdir(kind_confirm)
+kind_cancle = "c:\\my_games\\vam\\data_vam\\imgs\\action\\cancle_all"
+kind_cancle_list = os.listdir(kind_cancle)
 
 def menu_open(cla):
     import numpy as np
@@ -98,8 +100,37 @@ def confirm_all(cla):
         print(e)
 
 
+
+
 def cancle_all(cla):
-    print("cancle_all")
+    import numpy as np
+    import cv2
+
+    from function_game import imgs_set_, click_pos_reg, click_pos_2, int_put_, change_number
+    from action import menu_open
+
+    try:
+        print("cancle_all")
+
+
+
+        is_cancle = False
+
+        for i in range(len(kind_cancle_list)):
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\action\\cancle_all\\" + str(kind_cancle_list[i])
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(0, 30, 960, 1000, cla, img, 0.85)
+            if imgs_ is not None and imgs_ != False:
+                print("cancle_1", imgs_)
+                is_cancle = True
+                click_pos_reg(imgs_.x, imgs_.y, cla)
+                break
+
+        return is_cancle
+    except Exception as e:
+        print(e)
 
 
 

@@ -171,6 +171,10 @@ def skip_start(cla):
 
     from function_game import imgs_set_, click_pos_reg
     from dead_die import dead_check
+    from schedule import myQuest_play_check
+
+    # result_schedule = myQuest_play_check(cla, "skip_start")
+    # result_schedule_ = result_schedule[0][2]
 
     try:
         print("skip_start")
