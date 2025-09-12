@@ -123,7 +123,16 @@ def auction_in(cla):
                     is_action = True
 
                     click_pos_2(480, 1010, cla)
-                    time.sleep(0.5)
+                    for i in range(3):
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\auction\\ilgwal_hoisoo_btn.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(450, 650, 660, 760, cla, img, 0.85)
+                        if imgs_ is not None and imgs_ != False:
+                            click_pos_reg(imgs_.x, imgs_.y, cla)
+                            break
+                        time.sleep(0.5)
+                    time.sleep(0.3)
                     confirm_all(cla)
                     click_pos_2(610, 1010, cla)
 
