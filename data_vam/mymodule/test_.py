@@ -53,7 +53,7 @@ def go_test():
 
         print("test")
 
-        auction_start(cla)
+        get_special(cla)
 
         full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\point_2.PNG"
         img_array = np.fromfile(full_path, np.uint8)

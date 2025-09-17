@@ -14,6 +14,9 @@ get_e_ready_list = os.listdir(get_e_ready)
 get_e_title = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\title\\"
 get_e_title_list = os.listdir(get_e_title)
 
+checked = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\checked\\"
+
+
 def get_start(cla):
     from boonhae_collection import boonhae_collection_start
     from klan import klan_donation
@@ -308,44 +311,84 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         num_ready = data.split(".")
         num = num_ready[0]
 
-        # 삭제 :
+        # 삭제 : 10
 
-        # 1 : 위대한시작!영웅의서약(seven_five_eight)
+        # 1 : 위대한시작!영웅의서약(seven_five_eight) o
 
-        # 2 : 사용하고강해져라!(common)
+        # 2 : 사용하고강해져라!(common) o
 
-        # 3 : 강화의길!출석이벤트(common)
+        # 3 : 포아메의포상출석이벤트(seven) 3
 
-        # 4 : 삼위일체!(common)
+        # 4 : 카프의의뢰(eight) 4
 
-        # 5 : 다미르의의뢰(common)
+        # 5 : 데일리출석(tewnty_one) 5
 
-        # 6 : 데일리출석(common)
+        # 6 : 삼위일체!(eight) 6
 
-        # 7 : 트리니티사용!(common)
+        # 7 : 트리니티사용!(eight) 7
 
-        # 8 : 황금!(common)
+        # 8 : 다미르의의뢰(eight) 8
 
-        # 9 : 적들을사냥하라!(common)
+        # 9 : 강화의길!출석이벤트(seven) 9
 
-        # 10 : 출석이벤트(common)
+        # 10 : 황금!(eight) 10
 
-        # 11 : 클랜생활시작!(common)
+        # 11 : 적들을사냥하라!(eight) 11
 
-        # 12 : 아이템성장!(common)
+        # 12 : 클랜생활시작!(eight) 12
+
+        # 13 : 아이템성장!(eight) 13
+
+        # 14 :
+
+
+
+
+
+
 
         # new
 
-        # ? :
+        # ? : 포아메의포상출석이벤트(seven) 3
+
+        # ? : 카프의의뢰(eight) 4
+
+        # ? : 데일리출석(tewnty_one) 5
+
+        #  ? : 삼위일체!(eight) 6
+
+        # ? : 트리니티사용!(eight) 7
+
+        # ? : 다미르의의뢰(eight) 8
+
+        # ? : 강화의길!출석이벤트(seven) 9
+
+        # ? : 황금!(eight) 10
+
+        # ? : 적들을사냥하라!(eight) 11
+
+        # ? : 클랜생활시작!(eight) 12
+
+        # ? : 아이템성장!(eight) 13
+
 
 
         if num == "1":
             kind = "seven_five_eight"
 
-        else:
+        elif num == "5":
+            kind = "tewnty_one"
+
+        elif num == "2":
             kind = "common"
 
+        elif num == "3" or num == "9":
+            kind = "seven"
 
+        elif num == "4" or num == "6" or num == "7" or num == "8" or num == "10" or num == "11" or num == "12" or num == "13":
+            kind = "eight"
+
+        print("kind", kind)
 
         is_open = False
         is_open_count = 0
@@ -423,18 +466,86 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                             click_pos_2(435, 690, cla)
                             QTest.qWait(1000)
                             skip_start(cla)
-                    if kind == "common":
-                        # common point
-                        for i in range(len(get_ready_list)):
-                            full_path = str(get_ready) + str(get_ready_list[i])
-                            img_array = np.fromfile(full_path, np.uint8)
-                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                            imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
-                            if imgs_ is not None and imgs_ != False:
-                                print("get_ready_list", get_ready_list[i], imgs_)
-                                click_pos_reg(imgs_.x - 15, imgs_.y, cla)
+                    else:
+                        if kind != "common":
+                            path = checked + str(kind)
+
+
+                            is_checked = False
+
+                            if kind == "seven":
+                                get_checked_list = os.listdir(path)
+                                reg_x = 350
+                                reg_y = 650
+
+                                for i in range(len(get_checked_list)):
+                                    full_path = str(checked) + str(kind) + "\\" +str(get_checked_list[i])
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set_for(280, 550, 850, 700, cla, img, 0.85)
+                                    if imgs_ is not None and imgs_ != False:
+
+                                        if len(imgs_) > 0:
+                                            print("get_ready_list", get_checked_list[i], imgs_)
+
+                                            for_x = imgs_[len(imgs_) - 1][0]
+                                            for_y = imgs_[len(imgs_) - 1][1]
+
+                                            click_pos_reg(for_x + 70, for_y, cla)
+                                            QTest.qWait(1000)
+                                            skip_start(cla)
+                                            is_checked = True
+
+                            elif kind == "eight":
+                                reg_x = 430
+                                reg_y = 460
+                            elif kind == "tewnty_one":
+                                get_checked_list = os.listdir(path)
+                                reg_x = 350
+                                reg_y = 500
+                                for i in range(len(get_checked_list)):
+                                    full_path = str(checked) + str(kind) + "\\" +str(get_checked_list[i])
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set_for(300, 440, 850, 750, cla, img, 0.85)
+                                    if imgs_ is not None and imgs_ != False:
+
+                                        if len(imgs_) > 0:
+                                            print("get_ready_list", get_checked_list[i], imgs_)
+
+                                            for_x = imgs_[len(imgs_) - 1][0]
+                                            for_y = imgs_[len(imgs_) - 1][1]
+
+                                            if for_x > 750:
+                                                if for_y < 540:
+                                                    reg_y = 600
+                                                elif for_y < 630:
+                                                    reg_y = 700
+                                                else:
+                                                    break
+                                            else:
+                                                click_pos_reg(for_x + 70, for_y, cla)
+                                                QTest.qWait(1000)
+                                                skip_start(cla)
+                                                is_checked = True
+                            if is_checked == False:
+                                click_pos_2(reg_x, reg_y, cla)
                                 QTest.qWait(1000)
                                 skip_start(cla)
+
+
+                        else:
+                            # common point
+                            for i in range(len(get_ready_list)):
+                                full_path = str(get_ready) + str(get_ready_list[i])
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
+                                if imgs_ is not None and imgs_ != False:
+                                    print("get_ready_list", get_ready_list[i], imgs_)
+                                    click_pos_reg(imgs_.x - 15, imgs_.y, cla)
+                                    QTest.qWait(1000)
+                                    skip_start(cla)
                 else:
                     is_open = True
             else:
