@@ -91,8 +91,9 @@ def collection_start(cla):
                                 confirm_all(cla)
 
 
-                if is_open == True:
+                else:
                     clean_screen_start(cla)
+                    is_open = True
             else:
                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\collection.PNG"
                 img_array = np.fromfile(full_path, np.uint8)
