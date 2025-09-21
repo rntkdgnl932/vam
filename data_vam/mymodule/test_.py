@@ -23,7 +23,7 @@ def go_test():
     from potion import maul_potion
     from action import juljun_off, juljun_on, menu_open
     from auction_game import auction_start
-    from get_item import get_post, get_event, get_chosanghwa, get_inmool, get_acave, get_special
+    from get_item import get_post, get_event, get_chosanghwa, get_inmool, get_acave, get_special, get_start
     from check import attack_check, juljun_check
     from boonhae_collection import boonhae_start, collection_setting
     from jadong import jadong_start
@@ -53,7 +53,7 @@ def go_test():
 
         print("test")
 
-        get_special(cla)
+        get_start(cla)
 
         full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\point_2.PNG"
         img_array = np.fromfile(full_path, np.uint8)
