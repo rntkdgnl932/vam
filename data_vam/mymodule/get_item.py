@@ -33,6 +33,8 @@ def get_start(cla):
         get_inmool(cla)
         get_chosanghwa(cla)
         get_acave(cla)
+        get_malyuc(cla)
+        get_guild(cla)
 
         klan_donation(cla)
 
@@ -187,7 +189,6 @@ def get_event(cla):
     try:
         print("get_event")
 
-        draged = False
 
         is_open = False
         is_open_count = 0
@@ -195,6 +196,8 @@ def get_event(cla):
             is_open_count += 1
             if is_open_count > 15:
                 is_open = True
+
+            last_event = False
 
             full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\server.PNG"
             img_array = np.fromfile(full_path, np.uint8)
@@ -230,9 +233,21 @@ def get_event(cla):
 
                             break
 
-                    if draged == False and is_point == False:
-                        draged = True
-                        drag_pos(220, 720, 220, 350, cla)
+                    if is_point == False:
+
+                        ##############################################
+                        ######### 마지막 이벤트 확인하기  ###################
+                        ##############################################
+
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\title\\last_event.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(105, 685, 290, 750, cla, img, 0.8)
+                        if imgs_ is not None and imgs_ != False:
+                            print("last_event", imgs_)
+                            last_event = True
+                        else:
+                            drag_pos(220, 720, 220, 350, cla)
                     QTest.qWait(500)
 
                 if is_point == True:
@@ -252,8 +267,9 @@ def get_event(cla):
 
 
                 else:
-                    is_open = True
-                    clean_screen_start(cla)
+                    if last_event == True:
+                        is_open = True
+                        clean_screen_start(cla)
             else:
 
                 # full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\point_2.PNG"
@@ -311,67 +327,62 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         num_ready = data.split(".")
         num = num_ready[0]
 
-        # 삭제 : 10
+        # 삭제 : 2, 9
 
         # 1 : 위대한시작!영웅의서약(seven_five_eight) o
 
-        # 2 : 사용하고강해져라!(common) o
+        # 2 : 사용하고강해져라!(common)
 
-        # 3 : 포아메의포상출석이벤트(seven) 3
+        # 3 : 포아메의포상출석이벤트(seven) o
 
-        # 4 : 카프의의뢰(eight) 4
+        # 4 : 카프의의뢰(eight) o
 
-        # 5 : 데일리출석(tewnty_one) 5
+        # 5 : 데일리출석(tewnty_one) o
 
-        # 6 : 삼위일체!(eight) 6
+        # 6 : 삼위일체!(eight) o
 
-        # 7 : 트리니티사용!(eight) 7
+        # 7 : 트리니티사용!(eight) o
 
-        # 8 : 다미르의의뢰(eight) 8
+        # 8 : 다미르의의뢰(eight) o
 
-        # 9 : 강화의길!출석이벤트(seven) 9
+        # 9 : 강화의길!출석이벤트(seven)
 
-        # 10 : 황금!(eight) 10
+        # 10 : 황금!(eight) o
 
-        # 11 : 적들을사냥하라!(eight) 11
+        # 11 : 적들을사냥하라!(eight) o
 
-        # 12 : 클랜생활시작!(eight) 12
+        # 12 : 클랜생활시작!(eight) o
 
-        # 13 : 아이템성장!(eight) 13
+        # 13 : 아이템성장!(eight) o
 
         # 14 :
 
+        # 15 :
 
-
-
-
+        ##############################################
+        ######### 마지막 이벤트 확인하기  ###################
+        ##############################################
 
 
         # new
 
-        # ? : 포아메의포상출석이벤트(seven) 3
+        # ? : 모아르테의은혜출석이벤트(seven) 2
 
-        # ? : 카프의의뢰(eight) 4
+        # ? : vampir30일의서약스페셜출석이벤트(seven) 9
 
-        # ? : 데일리출석(tewnty_one) 5
+        # ? : vampir30일서약(eight) 14
 
-        #  ? : 삼위일체!(eight) 6
+        #  ? : 쟁탈전프리시즌기념!(eight) 15
 
-        # ? : 트리니티사용!(eight) 7
+        # ? :
 
-        # ? : 다미르의의뢰(eight) 8
+        # ? :
 
-        # ? : 강화의길!출석이벤트(seven) 9
+        # ? :
 
-        # ? : 황금!(eight) 10
-
-        # ? : 적들을사냥하라!(eight) 11
-
-        # ? : 클랜생활시작!(eight) 12
-
-        # ? : 아이템성장!(eight) 13
-
-
+        ##############################################
+        ######### 마지막 이벤트 확인하기  ###################
+        ##############################################
 
         if num == "1":
             kind = "seven_five_eight"
@@ -379,13 +390,13 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         elif num == "5":
             kind = "tewnty_one"
 
-        elif num == "2":
+        elif num == "0":
             kind = "common"
 
-        elif num == "3" or num == "9":
+        elif num == "2" or num == "3" or num == "9":
             kind = "seven"
 
-        elif num == "4" or num == "6" or num == "7" or num == "8" or num == "10" or num == "11" or num == "12" or num == "13":
+        elif num == "4" or num == "6" or num == "7" or num == "8" or num == "10" or num == "11" or num == "12" or num == "13" or num == "14" or num == "15":
             kind = "eight"
 
         print("kind", kind)
@@ -1161,7 +1172,7 @@ def get_acave(cla):
                 if imgs_ is not None and imgs_ != False:
                     print("bottom_point__1", imgs_)
                     is_point = True
-                    click_pos_reg(imgs_.x - 15, imgs_.y - 300, cla)
+                    click_pos_reg(imgs_.x - 15, imgs_.y - 30, cla)
                     QTest.qWait(500)
 
                 if is_point == True:
@@ -1336,13 +1347,186 @@ def get_acave(cla):
 
                         click_pos_reg(x_reg, y_reg, cla)
 
-                    QTest.qWait(500)
+                        QTest.qWait(500)
+                    else:
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\point_2.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_reg(x_reg, y_reg - 50, x_reg + 30, y_reg, cla, img, 0.8)
+                        if imgs_ is not None and imgs_ != False:
+                            print("point_2", imgs_)
+                            click_pos_reg(x_reg, y_reg, cla)
+
+                            QTest.qWait(500)
                 else:
                     menu_open(cla)
 
             QTest.qWait(500)
     except Exception as e:
         print(e)
+
+
+def get_malyuc(cla):
+    import numpy as np
+    import cv2
+
+    from clean_screen import skip_start, skip_check
+    from function_game import click_pos_reg, imgs_set_, click_pos_2, imgs_set_reg
+    from action import menu_open
+    from clean_screen import clean_screen_start
+
+    try:
+        print("get_malyuc")
+
+        is_open = False
+        is_open_count = 0
+        while is_open is False:
+            is_open_count += 1
+            if is_open_count > 12:
+                is_open = True
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\malyuc.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(700, 30, 960, 150, cla, img, 0.85)
+            if imgs_ is not None and imgs_ != False:
+                print("title : malyuc", imgs_)
+
+
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\malyuc\\point_1.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(70, 60, 500, 100, cla, img, 0.85)
+                if imgs_ is not None and imgs_ != False:
+                    print("point_1", imgs_)
+                    x_point = imgs_.x
+                    y_point = imgs_.y
+                    click_pos_reg(x_point - 15, y_point + 15, cla)
+                    QTest.qWait(500)
+
+
+                    for i in range(20):
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\malyuc\\point_1.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(x_point - 20, y_point - 20, x_point + 20, y_point + 20, cla, img, 0.85)
+                        if imgs_ is not None and imgs_ != False:
+                            click_pos_2(830, 1010, cla)
+                            QTest.qWait(700)
+                        else:
+                            break
+                else:
+                    is_open = True
+            else:
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\malyuc.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(600, 30, 960, 1040, cla, img, 0.8)
+                if imgs_ is not None and imgs_ != False:
+                    print("malyuc", imgs_)
+
+                    x_reg = imgs_.x
+                    y_reg = imgs_.y
+
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\point_1.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_reg(x_reg, y_reg - 50, x_reg + 30, y_reg, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("point_1", imgs_)
+
+                        click_pos_reg(x_reg, y_reg, cla)
+
+                        QTest.qWait(500)
+                    else:
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\point_2.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_reg(x_reg, y_reg - 50, x_reg + 30, y_reg, cla, img, 0.8)
+                        if imgs_ is not None and imgs_ != False:
+                            print("point_2", imgs_)
+                            click_pos_reg(x_reg, y_reg, cla)
+
+                            QTest.qWait(500)
+                        else:
+                            is_open = True
+                else:
+                    menu_open(cla)
+
+            QTest.qWait(500)
+    except Exception as e:
+        print(e)
+
+
+def get_guild(cla):
+    import numpy as np
+    import cv2
+
+    from clean_screen import skip_start, skip_check
+    from function_game import click_pos_reg, imgs_set_, click_pos_2, imgs_set_reg
+    from action import menu_open
+    from clean_screen import clean_screen_start
+
+    try:
+        print("get_guild")
+
+        is_open = False
+        is_open_count = 0
+        while is_open is False:
+            is_open_count += 1
+            if is_open_count > 12:
+                is_open = True
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\guild\\donation_title.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(400, 300, 550, 400, cla, img, 0.85)
+            if imgs_ is not None and imgs_ != False:
+                print("donation_title", imgs_)
+
+                for i in range(5):
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\guild\\anymore_donation.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(370, 80, 600, 140, cla, img, 0.85)
+                    if imgs_ is not None and imgs_ != False:
+                        is_open = True
+                        break
+                    else:
+                        click_pos_2(250, 640, cla)
+                    QTest.qWait(100)
+
+            else:
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\guild.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(700, 30, 960, 150, cla, img, 0.85)
+                if imgs_ is not None and imgs_ != False:
+                    print("title : guild", imgs_)
+
+
+                    click_pos_2(810, 1010, cla)
+
+
+
+                else:
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\guild.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(600, 30, 960, 1040, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("guild", imgs_)
+
+                        x_reg = imgs_.x
+                        y_reg = imgs_.y
+                        click_pos_reg(x_reg, y_reg, cla)
+                    else:
+                        menu_open(cla)
+
+            QTest.qWait(500)
+    except Exception as e:
+        print(e)
+
 
 def get_event_sub(cla):
     print("get_event_sub")

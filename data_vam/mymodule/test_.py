@@ -15,7 +15,7 @@ def go_test():
     import pyautogui
     import random
 
-    from function_game import imgs_set_, click_pos_2, click_pos_reg, text_check_get_num, imgs_set_for, imgs_set_reg
+    from function_game import imgs_set_, click_pos_2, click_pos_reg, text_check_get_num, imgs_set_for, drag_pos, imgs_set_reg
 
     from massenger import line_to_me
     from character_select_and_game_start import character_change, game_ready
@@ -23,7 +23,7 @@ def go_test():
     from potion import maul_potion
     from action import juljun_off, juljun_on, menu_open
     from auction_game import auction_start
-    from get_item import get_post, get_event, get_chosanghwa, get_inmool, get_acave, get_special, get_start
+    from get_item import get_post, get_event, get_chosanghwa, get_inmool, get_acave, get_special, get_guild, get_malyuc
     from check import attack_check, juljun_check
     from boonhae_collection import boonhae_start, collection_setting
     from jadong import jadong_start
@@ -53,14 +53,9 @@ def go_test():
 
         print("test")
 
-        get_start(cla)
+        get_malyuc(cla)
+        get_guild(cla)
 
-        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\point_2.PNG"
-        img_array = np.fromfile(full_path, np.uint8)
-        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        imgs_ = imgs_set_(700, 20, 750, 45, cla, img, 0.8)
-        if imgs_ is not None and imgs_ != False:
-            print("point_2", imgs_)
 
 
         # kind_num = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\number\\"
