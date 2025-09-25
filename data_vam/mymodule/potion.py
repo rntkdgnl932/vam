@@ -107,12 +107,9 @@ def potion_check(cla):
 def maul_potion(cla):
     import numpy as np
     import cv2
-    import pyautogui
-    import random
 
-    from boonhae_collection import boonhae_collection_start
-    from check import out_check, maul_check, move_check, move_ing
-    from function_game import click_pos_2, click_pos_reg, imgs_set_
+    from check import maul_check, move_check, move_ing
+    from function_game import click_pos_2, imgs_set_
     from action import go_maul
 
     try:

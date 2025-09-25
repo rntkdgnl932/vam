@@ -119,10 +119,10 @@ def dun_spot(cla, data):
             click_title_y = 160
         elif dun_2 == "빛바랜유산":
             dun_name = "yousan"
-            click_title_y = 245
+            click_title_y = 220
         elif dun_2 == "고대의공방":
             dun_name = "gongbang"
-            click_title_y = 330
+            click_title_y = 290
         # 145, 195....(+50...)
 
         click_step_y = 95 + (int(dun_3) * 50)
@@ -146,7 +146,7 @@ def dun_spot(cla, data):
                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\complete.PNG"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(250, 200, 320, 270, cla, img, 0.8)
+                imgs_ = imgs_set_(210, 200, 320, 270, cla, img, 0.8)
                 if imgs_ is not None and imgs_ != False:
                     print("complete", imgs_)
                     complete = True
@@ -189,7 +189,7 @@ def dun_spot(cla, data):
                                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\" + str(dun_name) + "\\click_title.PNG"
                                 img_array = np.fromfile(full_path, np.uint8)
                                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set_(185, 135, 385, 195, cla, img, 0.8)
+                                imgs_ = imgs_set_(150, 135, 385, 195, cla, img, 0.8)
                                 if imgs_ is not None and imgs_ != False:
                                     print("click_title", str(dun_name), imgs_)
                                     click_pos_2(840, click_step_y, cla)
