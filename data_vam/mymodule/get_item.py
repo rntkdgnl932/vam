@@ -199,14 +199,20 @@ def get_event(cla):
 
             last_event = False
 
-            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\server.PNG"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set_(280, 320, 340, 360, cla, img, 0.85)
-            if imgs_ is not None and imgs_ != False:
-                print("server", imgs_)
+            is_event = False
 
+            for i in range(len(get_e_title_list)):
+                full_path = str(get_e_title) + str(get_e_title_list[i])
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(270, 300, 860, 760, cla, img, 0.8)
+                if imgs_ is not None and imgs_ != False:
+                    print("get_e_title_list", get_e_title_list[i], imgs_)
+                    is_event = True
 
+                    break
+
+            if is_event == True:
                 is_point = False
 
                 e_x_reg = 0
@@ -233,22 +239,7 @@ def get_event(cla):
 
                             break
 
-                    if is_point == False:
 
-                        ##############################################
-                        ######### 마지막 이벤트 확인하기  ###################
-                        ##############################################
-
-                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\title\\last_event.PNG"
-                        img_array = np.fromfile(full_path, np.uint8)
-                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set_(105, 685, 290, 750, cla, img, 0.8)
-                        if imgs_ is not None and imgs_ != False:
-                            print("last_event", imgs_)
-                            last_event = True
-                        else:
-                            drag_pos(220, 720, 220, 350, cla)
-                    QTest.qWait(500)
 
                 if is_point == True:
                     # 번호 붙여서 ㄱㄱ
@@ -267,17 +258,37 @@ def get_event(cla):
 
 
                 else:
+
+                    if is_point == False:
+
+                        ##############################################
+                        ######### 마지막 이벤트 확인하기  ###################
+                        ##############################################
+
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\title\\last_event.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(105, 685, 290, 750, cla, img, 0.8)
+                        if imgs_ is not None and imgs_ != False:
+                            print("last_event", imgs_)
+                            last_event = True
+                        else:
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\last_checked.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(105, 685, 290, 750, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
+                                print("last_checked", imgs_)
+                                last_event = True
+                            else:
+                                drag_pos(220, 720, 220, 350, cla)
+                    QTest.qWait(500)
+
+
                     if last_event == True:
                         is_open = True
                         clean_screen_start(cla)
             else:
-
-                # full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\point_2.PNG"
-                # img_array = np.fromfile(full_path, np.uint8)
-                # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                # imgs_ = imgs_set_(700, 20, 750, 45, cla, img, 0.8)
-                # if imgs_ is not None and imgs_ != False:
-                #     print("point_2", imgs_)
 
                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\event.PNG"
                 img_array = np.fromfile(full_path, np.uint8)

@@ -53,8 +53,7 @@ def go_test():
 
         print("test")
 
-        get_malyuc(cla)
-        get_guild(cla)
+        get_event(cla)
 
 
 
