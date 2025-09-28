@@ -195,7 +195,7 @@ def dun_spot(cla, data):
                                     complete = True
                                 else:
 
-                                
+
                                     click_pos_2(840, click_step_y, cla)
                                     for x in range(5):
                                         full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\notime_notice.PNG"
