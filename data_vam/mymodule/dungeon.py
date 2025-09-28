@@ -143,55 +143,59 @@ def dun_spot(cla, data):
             if imgs_ is not None and imgs_ != False:
                 print("dungeon", imgs_)
 
-                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\complete.PNG"
-                img_array = np.fromfile(full_path, np.uint8)
-                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(210, 200, 320, 270, cla, img, 0.8)
-                if imgs_ is not None and imgs_ != False:
-                    print("complete", imgs_)
-                    complete = True
-                else:
-                    if dun_1 == "일반":
-                        click_pos_2(60, 90, cla)
-                    elif dun_1 == "에픽":
-                        click_pos_2(180, 90, cla)
+
+                if dun_1 == "일반":
+                    click_pos_2(60, 90, cla)
+                elif dun_1 == "에픽":
+                    click_pos_2(180, 90, cla)
 
 
 
-                    for i in range(9):
-                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\dungeon.PNG"
-                        img_array = np.fromfile(full_path, np.uint8)
-                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set_(600, 30, 960, 250, cla, img, 0.8)
-                        if imgs_ is not None and imgs_ != False:
-                            print("dungeon", imgs_)
+                for i in range(9):
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\dungeon.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(600, 30, 960, 250, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("dungeon", imgs_)
 
 
-                            result_confirm = confirm_all_check(cla)
-                            if result_confirm == True:
-                                is_dun = True
-                                confirm_all(cla)
+                        result_confirm = confirm_all_check(cla)
+                        if result_confirm == True:
+                            is_dun = True
+                            confirm_all(cla)
 
 
-                                for x in range(5):
-                                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\already_join_notice.PNG"
-                                    img_array = np.fromfile(full_path, np.uint8)
-                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                    imgs_ = imgs_set_(340, 70, 650, 140, cla, img, 0.8)
-                                    if imgs_ is not None and imgs_ != False:
-                                        print("already_join_notice", str(dun_name), imgs_)
-                                        clean_screen_start(cla)
-                                        break
-                                    QTest.qWait(200)
-                                break
-                            else:
-
-                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\" + str(dun_name) + "\\click_title.PNG"
+                            for x in range(5):
+                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\already_join_notice.PNG"
                                 img_array = np.fromfile(full_path, np.uint8)
                                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set_(150, 135, 385, 195, cla, img, 0.8)
+                                imgs_ = imgs_set_(340, 70, 650, 140, cla, img, 0.8)
                                 if imgs_ is not None and imgs_ != False:
-                                    print("click_title", str(dun_name), imgs_)
+                                    print("already_join_notice", str(dun_name), imgs_)
+                                    clean_screen_start(cla)
+                                    break
+                                QTest.qWait(200)
+                            break
+                        else:
+
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\" + str(dun_name) + "\\click_title.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(150, 135, 385, 195, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
+                                print("click_title", str(dun_name), imgs_)
+
+                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\complete.PNG"
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set_(210, 200, 320, 270, cla, img, 0.8)
+                                if imgs_ is not None and imgs_ != False:
+                                    print("complete", imgs_)
+                                    complete = True
+                                else:
+
+                                
                                     click_pos_2(840, click_step_y, cla)
                                     for x in range(5):
                                         full_path = "c:\\my_games\\vam\\data_vam\\imgs\\dungeon\\notime_notice.PNG"
@@ -204,11 +208,11 @@ def dun_spot(cla, data):
                                             break
                                     QTest.qWait(200)
 
-                                else:
-                                    click_pos_2(100, click_title_y, cla)
-                        else:
-                            break
-                        QTest.qWait(1000)
+                            else:
+                                click_pos_2(100, click_title_y, cla)
+                    else:
+                        break
+                    QTest.qWait(1000)
                 if complete == True:
                     myQuest_play_add(cla, data)
                     clean_screen_start(cla)
