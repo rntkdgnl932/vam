@@ -54,7 +54,7 @@ def go_test():
 
         print("test")
 
-        quest_get_daily(cla, "퀘스트_일일_서광가도")
+        boonhae_start(cla)
 
 
 

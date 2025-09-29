@@ -138,12 +138,75 @@ def quest_get(cla, data):
                         if imgs_ is not None and imgs_ != False:
 
 
-                            # 여기에 실제로 내가 가져올 퀘스트
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\bosang.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(400, 150, 800, 1040, cla, img, 0.7)
+                            if imgs_ is not None and imgs_ != False:
+                                print("bosang", imgs_)
+                                click_pos_reg(imgs_.x, imgs_.y, cla)
+                                QTest.qWait(300)
+                                click_pos_2(910, 1010, cla)
+                                QTest.qWait(300)
+                                click_pos_2(910, 1010, cla)
+                                QTest.qWait(300)
+                            result_skip = skip_check(cla)
+                            if result_skip == True:
+                                skip_start(cla)
 
-                            result_in = quest_get_daily(cla, data)
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\jadong_btn.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(780, 980, 960, 1040, cla, img, 0.85)
+                            if imgs_ is not None and imgs_ != False:
+                                print("jadong_btn", imgs_)
+                                click_pos_reg(imgs_.x, imgs_.y, cla)
+                            else:
+                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\soolock_btn.PNG"
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set_(780, 980, 960, 1040, cla, img, 0.85)
+                                if imgs_ is not None and imgs_ != False:
+                                    print("soolock_btn", imgs_)
+                                    click_pos_reg(imgs_.x, imgs_.y, cla)
+                                else:
+                                    complete = True
+                                    break
+                        else:
+                            end_get = True
+                            break
+                        QTest.qWait(500)
+                else:
 
-                            if result_in == True:
 
+                    # 일일
+                    # 여기에 실제로 내가 가져올 퀘스트
+
+                    result_in = quest_get_daily(cla, data)
+
+                    if result_in == True:
+
+
+                        for i in range(30):
+
+                            stand_y = 1040
+
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\complete_checked.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(400, 150, 800, 1040, cla, img, 0.85)
+                            if imgs_ is not None and imgs_ != False:
+                                print("complete_checked", imgs_)
+
+                                stand_y = imgs_.y
+
+
+
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\quest.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(600, 30, 960, 250, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
 
                                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\bosang.PNG"
                                 img_array = np.fromfile(full_path, np.uint8)
@@ -161,120 +224,49 @@ def quest_get(cla, data):
                                 if result_skip == True:
                                     skip_start(cla)
 
-                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\jadong_btn.PNG"
-                                img_array = np.fromfile(full_path, np.uint8)
-                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set_(780, 980, 960, 1040, cla, img, 0.85)
-                                if imgs_ is not None and imgs_ != False:
-                                    print("jadong_btn", imgs_)
-                                    click_pos_reg(imgs_.x, imgs_.y, cla)
                                 else:
-                                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\soolock_btn.PNG"
+                                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\bosang.PNG"
                                     img_array = np.fromfile(full_path, np.uint8)
                                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                    imgs_ = imgs_set_(780, 980, 960, 1040, cla, img, 0.85)
+                                    imgs_ = imgs_set_(400, 150, 800, 1040, cla, img, 0.7)
                                     if imgs_ is not None and imgs_ != False:
-                                        print("soolock_btn", imgs_)
-                                        click_pos_reg(imgs_.x, imgs_.y, cla)
-
-
-                                        for q in range(10):
-                                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\anymore_quest.PNG"
-                                            img_array = np.fromfile(full_path, np.uint8)
-                                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                            imgs_ = imgs_set_(370, 80, 600, 140, cla, img, 0.7)
-                                            if imgs_ is not None and imgs_ != False:
-                                                print("anymore_quest", imgs_)
-                                                click_pos_2(300, 190, cla)
-                                                break
-                                            QTest.qWait(100)
-
-
-
+                                        print("bosang", imgs_)
 
                                     else:
-                                        complete = True
-                                        break
-                        else:
-                            end_get = True
-                            break
-                        QTest.qWait(500)
-                else:
-
-
-                    # 일일일
-                    for i in range(30):
-
-                        stand_y = 1040
-
-                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\complete_checked.PNG"
-                        img_array = np.fromfile(full_path, np.uint8)
-                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set_(400, 150, 800, 1040, cla, img, 0.85)
-                        if imgs_ is not None and imgs_ != False:
-                            print("complete_checked", imgs_)
-
-                            stand_y = imgs_.y
-
-
-
-                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\quest.PNG"
-                        img_array = np.fromfile(full_path, np.uint8)
-                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set_(600, 30, 960, 250, cla, img, 0.8)
-                        if imgs_ is not None and imgs_ != False:
-
-                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\bosang.PNG"
-                            img_array = np.fromfile(full_path, np.uint8)
-                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                            imgs_ = imgs_set_(400, 150, 800, 1040, cla, img, 0.7)
-                            if imgs_ is not None and imgs_ != False:
-                                print("bosang", imgs_)
-                                click_pos_reg(imgs_.x, imgs_.y, cla)
-                                QTest.qWait(300)
-                                click_pos_2(910, 1010, cla)
-                                QTest.qWait(300)
-                                click_pos_2(910, 1010, cla)
-                                QTest.qWait(300)
-                            result_skip = skip_check(cla)
-                            if result_skip == True:
-                                skip_start(cla)
-
-                            else:
-                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\daily_trinity.PNG"
-                                img_array = np.fromfile(full_path, np.uint8)
-                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set_for(450, 150, 700, stand_y - 20, cla, img, 0.85)
-                                if imgs_ is not None and imgs_ != False:
-                                    print("daily_trinity", imgs_)
-
-                                    x_reg = imgs_[len(imgs_) - 1][0]
-                                    y_reg = imgs_[len(imgs_) - 1][1]
-
-                                    print("result", x_reg, y_reg)
-                                    click_pos_reg(x_reg - 200, y_reg, cla)
-                                    QTest.qWait(500)
-
-                                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\soolock_btn.PNG"
-                                    img_array = np.fromfile(full_path, np.uint8)
-                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                    imgs_ = imgs_set_(780, 980, 960, 1040, cla, img, 0.85)
-                                    if imgs_ is not None and imgs_ != False:
-                                        print("soolock_btn", imgs_)
-                                        click_pos_reg(imgs_.x, imgs_.y, cla)
-                                        QTest.qWait(100)
-
-                                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\anymore_quest.PNG" #########더 이상 못 받을때
+                                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\daily_trinity.PNG"
                                         img_array = np.fromfile(full_path, np.uint8)
                                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                        imgs_ = imgs_set_(350, 80, 600, 140, cla, img, 0.85)
+                                        imgs_ = imgs_set_for(450, 150, 700, stand_y - 20, cla, img, 0.85)
                                         if imgs_ is not None and imgs_ != False:
-                                            print("anymore_quest", imgs_)
-                                            end_get = True
-                                            break
-                        else:
-                            break
-                        QTest.qWait(300)
+                                            print("daily_trinity", imgs_)
+
+                                            x_reg = imgs_[len(imgs_) - 1][0]
+                                            y_reg = imgs_[len(imgs_) - 1][1]
+
+                                            print("result", x_reg, y_reg)
+                                            click_pos_reg(x_reg - 200, y_reg, cla)
+                                            QTest.qWait(500)
+
+                                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\soolock_btn.PNG"
+                                            img_array = np.fromfile(full_path, np.uint8)
+                                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                            imgs_ = imgs_set_(780, 980, 960, 1040, cla, img, 0.85)
+                                            if imgs_ is not None and imgs_ != False:
+                                                print("soolock_btn", imgs_)
+                                                click_pos_reg(imgs_.x, imgs_.y, cla)
+                                                QTest.qWait(100)
+
+                                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\anymore_quest.PNG" #########더 이상 못 받을때
+                                                img_array = np.fromfile(full_path, np.uint8)
+                                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                                imgs_ = imgs_set_(350, 80, 600, 140, cla, img, 0.85)
+                                                if imgs_ is not None and imgs_ != False:
+                                                    print("anymore_quest", imgs_)
+                                                    end_get = True
+                                                    break
+                            else:
+                                break
+                            QTest.qWait(300)
                 is_quest = True
                 if complete == True:
                     myQuest_play_add(cla, data)
@@ -289,13 +281,17 @@ def quest_get(cla, data):
                             imgs_ = imgs_set_(600, 30, 960, 250, cla, img, 0.8)
                             if imgs_ is not None and imgs_ != False:
 
-                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\daily_trinity.PNG"
-                                img_array = np.fromfile(full_path, np.uint8)
-                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set_(450, 150, 700, 1020, cla, img, 0.85)
-                                if imgs_ is not None and imgs_ != False:
-                                    click_pos_reg(imgs_.x - 200, imgs_.y, cla)
-                                    QTest.qWait(200)
+                                # full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\daily_trinity.PNG"
+                                # img_array = np.fromfile(full_path, np.uint8)
+                                # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                # imgs_ = imgs_set_(450, 150, 700, 1020, cla, img, 0.85)
+                                # if imgs_ is not None and imgs_ != False:
+                                #     click_pos_reg(imgs_.x - 200, imgs_.y, cla)
+                                #     QTest.qWait(200)
+
+                                click_pos_2(400, 190, cla)
+                                QTest.qWait(500)
+
                                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\soolock_btn.PNG"
                                 img_array = np.fromfile(full_path, np.uint8)
                                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
