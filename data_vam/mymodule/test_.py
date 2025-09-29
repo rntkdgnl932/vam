@@ -29,6 +29,7 @@ def go_test():
     from jadong import jadong_start
     from dead_die import dead_check
     from dungeon import dun_get_x_y
+    from quest import quest_get_daily
 
 
     cla = "one"
@@ -53,7 +54,7 @@ def go_test():
 
         print("test")
 
-        get_event(cla)
+        quest_get_daily(cla, "퀘스트_일일_서광가도")
 
 
 

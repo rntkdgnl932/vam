@@ -13,6 +13,7 @@ def out_check(cla):
 
     from function_game import imgs_set_
 
+
     try:
         print("out_check")
 
@@ -28,7 +29,6 @@ def out_check(cla):
             result_menu = menu_open_check(cla)
             if result_menu == False:
                 is_out = True
-
         return is_out
 
     except Exception as e:

@@ -29,7 +29,7 @@ def quest_start(cla, data):
     try:
         print("quest_start", data)
 
-        # 메인, 서브, 일일일
+        # 메인, 서브, 일일
 
         result_juljun = juljun_check(cla)
 
@@ -76,6 +76,8 @@ def quest_get(cla, data):
         result_data = data.split("_")
 
         result_now = result_data[1] # 메인, 서브, 일일
+
+        # 퀘스트_일일_검은만, 퀘스트_일일_서광가도, 퀘스트_일일_꿰뚫린평원,
 
         end_get = False
         complete = False
@@ -135,40 +137,48 @@ def quest_get(cla, data):
                         imgs_ = imgs_set_(600, 30, 960, 250, cla, img, 0.8)
                         if imgs_ is not None and imgs_ != False:
 
-                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\bosang.PNG"
-                            img_array = np.fromfile(full_path, np.uint8)
-                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                            imgs_ = imgs_set_(400, 150, 800, 1040, cla, img, 0.7)
-                            if imgs_ is not None and imgs_ != False:
-                                print("bosang", imgs_)
-                                click_pos_reg(imgs_.x, imgs_.y, cla)
-                                QTest.qWait(300)
-                                click_pos_2(910, 1010, cla)
-                                QTest.qWait(300)
-                                click_pos_2(910, 1010, cla)
-                                QTest.qWait(300)
-                            result_skip = skip_check(cla)
-                            if result_skip == True:
-                                skip_start(cla)
 
-                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\jadong_btn.PNG"
-                            img_array = np.fromfile(full_path, np.uint8)
-                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                            imgs_ = imgs_set_(780, 980, 960, 1040, cla, img, 0.85)
-                            if imgs_ is not None and imgs_ != False:
-                                print("jadong_btn", imgs_)
-                                click_pos_reg(imgs_.x, imgs_.y, cla)
-                            else:
-                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\soolock_btn.PNG"
+                            # 여기에 실제로 내가 가져올 퀘스트
+
+                            result_in = quest_get_daily(cla, data)
+
+                            if result_in == True:
+
+
+                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\bosang.PNG"
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set_(400, 150, 800, 1040, cla, img, 0.7)
+                                if imgs_ is not None and imgs_ != False:
+                                    print("bosang", imgs_)
+                                    click_pos_reg(imgs_.x, imgs_.y, cla)
+                                    QTest.qWait(300)
+                                    click_pos_2(910, 1010, cla)
+                                    QTest.qWait(300)
+                                    click_pos_2(910, 1010, cla)
+                                    QTest.qWait(300)
+                                result_skip = skip_check(cla)
+                                if result_skip == True:
+                                    skip_start(cla)
+
+                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\jadong_btn.PNG"
                                 img_array = np.fromfile(full_path, np.uint8)
                                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                                 imgs_ = imgs_set_(780, 980, 960, 1040, cla, img, 0.85)
                                 if imgs_ is not None and imgs_ != False:
-                                    print("soolock_btn", imgs_)
+                                    print("jadong_btn", imgs_)
                                     click_pos_reg(imgs_.x, imgs_.y, cla)
                                 else:
-                                    complete = True
-                                    break
+                                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\soolock_btn.PNG"
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set_(780, 980, 960, 1040, cla, img, 0.85)
+                                    if imgs_ is not None and imgs_ != False:
+                                        print("soolock_btn", imgs_)
+                                        click_pos_reg(imgs_.x, imgs_.y, cla)
+                                    else:
+                                        complete = True
+                                        break
                         else:
                             end_get = True
                             break
@@ -320,3 +330,105 @@ def quest_get(cla, data):
 
     except Exception as e:
         print(e)
+
+
+
+
+def quest_get_daily(cla, data):
+    import numpy as np
+    import cv2
+    import pyautogui
+    import random
+
+    from clean_screen import clean_screen_start, skip_check, skip_start
+    from function_game import click_pos_2, click_pos_reg, imgs_set_, imgs_set_for
+    from schedule import myQuest_play_add
+    from action import menu_open, juljun_on
+    # kind_skip = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\skip"
+    # kind_skip_list = os.listdir(kind_skip)
+
+    try:
+        print("quest_get_daily", data)
+
+        result_data = data.split("_")
+
+        if len(result_data) == 2:
+            daily_name = "gado.PNG"
+            daily_cate = "foenari.PNG"
+        else:
+            # 퀘스트_일일_검은만, 퀘스트_일일_서광가도, 퀘스트_일일_꿰뚫린평원,
+
+            if result_data[2] == "검은만":
+                daily_name = "black.PNG"
+                daily_cate = "krvna.PNG"
+            elif result_data[2] == "서광가도":
+                daily_name = "gado.PNG"
+                daily_cate = "foenari.PNG"
+            elif result_data[2] == "꿰뚫린평원":
+                daily_name = "won.PNG"
+                daily_cate = "foenari.PNG"
+        is_quest = False
+        is_quest_count = 0
+
+        is_in = False
+
+        while is_quest is False:
+            is_quest_count += 1
+            if is_quest_count > 15:
+                is_quest = True
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\quest.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(600, 30, 960, 250, cla, img, 0.8)
+            if imgs_ is not None and imgs_ != False:
+
+                # 여기에 실제로 내가 가져올 퀘스트
+
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\daily\\" + str(daily_name)
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(0, 120, 170, 960, cla, img, 0.8)
+                if imgs_ is not None and imgs_ != False:
+                    print("daily_name", str(daily_name), imgs_)
+                    x_reg = imgs_.x
+                    y_reg = imgs_.y
+
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\daily\\checked.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(0, y_reg - 15, 30, y_reg + 15, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("checked", imgs_)
+
+                        is_quest = True
+                        is_in = True
+
+                    else:
+                        click_pos_reg(x_reg, y_reg, cla)
+                else:
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\daily\\" + str(daily_cate)
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(0, 120, 170, 960, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("daily_cate", str(daily_cate), imgs_)
+
+                        x_reg = imgs_.x
+                        y_reg = imgs_.y
+
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\quest\\daily\\up.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(110, y_reg - 15, 170, y_reg + 15, cla, img, 0.8)
+                        if imgs_ is not None and imgs_ != False:
+                            print("up", imgs_)
+                        else:
+                            click_pos_reg(x_reg, y_reg, cla)
+
+            QTest.qWait(1000)
+        return is_in
+    except Exception as e:
+        print(e)
+
+
