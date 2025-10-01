@@ -21,9 +21,87 @@ def menu_open(cla):
     from clean_screen import clean_screen_start
     from check import out_check, maul_check, move_check, move_ing
     from function_game import click_pos_2, click_pos_reg, imgs_set_
+    from get_item import get_event, get_post
 
     try:
         print("menu_open")
+
+        is_open = False
+        is_open_count = 0
+        while is_open is False:
+            is_open_count += 1
+            if is_open_count > 7:
+                is_open = True
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\post.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(600, 30, 960, 1040, cla, img, 0.8)
+            if imgs_ is not None and imgs_ != False:
+                print("menu : post", imgs_)
+
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\event.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(600, 30, 960, 1040, cla, img, 0.8)
+                if imgs_ is not None and imgs_ != False:
+                    print("event", imgs_)
+                    x_reg = imgs_.x
+                    y_reg = imgs_.y
+
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\point\\menu_point_1.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(x_reg, y_reg - 30, x_reg + 30, y_reg, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("menu_point_1", imgs_)
+                        get_event(cla)
+                else:
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\post.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(600, 30, 960, 1040, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("post", imgs_)
+                        x_reg = imgs_.x
+                        y_reg = imgs_.y
+
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\point\\menu_point_1.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(x_reg, y_reg - 30, x_reg + 30, y_reg, cla, img, 0.8)
+                        if imgs_ is not None and imgs_ != False:
+                            print("menu_point_1", imgs_)
+                            get_post(cla)
+
+
+                is_open = True
+
+            else:
+                result_out = out_check(cla)
+                if result_out == True:
+                    click_pos_2(930, 45, cla)
+                else:
+                    clean_screen_start(cla)
+
+
+
+            QTest.qWait(200)
+    except Exception as e:
+        print(e)
+
+def menu_open_pure(cla):
+    import numpy as np
+    import cv2
+    import pyautogui
+    import random
+
+    from clean_screen import clean_screen_start
+    from check import out_check, maul_check, move_check, move_ing
+    from function_game import click_pos_2, click_pos_reg, imgs_set_
+
+    try:
+        print("menu_open_pure")
 
         is_open = False
         is_open_count = 0
@@ -53,8 +131,6 @@ def menu_open(cla):
             QTest.qWait(200)
     except Exception as e:
         print(e)
-
-
 
 def confirm_all(cla):
     import numpy as np

@@ -54,7 +54,7 @@ def go_test():
 
         print("test")
 
-        boonhae_start(cla)
+        get_event(cla)
 
 
 

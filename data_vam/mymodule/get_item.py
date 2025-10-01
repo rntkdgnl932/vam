@@ -48,7 +48,7 @@ def get_post(cla):
 
     from clean_screen import skip_start
     from function_game import click_pos_2, click_pos_reg, imgs_set_
-    from action import menu_open
+    from action import menu_open_pure
     from clean_screen import clean_screen_start
 
     try:
@@ -110,7 +110,7 @@ def get_post(cla):
                     print("post", imgs_)
                     click_pos_reg(imgs_.x, imgs_.y, cla)
                 else:
-                    menu_open(cla)
+                    menu_open_pure(cla)
 
             QTest.qWait(500)
     except Exception as e:
@@ -123,7 +123,7 @@ def get_upjuk(cla):
 
     from clean_screen import skip_start
     from function_game import click_pos_2, click_pos_reg, imgs_set_
-    from action import menu_open
+    from action import menu_open_pure
     from clean_screen import clean_screen_start
 
     try:
@@ -165,7 +165,7 @@ def get_upjuk(cla):
                     print("upjuk", imgs_)
                     click_pos_reg(imgs_.x, imgs_.y, cla)
                 else:
-                    menu_open(cla)
+                    menu_open_pure(cla)
 
             QTest.qWait(500)
     except Exception as e:
@@ -177,7 +177,7 @@ def get_event(cla):
 
     from clean_screen import skip_start
     from function_game import drag_pos, click_pos_reg, imgs_set_
-    from action import menu_open
+    from action import menu_open_pure
     from clean_screen import clean_screen_start
 
 
@@ -265,23 +265,16 @@ def get_event(cla):
                         ######### 마지막 이벤트 확인하기  ###################
                         ##############################################
 
-                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\title\\last_event.PNG"
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\last_checked.PNG"
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                         imgs_ = imgs_set_(105, 685, 290, 750, cla, img, 0.8)
                         if imgs_ is not None and imgs_ != False:
-                            print("last_event", imgs_)
+                            print("last_checked", imgs_)
                             last_event = True
                         else:
-                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\last_checked.PNG"
-                            img_array = np.fromfile(full_path, np.uint8)
-                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                            imgs_ = imgs_set_(105, 685, 290, 750, cla, img, 0.8)
-                            if imgs_ is not None and imgs_ != False:
-                                print("last_checked", imgs_)
-                                last_event = True
-                            else:
-                                drag_pos(220, 720, 220, 350, cla)
+                            drag_pos(220, 720, 220, 350, cla)
+
                     QTest.qWait(500)
 
 
@@ -298,7 +291,7 @@ def get_event(cla):
                     print("event", imgs_)
                     click_pos_reg(imgs_.x, imgs_.y, cla)
                 else:
-                    menu_open(cla)
+                    menu_open_pure(cla)
 
             QTest.qWait(500)
     except Exception as e:
@@ -311,7 +304,7 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
     from clean_screen import skip_start
     from function_game import click_pos_2, click_pos_reg, imgs_set_, imgs_set_for
-    from action import menu_open
+    from action import menu_open_pure
     from clean_screen import clean_screen_start
 
     plus = 0
@@ -338,37 +331,37 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         num_ready = data.split(".")
         num = num_ready[0]
 
-        # 삭제 : 2, 9
+        # 삭제 : 3, 4, 6, 8, 10, 11, 12, 13
 
         # 1 : 위대한시작!영웅의서약(seven_five_eight) o
 
-        # 2 : 사용하고강해져라!(common)
+        # 2 : 모아르테의은혜출석이벤트(seven) o
 
-        # 3 : 포아메의포상출석이벤트(seven) o
+        # 3 : 출석이벤트(seven) 3
 
-        # 4 : 카프의의뢰(eight) o
+        # 4 : 핏빛만월제(eight) 4
 
         # 5 : 데일리출석(tewnty_one) o
 
-        # 6 : 삼위일체!(eight) o
+        # 6 :
 
         # 7 : 트리니티사용!(eight) o
 
-        # 8 : 다미르의의뢰(eight) o
+        # 8 :
 
-        # 9 : 강화의길!출석이벤트(seven)
+        # 9 : vampir30일의서약스페셜출석이벤트(seven) o
 
-        # 10 : 황금!(eight) o
+        # 10 :
 
-        # 11 : 적들을사냥하라!(eight) o
+        # 11 :
 
-        # 12 : 클랜생활시작!(eight) o
+        # 12 :
 
-        # 13 : 아이템성장!(eight) o
+        # 13 :
 
-        # 14 :
+        # 14 : vampir30일서약(eight) o
 
-        # 15 :
+        # 15 : 쟁탈전프리시즌기념!(eight) o
 
         ##############################################
         ######### 마지막 이벤트 확인하기  ###################
@@ -377,13 +370,13 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # new
 
-        # ? : 모아르테의은혜출석이벤트(seven) 2
+        # ? : 출석이벤트(seven) 3
 
-        # ? : vampir30일의서약스페셜출석이벤트(seven) 9
+        # ? : 핏빛만월제(eight) 4
 
-        # ? : vampir30일서약(eight) 14
+        # ? :
 
-        #  ? : 쟁탈전프리시즌기념!(eight) 15
+        #  ? :
 
         # ? :
 
@@ -394,6 +387,7 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         ##############################################
         ######### 마지막 이벤트 확인하기  ###################
         ##############################################
+        # 삭제 : 3, 4, 6, 8, 10, 11, 12, 13
 
         if num == "1":
             kind = "seven_five_eight"
@@ -407,7 +401,7 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         elif num == "2" or num == "3" or num == "9":
             kind = "seven"
 
-        elif num == "4" or num == "6" or num == "7" or num == "8" or num == "10" or num == "11" or num == "12" or num == "13" or num == "14" or num == "15":
+        elif num == "4" or num == "7" or num == "14" or num == "15":
             kind = "eight"
 
         print("kind", kind)
@@ -606,7 +600,7 @@ def get_special(cla):
 
     from clean_screen import skip_start
     from function_game import click_pos_2, click_pos_reg, imgs_set_
-    from action import menu_open
+    from action import menu_open_pure
     from clean_screen import clean_screen_start
 
 
@@ -671,7 +665,7 @@ def get_special(cla):
                     print("special", imgs_)
                     click_pos_reg(imgs_.x, imgs_.y, cla)
                 else:
-                    menu_open(cla)
+                    menu_open_pure(cla)
 
             QTest.qWait(500)
     except Exception as e:
@@ -685,7 +679,7 @@ def get_sangjum_gyohwan(cla):
 
     from clean_screen import skip_start
     from function_game import click_pos_2, click_pos_reg, imgs_set_
-    from action import menu_open
+    from action import menu_open_pure
     from clean_screen import clean_screen_start
 
 
@@ -752,7 +746,7 @@ def get_sangjum_gyohwan(cla):
                     click_pos_reg(imgs_.x, imgs_.y, cla)
                     QTest.qWait(500)
                 else:
-                    menu_open(cla)
+                    menu_open_pure(cla)
 
             QTest.qWait(500)
     except Exception as e:
@@ -764,7 +758,7 @@ def get_sangjum_start(cla):
 
     from clean_screen import skip_start
     from function_game import click_pos_2, click_pos_reg, imgs_set_
-    from action import menu_open
+    from action import menu_open_pure
     from clean_screen import clean_screen_start
 
 
@@ -836,7 +830,7 @@ def get_sangjum_start(cla):
                     click_pos_reg(imgs_.x, imgs_.y, cla)
                     QTest.qWait(500)
                 else:
-                    menu_open(cla)
+                    menu_open_pure(cla)
 
             QTest.qWait(500)
     except Exception as e:
@@ -951,7 +945,7 @@ def get_inmool(cla):
 
     from clean_screen import skip_start, skip_check
     from function_game import click_pos_2, click_pos_reg, imgs_set_
-    from action import menu_open
+    from action import menu_open_pure
     from clean_screen import clean_screen_start
 
 
@@ -1040,7 +1034,7 @@ def get_inmool(cla):
                     click_pos_reg(imgs_.x, imgs_.y, cla)
                     QTest.qWait(500)
                 else:
-                    menu_open(cla)
+                    menu_open_pure(cla)
 
             QTest.qWait(500)
     except Exception as e:
@@ -1053,7 +1047,7 @@ def get_chosanghwa(cla):
 
     from clean_screen import skip_start, skip_check
     from function_game import click_pos_2, click_pos_reg, imgs_set_
-    from action import menu_open
+    from action import menu_open_pure
     from clean_screen import clean_screen_start
 
     try:
@@ -1139,7 +1133,7 @@ def get_chosanghwa(cla):
                     click_pos_reg(imgs_.x, imgs_.y, cla)
                     QTest.qWait(500)
                 else:
-                    menu_open(cla)
+                    menu_open_pure(cla)
 
             QTest.qWait(500)
     except Exception as e:
@@ -1154,7 +1148,7 @@ def get_acave(cla):
 
     from clean_screen import skip_start, skip_check
     from function_game import imgs_set_reg, click_pos_reg, imgs_set_, click_pos_2
-    from action import menu_open
+    from action import menu_open_pure
     from clean_screen import clean_screen_start
 
     try:
@@ -1370,7 +1364,7 @@ def get_acave(cla):
 
                             QTest.qWait(500)
                 else:
-                    menu_open(cla)
+                    menu_open_pure(cla)
 
             QTest.qWait(500)
     except Exception as e:
@@ -1383,7 +1377,7 @@ def get_malyuc(cla):
 
     from clean_screen import skip_start, skip_check
     from function_game import click_pos_reg, imgs_set_, click_pos_2, imgs_set_reg
-    from action import menu_open
+    from action import menu_open_pure
     from clean_screen import clean_screen_start
 
     try:
@@ -1462,7 +1456,7 @@ def get_malyuc(cla):
                         else:
                             is_open = True
                 else:
-                    menu_open(cla)
+                    menu_open_pure(cla)
 
             QTest.qWait(500)
     except Exception as e:
@@ -1475,7 +1469,7 @@ def get_guild(cla):
 
     from clean_screen import skip_start, skip_check
     from function_game import click_pos_reg, imgs_set_, click_pos_2, imgs_set_reg
-    from action import menu_open
+    from action import menu_open_pure
     from clean_screen import clean_screen_start
 
     try:
@@ -1532,7 +1526,7 @@ def get_guild(cla):
                         y_reg = imgs_.y
                         click_pos_reg(x_reg, y_reg, cla)
                     else:
-                        menu_open(cla)
+                        menu_open_pure(cla)
 
             QTest.qWait(500)
     except Exception as e:
