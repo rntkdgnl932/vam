@@ -39,6 +39,8 @@ def dun_start(cla, data):
             dun_name = "yousan"
         elif dun_2 == "고대의공방":
             dun_name = "gongbang"
+        elif dun_2 == "이벤트":
+            dun_name = "event"
 
         result_juljun = juljun_check(cla)
 

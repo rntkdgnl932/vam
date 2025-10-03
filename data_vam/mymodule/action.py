@@ -228,7 +228,7 @@ def go_random(cla):
         is_data = False
         is_data_count = 0
         while is_data is False:
-            is_data_count +=1
+            is_data_count += 1
             if is_data_count > 7:
                 is_data = True
 
@@ -239,7 +239,7 @@ def go_random(cla):
             if imgs_ is not None and imgs_ != False:
                 print("random_page", imgs_)
                 click_pos_reg(imgs_.x, imgs_.y, cla)
-                QTest.qWait(1000)
+                QTest.qWait(2000)
                 result_loading = loading_check(cla)
                 if result_loading == True:
                     loading_start(cla)
