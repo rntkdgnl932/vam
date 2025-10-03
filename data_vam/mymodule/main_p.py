@@ -1105,7 +1105,7 @@ class FirstTab(QWidget):
         # 던전_일반_빛바랜유산_1_중 // yousan
         # 던전_일반_고대의공방_1_상 // gongbang
         # list4 = ['던전 선택', '일반_업보', '일반_지옥', '일반_죄악', '일반_저주', '특수_마족', '특수_아르카스', '파티_묘지']
-        dun_g1_list = ['던전', '창조의심연', '빛바랜유산', '고대의공방']
+        dun_g1_list = ['던전', '창조의심연', '빛바랜유산', '고대의공방', '이벤트']
         dun_g1_name.addItems(dun_g1_list)
 
         dun_g1_stair = QComboBox()

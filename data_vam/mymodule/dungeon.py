@@ -123,6 +123,17 @@ def dun_spot(cla, data):
         elif dun_2 == "고대의공방":
             dun_name = "gongbang"
             click_title_y = 290
+
+            if int(dun_3) > 6:
+                dun_3 = "6"
+
+        elif dun_2 == "이벤트":
+            dun_name = "event"
+            click_title_y = 360
+
+            if int(dun_3) > 4:
+                dun_3 = "4"
+
         # 145, 195....(+50...)
 
         click_step_y = 95 + (int(dun_3) * 50)
@@ -221,8 +232,12 @@ def dun_spot(cla, data):
                     if is_dun == True:
                         # 랜덤이동 추가
                         QTest.qWait(1000)
-                        result_reg = dun_get_x_y(data)
-                        dun_spot_difficulty(cla, result_reg)
+
+                        if dun_2 == "이벤트":
+                            go_random(cla)
+                        else:
+                            result_reg = dun_get_x_y(data)
+                            dun_spot_difficulty(cla, result_reg)
                         attack_on(cla)
                         juljun_on(cla)
                 is_check = True
