@@ -184,7 +184,7 @@ def skip_start(cla):
 
         while is_action is False:
             is_action_count += 1
-            if is_action_count > 10:
+            if is_action_count > 5:
                 is_action = True
 
             is_skip = False

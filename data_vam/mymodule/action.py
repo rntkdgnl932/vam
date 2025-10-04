@@ -21,7 +21,7 @@ def menu_open(cla):
     from clean_screen import clean_screen_start
     from check import out_check, maul_check, move_check, move_ing
     from function_game import click_pos_2, click_pos_reg, imgs_set_
-    from get_item import get_event, get_post
+    from get_item import get_event, get_post, get_special, get_upjuk
 
     try:
         print("menu_open")
@@ -38,14 +38,14 @@ def menu_open(cla):
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
             imgs_ = imgs_set_(600, 30, 960, 1040, cla, img, 0.8)
             if imgs_ is not None and imgs_ != False:
-                print("menu : post", imgs_)
+                print("menu : open", imgs_)
 
                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\event.PNG"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                 imgs_ = imgs_set_(600, 30, 960, 1040, cla, img, 0.8)
                 if imgs_ is not None and imgs_ != False:
-                    print("event", imgs_)
+                    print("event point check", imgs_)
                     x_reg = imgs_.x
                     y_reg = imgs_.y
 
@@ -56,26 +56,60 @@ def menu_open(cla):
                     if imgs_ is not None and imgs_ != False:
                         print("menu_point_1", imgs_)
                         get_event(cla)
-                else:
-                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\post.PNG"
-                    img_array = np.fromfile(full_path, np.uint8)
-                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set_(600, 30, 960, 1040, cla, img, 0.8)
-                    if imgs_ is not None and imgs_ != False:
-                        print("post", imgs_)
-                        x_reg = imgs_.x
-                        y_reg = imgs_.y
-
-                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\point\\menu_point_1.PNG"
+                    else:
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\post.PNG"
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set_(x_reg, y_reg - 30, x_reg + 30, y_reg, cla, img, 0.8)
+                        imgs_ = imgs_set_(600, 30, 960, 1040, cla, img, 0.8)
                         if imgs_ is not None and imgs_ != False:
-                            print("menu_point_1", imgs_)
-                            get_post(cla)
+                            print("post point check", imgs_)
+                            x_reg = imgs_.x
+                            y_reg = imgs_.y
 
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\point\\menu_point_1.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(x_reg, y_reg - 30, x_reg + 30, y_reg, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
+                                print("menu_point_1", imgs_)
+                                get_post(cla)
+                            else:
+                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\special.PNG"
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set_(600, 30, 960, 1040, cla, img, 0.8)
+                                if imgs_ is not None and imgs_ != False:
+                                    print("special point check", imgs_)
+                                    x_reg = imgs_.x
+                                    y_reg = imgs_.y
 
-                is_open = True
+                                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\point\\menu_point_1.PNG"
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set_(x_reg, y_reg - 30, x_reg + 30, y_reg, cla, img, 0.8)
+                                    if imgs_ is not None and imgs_ != False:
+                                        print("menu_point_1", imgs_)
+                                        get_special(cla)
+                                    else:
+                                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\upjuk.PNG"
+                                        img_array = np.fromfile(full_path, np.uint8)
+                                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                        imgs_ = imgs_set_(600, 30, 960, 1040, cla, img, 0.8)
+                                        if imgs_ is not None and imgs_ != False:
+                                            print("upjuk point check", imgs_)
+                                            x_reg = imgs_.x
+                                            y_reg = imgs_.y
+
+                                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\point\\menu_point_1.PNG"
+                                            img_array = np.fromfile(full_path, np.uint8)
+                                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                            imgs_ = imgs_set_(x_reg, y_reg - 30, x_reg + 30, y_reg, cla, img, 0.8)
+                                            if imgs_ is not None and imgs_ != False:
+                                                print("menu_point_1", imgs_)
+                                                get_upjuk(cla)
+                                            else:
+                                                is_open = True
+
 
             else:
                 result_out = out_check(cla)

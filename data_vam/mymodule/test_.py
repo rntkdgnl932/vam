@@ -54,7 +54,7 @@ def go_test():
 
         print("test")
 
-        get_event(cla)
+        menu_open(cla)
 
 
 

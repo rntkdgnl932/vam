@@ -124,7 +124,8 @@ def get_upjuk(cla):
     from clean_screen import skip_start
     from function_game import click_pos_2, click_pos_reg, imgs_set_
     from action import menu_open_pure
-    from clean_screen import clean_screen_start
+    from clean_screen import clean_screen_start, skip_check
+
 
     try:
         print("get_upjuk")
@@ -143,19 +144,38 @@ def get_upjuk(cla):
             if imgs_ is not None and imgs_ != False:
                 print("upjuk", imgs_)
 
-                is_open = True
 
-                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\post\\all_get_btn.PNG"
-                img_array = np.fromfile(full_path, np.uint8)
-                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(0, 50, 960, 1040, cla, img, 0.8)
-                if imgs_ is not None and imgs_ != False:
-                    print("all_get_btn", imgs_)
+                is_point = False
+                for i in range(len(get_e_ready_list)):
+                    full_path = str(get_e_ready) + str(get_e_ready_list[i])
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(60, 60, 850, 100, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("get_e_ready_list", get_e_ready_list[i], imgs_)
+                        is_point = True
+                        break
+                if is_point == True:
 
-                    click_pos_reg(imgs_.x, imgs_.y, cla)
-                    QTest.qWait(500)
-                    skip_start(cla)
-                clean_screen_start(cla)
+
+
+
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\post\\all_get_btn.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(0, 50, 960, 1040, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("all_get_btn", imgs_)
+                        for i in range(4):
+                            click_pos_reg(imgs_.x, imgs_.y, cla)
+                            QTest.qWait(500)
+                else:
+                    result_skip = skip_check(cla)
+                    if result_skip == True:
+                        skip_start(cla)
+                    else:
+                        is_open = True
+                        clean_screen_start(cla)
             else:
                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\menu\\upjuk.PNG"
                 img_array = np.fromfile(full_path, np.uint8)
@@ -343,11 +363,11 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # 5 : 데일리출석(tewnty_one) o
 
-        # 6 :
+        # 6 : 만월의밤스페셜던전이벤트(pass)
 
         # 7 : 트리니티사용!(eight) o
 
-        # 8 :
+        # 8 : 일일퀘스트더블보상이벤트!(pass)
 
         # 9 : vampir30일의서약스페셜출석이벤트(seven) o
 
@@ -404,9 +424,16 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         elif num == "4" or num == "7" or num == "14" or num == "15":
             kind = "eight"
 
+        elif num == "6" or num =="8":
+            kind = "pass"
+
         print("kind", kind)
 
         is_open = False
+
+        if kind == "pass":
+            is_open = True
+
         is_open_count = 0
         while is_open is False:
             is_open_count += 1
