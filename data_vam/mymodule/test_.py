@@ -7,7 +7,8 @@ import variable as v_
 
 sys.path.append('C:/my_games/' + str(v_.game_folder) + '/' + str(v_.data_folder) + '/mymodule')
 
-
+kind_num = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\number\\"
+kind_num_list = os.listdir(kind_num)
 
 def go_test():
     import numpy as np
@@ -30,6 +31,7 @@ def go_test():
     from dead_die import dead_check
     from dungeon import dun_get_x_y
     from quest import quest_get_daily
+    from potion import potion_check
 
 
     cla = "one"
@@ -54,7 +56,7 @@ def go_test():
 
         print("test")
 
-        menu_open(cla)
+        potion_check(cla)
 
 
 
