@@ -58,6 +58,7 @@ def jadong_spot(cla):
     from function_game import click_pos_2, click_pos_reg, imgs_set_, imgs_set_for
     from massenger import line_to_me
     from potion import maul_potion
+    from clean_screen import clean_screen_start
     # kind_skip = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\skip"
     # kind_skip_list = os.listdir(kind_skip)
 
@@ -118,6 +119,15 @@ def jadong_spot(cla):
                                     imgs_ = imgs_set_(340, 150, 650, 900, cla, img, 0.8)
                                     if imgs_ is not None and imgs_ != False:
                                         click_pos_reg(imgs_.x, imgs_.y, cla)
+                                        for c in range(10):
+                                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\jadong\\dochack.PNG"
+                                            img_array = np.fromfile(full_path, np.uint8)
+                                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                            imgs_ = imgs_set_(340, 70, 650, 140, cla, img, 0.8)
+                                            if imgs_ is not None and imgs_ != False:
+                                                clean_screen_start(cla)
+                                                break
+                                            QTest.qWait(100)
                                 else:
                                     # 자동사냥하기
                                     attack_on(cla)
