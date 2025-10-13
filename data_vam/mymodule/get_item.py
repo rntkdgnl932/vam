@@ -351,23 +351,23 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         num_ready = data.split(".")
         num = num_ready[0]
 
-        # 삭제 : 3, 4, 6, 8, 10, 11, 12, 13
+        # 삭제 : 2, 8, 14, 15
 
         # 1 : 위대한시작!영웅의서약(seven_five_eight) o
 
-        # 2 : 모아르테의은혜출석이벤트(seven) o
+        # 2 :
 
-        # 3 : 출석이벤트(seven) 3
+        # 3 : 핏빛만월제출석이벤트(seven) o
 
-        # 4 : 핏빛만월제(eight) 4
+        # 4 : 핏빛만월제(eight) o
 
         # 5 : 데일리출석(tewnty_one) o
 
-        # 6 : 만월의밤스페셜던전이벤트(pass)
+        # 6 : 만월의밤스페셜던전이벤트(pass) o
 
         # 7 : 트리니티사용!(eight) o
 
-        # 8 : 일일퀘스트더블보상이벤트!(pass)
+        # 8 :
 
         # 9 : vampir30일의서약스페셜출석이벤트(seven) o
 
@@ -379,9 +379,9 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # 13 :
 
-        # 14 : vampir30일서약(eight) o
+        # 14 :
 
-        # 15 : 쟁탈전프리시즌기념!(eight) o
+        # 15 :
 
         ##############################################
         ######### 마지막 이벤트 확인하기  ###################
@@ -390,9 +390,9 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # new
 
-        # ? : 출석이벤트(seven) 3
+        # ? : 붉은한가위출석이벤트(seven) 2
 
-        # ? : 핏빛만월제(eight) 4
+        # ? : 적들을사냥하라!(eight) 8
 
         # ? :
 
@@ -421,10 +421,10 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         elif num == "2" or num == "3" or num == "9":
             kind = "seven"
 
-        elif num == "4" or num == "7" or num == "14" or num == "15":
+        elif num == "4" or num == "7" or num == "8" or num == "0":
             kind = "eight"
 
-        elif num == "6" or num =="8":
+        elif num == "6" or num == "0":
             kind = "pass"
 
         print("kind", kind)
