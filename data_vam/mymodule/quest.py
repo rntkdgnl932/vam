@@ -51,6 +51,7 @@ def quest_start(cla, data):
             else:
                 quest_get(cla, data)
         else:
+
             quest_get(cla, data)
 
     except Exception as e:

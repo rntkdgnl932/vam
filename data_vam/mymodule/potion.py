@@ -174,6 +174,8 @@ def ilgwal_buy(cla):
     try:
         print("ilgwal_buy")
 
+        anymore_notice = False
+
         is_buy = False
         is_buy_count = 0
         while is_buy is False:
@@ -188,6 +190,7 @@ def ilgwal_buy(cla):
             if imgs_ is not None and imgs_ != False:
                 print("not_selected_notice", imgs_)
                 is_buy = True
+                anymore_notice = True
             else:
                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\anymore_buy_notice.PNG"
                 img_array = np.fromfile(full_path, np.uint8)
@@ -234,6 +237,12 @@ def ilgwal_buy(cla):
                             click_pos_2(200, 1000, cla)
 
             if is_buy == True:
+
+
+                # 오류때문에 한번더 구매매
+                if anymore_notice == False:
+                    again_buy(cla)
+
                 clean_screen_start(cla)
 
             QTest.qWait(200)
@@ -302,6 +311,111 @@ def ilgwal_setting(cla):
                 else:
                     click_pos_2(70, 1000, cla)
                     QTest.qWait(500)
+            QTest.qWait(500)
+
+    except Exception as e:
+        print(e)
+
+
+
+def again_buy(cla):
+    import numpy as np
+    import cv2
+    import pyautogui
+    import random
+
+    from clean_screen import all_skip
+    from check import out_check
+    from function_game import click_pos_2, click_pos_reg, imgs_set_
+
+    try:
+        print("again_buy")
+
+        is_buy = False
+        is_buy_count = 0
+        while is_buy is False:
+            is_buy_count += 1
+            if is_buy_count > 7:
+                is_buy = True
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\buy_btn.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(480, 660, 600, 720, cla, img, 0.8)
+            if imgs_ is not None and imgs_ != False:
+                print("buy_btn", imgs_)
+                click_pos_2(415, 570, cla)
+                QTest.qWait(500)
+                click_pos_reg(imgs_.x, imgs_.y, cla)
+                is_buy = True
+            else:
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\teleport_maul.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(0, 60, 150, 1000, cla, img, 0.8)
+                if imgs_ is not None and imgs_ != False:
+                    print("teleport_maul", imgs_)
+                    click_pos_reg(imgs_.x, imgs_.y, cla)
+
+
+            QTest.qWait(500)
+
+        is_buy = False
+        is_buy_count = 0
+        while is_buy is False:
+            is_buy_count += 1
+            if is_buy_count > 7:
+                is_buy = True
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\buy_btn.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(480, 660, 600, 720, cla, img, 0.8)
+            if imgs_ is not None and imgs_ != False:
+                print("buy_btn", imgs_)
+                click_pos_2(415, 570, cla)
+                QTest.qWait(500)
+                click_pos_reg(imgs_.x, imgs_.y, cla)
+                is_buy = True
+            else:
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\teleport_random.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(0, 60, 150, 1000, cla, img, 0.8)
+                if imgs_ is not None and imgs_ != False:
+                    print("teleport_maul", imgs_)
+                    click_pos_reg(imgs_.x, imgs_.y, cla)
+
+            QTest.qWait(500)
+
+        is_buy = False
+        is_buy_count = 0
+        while is_buy is False:
+            is_buy_count += 1
+            if is_buy_count > 7:
+                is_buy = True
+
+            for i in range(3):
+
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\potion\\buy_btn.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(480, 660, 600, 720, cla, img, 0.8)
+                if imgs_ is not None and imgs_ != False:
+                    print("buy_btn", imgs_)
+                    click_pos_2(375, 610, cla)
+                    QTest.qWait(500)
+                    click_pos_reg(imgs_.x, imgs_.y, cla)
+                    is_buy = True
+                    break
+                else:
+                    if i == 0:
+                        click_pos_2(40, 290, cla)
+                    elif i == 1:
+                        click_pos_2(40, 220, cla)
+                    elif i == 2:
+                        click_pos_2(40, 170, cla)
+                QTest.qWait(1000)
             QTest.qWait(500)
 
     except Exception as e:

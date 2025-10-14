@@ -56,7 +56,7 @@ def go_test():
 
         print("test")
 
-        menu_open(cla)
+        maul_potion(cla)
 
 
 
