@@ -22,7 +22,7 @@ def go_test():
     from character_select_and_game_start import character_change, game_ready
     from clean_screen import all_skip, clean_screen_start, skip_start
     from potion import maul_potion
-    from action import juljun_off, juljun_on, menu_open
+    from action import juljun_off, juljun_on, menu_open, go_maul
     from auction_game import auction_start
     from get_item import get_post, get_event, get_chosanghwa, get_inmool, get_acave, get_special, get_guild, get_malyuc
     from check import attack_check, juljun_check
@@ -56,7 +56,7 @@ def go_test():
 
         print("test")
 
-        potion_check(cla)
+        menu_open(cla)
 
 
 

@@ -128,32 +128,41 @@ def collection_setting(cla):
                 is_open = True
 
             setting_ready = False
-            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\collection.PNG"
+
+            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\list.PNG"
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set_(700, 30, 960, 150, cla, img, 0.85)
+            imgs_ = imgs_set_(400, 340, 550, 400, cla, img, 0.85)
             if imgs_ is not None and imgs_ != False:
-                print("title : collection", imgs_)
-
-                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\list.PNG"
+                print("list", imgs_)
+                setting_ready = True
+            else:
+                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\collection.PNG"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(400, 340, 550, 400, cla, img, 0.85)
+                imgs_ = imgs_set_(700, 30, 960, 150, cla, img, 0.85)
                 if imgs_ is not None and imgs_ != False:
-                    print("list", imgs_)
-                    setting_ready = True
-                else:
-                    click_pos_2(890, 90, cla)
+                    print("title : collection", imgs_)
+
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\list.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(400, 340, 550, 400, cla, img, 0.85)
+                    if imgs_ is not None and imgs_ != False:
+                        print("list", imgs_)
+                        setting_ready = True
+                    else:
+                        click_pos_2(890, 90, cla)
 
 
-                    for i in range(4):
-                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\list.PNG"
-                        img_array = np.fromfile(full_path, np.uint8)
-                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set_(400, 340, 550, 400, cla, img, 0.8)
-                        if imgs_ is not None and imgs_ != False:
-                            setting_ready = True
-                        QTest.qWait(500)
+                        for i in range(4):
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\list.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(400, 340, 550, 400, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
+                                setting_ready = True
+                            QTest.qWait(500)
 
             if setting_ready == True:
 

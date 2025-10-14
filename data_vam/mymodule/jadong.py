@@ -59,6 +59,7 @@ def jadong_spot(cla):
     from massenger import line_to_me
     from potion import maul_potion
     from clean_screen import clean_screen_start
+    from boonhae_collection import boonhae_collection_start
     # kind_skip = "c:\\my_games\\vam\\data_vam\\imgs\\skip\\skip"
     # kind_skip_list = os.listdir(kind_skip)
 
@@ -105,6 +106,8 @@ def jadong_spot(cla):
                             x_reg = int(imgs_[ran_star][0])
                             y_reg = int(imgs_[ran_star][1])
 
+                            arrived = True
+
                             for i in range(10):
                                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\title\\worldmap.PNG"
                                 img_array = np.fromfile(full_path, np.uint8)
@@ -127,13 +130,27 @@ def jadong_spot(cla):
                                             if imgs_ is not None and imgs_ != False:
                                                 clean_screen_start(cla)
                                                 break
+                                            else:
+                                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\action\\go_maul\\bag_over_notice.PNG"
+                                                img_array = np.fromfile(full_path, np.uint8)
+                                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                                imgs_ = imgs_set_(350, 70, 600, 140, cla, img, 0.8)
+                                                if imgs_ is not None and imgs_ != False:
+                                                    print("bag_over_notice", imgs_)
+                                                    arrived = False
+                                                    boonhae_collection_start(cla)
+                                                    break
                                             QTest.qWait(100)
                                 else:
-                                    # 자동사냥하기
-                                    attack_on(cla)
-                                    juljun_on(cla)
-                                    is_check = True
-                                    break
+                                    if arrived == True:
+                                        # 자동사냥하기
+                                        attack_on(cla)
+                                        juljun_on(cla)
+                                        is_check = True
+                                        break
+                                    else:
+                                        is_check_count = 0
+                                        break
                                 QTest.qWait(500)
                         else:
                             why = "자동사냥터 정해야 한다."

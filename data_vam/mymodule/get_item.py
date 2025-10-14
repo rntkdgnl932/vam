@@ -492,23 +492,40 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                         full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\checked.PNG"
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set_for(380, 650, 860, 730, cla, img, 0.8)
-                        if imgs_ is not None and imgs_ != False:
-                            print("checked", imgs_)
-                            if len(imgs_) > 0:
+                        imgs_for = imgs_set_for(380, 650, 860, 730, cla, img, 0.8)
+                        if imgs_for is not None and imgs_for != False:
+                            print("checked", imgs_for)
+                            if len(imgs_for) > 0:
                                 is_checked = True
-                                print("g", imgs_[len(imgs_) - 1][0], imgs_[len(imgs_) - 1][1])
-                                x_reg = imgs_[len(imgs_) - 1][0]
-                                y_reg = imgs_[len(imgs_) - 1][1]
+                                print("g", imgs_for[len(imgs_for) - 1][0], imgs_[len(imgs_for) - 1][1])
+                                x_reg = imgs_for[len(imgs_for) - 1][0]
+                                y_reg = imgs_for[len(imgs_for) - 1][1]
                                 if x_reg < 790 + plus:
 
                                     click_pos_reg(x_reg + 55, y_reg, cla)
                                     QTest.qWait(1000)
-                                    skip_start(cla)
+
+                                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\close_1.PNG"
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set_(550, 80, 610, 145, cla, img, 0.8)
+                                    if imgs_ is not None and imgs_ != False:
+                                        print("close_1", imgs_)
+                                        click_pos_reg(imgs_.x, imgs_.y, cla)
+                                    else:
+                                        skip_start(cla)
                         if is_checked == False:
                             click_pos_2(435, 690, cla)
                             QTest.qWait(1000)
-                            skip_start(cla)
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\close_1.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(550, 80, 610, 145, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
+                                print("close_1", imgs_)
+                                click_pos_reg(imgs_.x, imgs_.y, cla)
+                            else:
+                                skip_start(cla)
                     else:
                         if kind != "common":
                             path = checked + str(kind)
@@ -525,18 +542,29 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                                     full_path = str(checked) + str(kind) + "\\" +str(get_checked_list[i])
                                     img_array = np.fromfile(full_path, np.uint8)
                                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                    imgs_ = imgs_set_for(280, 550, 850, 700, cla, img, 0.85)
-                                    if imgs_ is not None and imgs_ != False:
+                                    imgs_for = imgs_set_for(280, 550, 850, 700, cla, img, 0.85)
+                                    if imgs_for is not None and imgs_for != False:
 
-                                        if len(imgs_) > 0:
-                                            print("get_ready_list", get_checked_list[i], imgs_)
+                                        if len(imgs_for) > 0:
+                                            print("get_ready_list", get_checked_list[i], imgs_for)
 
-                                            for_x = imgs_[len(imgs_) - 1][0]
-                                            for_y = imgs_[len(imgs_) - 1][1]
+                                            for_x = imgs_for[len(imgs_for) - 1][0]
+                                            for_y = imgs_for[len(imgs_for) - 1][1]
 
                                             click_pos_reg(for_x + 70, for_y, cla)
                                             QTest.qWait(1000)
-                                            skip_start(cla)
+
+                                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\close_1.PNG"
+                                            img_array = np.fromfile(full_path, np.uint8)
+                                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                            imgs_ = imgs_set_(550, 80, 610, 145, cla, img, 0.8)
+                                            if imgs_ is not None and imgs_ != False:
+                                                print("close_1", imgs_)
+                                                click_pos_reg(imgs_.x, imgs_.y, cla)
+                                                break
+                                            else:
+
+                                                skip_start(cla)
                                             is_checked = True
 
                             elif kind == "eight":
@@ -550,14 +578,14 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                                     full_path = str(checked) + str(kind) + "\\" +str(get_checked_list[i])
                                     img_array = np.fromfile(full_path, np.uint8)
                                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                    imgs_ = imgs_set_for(300, 440, 850, 750, cla, img, 0.85)
-                                    if imgs_ is not None and imgs_ != False:
+                                    imgs_for = imgs_set_for(300, 440, 850, 750, cla, img, 0.85)
+                                    if imgs_for is not None and imgs_for != False:
 
-                                        if len(imgs_) > 0:
-                                            print("get_ready_list", get_checked_list[i], imgs_)
+                                        if len(imgs_for) > 0:
+                                            print("get_ready_list", get_checked_list[i], imgs_for)
 
-                                            for_x = imgs_[len(imgs_) - 1][0]
-                                            for_y = imgs_[len(imgs_) - 1][1]
+                                            for_x = imgs_for[len(imgs_for) - 1][0]
+                                            for_y = imgs_for[len(imgs_for) - 1][1]
 
                                             if for_x > 750:
                                                 if for_y < 540:
@@ -569,7 +597,17 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                                             else:
                                                 click_pos_reg(for_x + 70, for_y, cla)
                                                 QTest.qWait(1000)
-                                                skip_start(cla)
+                                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\close_1.PNG"
+                                                img_array = np.fromfile(full_path, np.uint8)
+                                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                                imgs_ = imgs_set_(550, 80, 610, 145, cla, img, 0.8)
+                                                if imgs_ is not None and imgs_ != False:
+                                                    print("close_1", imgs_)
+                                                    click_pos_reg(imgs_.x, imgs_.y, cla)
+                                                    break
+                                                else:
+
+                                                    skip_start(cla)
                                                 is_checked = True
                             if is_checked == False:
                                 click_pos_2(reg_x, reg_y, cla)
@@ -588,7 +626,17 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                                     print("get_ready_list", get_ready_list[i], imgs_)
                                     click_pos_reg(imgs_.x - 15, imgs_.y, cla)
                                     QTest.qWait(1000)
-                                    skip_start(cla)
+                                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\close_1.PNG"
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set_(550, 80, 610, 145, cla, img, 0.8)
+                                    if imgs_ is not None and imgs_ != False:
+                                        print("close_1", imgs_)
+                                        click_pos_reg(imgs_.x, imgs_.y, cla)
+                                        break
+                                    else:
+
+                                        skip_start(cla)
                 else:
                     is_open = True
             else:
@@ -605,7 +653,15 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                         is_title = True
                         break
                 if is_title == False:
-                    skip_start(cla)
+                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\close_1.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(550, 80, 610, 145, cla, img, 0.8)
+                    if imgs_ is not None and imgs_ != False:
+                        print("close_1", imgs_)
+                        click_pos_reg(imgs_.x, imgs_.y, cla)
+                    else:
+                        skip_start(cla)
                 else:
                     full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\title\\" + str(data)
                     img_array = np.fromfile(full_path, np.uint8)
