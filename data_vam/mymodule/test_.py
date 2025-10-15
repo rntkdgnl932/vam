@@ -56,7 +56,7 @@ def go_test():
 
         print("test")
 
-        maul_potion(cla)
+        get_event(cla)
 
 
 

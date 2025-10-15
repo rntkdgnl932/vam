@@ -324,7 +324,7 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
     from clean_screen import skip_start
     from function_game import click_pos_2, click_pos_reg, imgs_set_, imgs_set_for
-    from action import menu_open_pure
+    from action import confirm_all
     from clean_screen import clean_screen_start
 
     plus = 0
@@ -351,23 +351,23 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         num_ready = data.split(".")
         num = num_ready[0]
 
-        # 삭제 : 2, 8, 14, 15
+        # 삭제 : 3,4,6,
 
         # 1 : 위대한시작!영웅의서약(seven_five_eight) o
 
-        # 2 :
+        # 2 : 붉은한가위출석이벤트(seven) o
 
-        # 3 : 핏빛만월제출석이벤트(seven) o
+        # 3 : 핏빛만월제출석이벤트(seven)
 
-        # 4 : 핏빛만월제(eight) o
+        # 4 : 핏빛만월제(eight)
 
         # 5 : 데일리출석(tewnty_one) o
 
-        # 6 : 만월의밤스페셜던전이벤트(pass) o
+        # 6 : 만월의밤스페셜던전이벤트(pass)
 
         # 7 : 트리니티사용!(eight) o
 
-        # 8 :
+        # 8 : 적들을사냥하라!(eight) o
 
         # 9 : vampir30일의서약스페셜출석이벤트(seven) o
 
@@ -390,13 +390,13 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # new
 
-        # ? : 붉은한가위출석이벤트(seven) 2
+        # ? : 포아메의비밀라운지(random) 3
 
-        # ? : 적들을사냥하라!(eight) 8
+        # ? : 스페셜출석이벤트(seven) 4
 
-        # ? :
+        # ? : 뱀파이어의50일연회(eight) 6
 
-        #  ? :
+        # ? : 보너스타임이벤트(pass) 10
 
         # ? :
 
@@ -407,7 +407,7 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         ##############################################
         ######### 마지막 이벤트 확인하기  ###################
         ##############################################
-        # 삭제 : 3, 4, 6, 8, 10, 11, 12, 13
+        # 삭제 : 3, 4, 6,
 
         if num == "1":
             kind = "seven_five_eight"
@@ -418,13 +418,16 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         elif num == "0":
             kind = "common"
 
-        elif num == "2" or num == "3" or num == "9":
+        elif num == "3":
+            kind = "random"
+
+        elif num == "2" or num == "4" or num == "9":
             kind = "seven"
 
-        elif num == "4" or num == "7" or num == "8" or num == "0":
+        elif num == "6" or num == "7" or num == "8" or num == "0":
             kind = "eight"
 
-        elif num == "6" or num == "0":
+        elif num == "10" or num == "0":
             kind = "pass"
 
         print("kind", kind)
@@ -609,6 +612,82 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
                                                     skip_start(cla)
                                                 is_checked = True
+
+                            elif kind == "random":
+                                reg_x = 340
+                                reg_y = 460
+
+                                is_checked = True
+
+                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\checked\\random\\close_btn.PNG"
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set_(550, 80, 620, 140, cla, img, 0.8)
+                                if imgs_ is not None and imgs_ != False:
+                                    print("close_btn", imgs_)
+                                    click_pos_reg(imgs_.x, imgs_.y, cla)
+                                    QTest.qWait(500)
+
+                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\checked\\random\\click_ready.PNG"
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set_(300, 400, 560, 680, cla, img, 0.8)
+                                if imgs_ is not None and imgs_ != False:
+                                    print("click_ready", imgs_)
+                                    click_pos_reg(imgs_.x, imgs_.y, cla)
+                                    anymore_notice = False
+                                    for i in range(10):
+                                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\checked\\random\\anymore_notice.PNG"
+                                        img_array = np.fromfile(full_path, np.uint8)
+                                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                        imgs_ = imgs_set_(370, 80, 560, 140, cla, img, 0.8)
+                                        if imgs_ is not None and imgs_ != False:
+                                            print("anymore_notice", imgs_)
+                                            anymore_notice = True
+                                            break
+                                        QTest.qWait(100)
+                                    if anymore_notice == True:
+                                        # 왼쪽 포인트
+                                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\e_point\\" + str(
+                                            point_kind)
+                                        img_array = np.fromfile(full_path, np.uint8)
+                                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                        imgs_ = imgs_set_(e_x_reg - reg, e_y_reg - reg, e_x_reg + reg, e_y_reg + reg,
+                                                          cla, img, 0.8)
+                                        if imgs_ is not None and imgs_ != False:
+                                            print("get_event_start: get_e_ready_list", str(point_kind), imgs_)
+                                            # 420, 455, 540, 720, 825
+
+                                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\checked\\random\\close_btn.PNG"
+                                            img_array = np.fromfile(full_path, np.uint8)
+                                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                            imgs_ = imgs_set_(550, 80, 620, 140, cla, img, 0.8)
+                                            if imgs_ is not None and imgs_ != False:
+                                                print("close_btn", imgs_)
+                                                click_pos_reg(imgs_.x, imgs_.y, cla)
+                                                QTest.qWait(500)
+
+                                            click_list = [420, 460, 540, 725, 825]
+
+                                            for i in range(len(click_list)):
+                                                click_pos_2(click_list[i], 695, cla)
+                                                QTest.qWait(500)
+                                                full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\checked\\random\\close_btn.PNG"
+                                                img_array = np.fromfile(full_path, np.uint8)
+                                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                                imgs_ = imgs_set_(550, 80, 620, 140, cla, img, 0.8)
+                                                if imgs_ is not None and imgs_ != False:
+                                                    print("close_btn", imgs_)
+                                                    click_pos_reg(imgs_.x, imgs_.y, cla)
+                                                    QTest.qWait(500)
+
+
+                                    else:
+                                        skip_start(cla)
+                                else:
+                                    click_pos_2(760, 400, cla)
+                                    QTest.qWait(500)
+                                    confirm_all(cla)
                             if is_checked == False:
                                 click_pos_2(reg_x, reg_y, cla)
                                 QTest.qWait(1000)
