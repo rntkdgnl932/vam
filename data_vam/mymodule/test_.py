@@ -56,7 +56,7 @@ def go_test():
 
         print("test")
 
-        get_event(cla)
+        get_post(cla)
 
 
 

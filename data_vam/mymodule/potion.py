@@ -240,8 +240,8 @@ def ilgwal_buy(cla):
 
 
                 # 오류때문에 한번더 구매매
-                if anymore_notice == False:
-                    again_buy(cla)
+                # if anymore_notice == False:
+                #     again_buy(cla)
 
                 clean_screen_start(cla)
 
