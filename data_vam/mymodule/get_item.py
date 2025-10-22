@@ -351,25 +351,25 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         num_ready = data.split(".")
         num = num_ready[0]
 
-        # 삭제 : 3,4,6,
+        # 삭제 : 2 7 8 9 10
 
         # 1 : 위대한시작!영웅의서약(seven_five_eight) o
 
-        # 2 : 붉은한가위출석이벤트(seven) o
+        # 2 :
 
-        # 3 : 핏빛만월제출석이벤트(seven)
+        # 3 : 포아메의비밀라운지(random) o
 
-        # 4 : 핏빛만월제(eight)
+        # 4 : 스페셜출석이벤트(seven) o
 
         # 5 : 데일리출석(tewnty_one) o
 
-        # 6 : 만월의밤스페셜던전이벤트(pass)
+        # 6 : 뱀파이어의50일연회(eight) o
 
-        # 7 : 트리니티사용!(eight) o
+        # 7 :
 
-        # 8 : 적들을사냥하라!(eight) o
+        # 8 :
 
-        # 9 : vampir30일의서약스페셜출석이벤트(seven) o
+        # 9 :
 
         # 10 :
 
@@ -390,13 +390,13 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # new
 
-        # ? : 포아메의비밀라운지(random) 3
+        # ? : 스페셜출석이벤트II(seven) 2
 
-        # ? : 스페셜출석이벤트(seven) 4
+        # ? : 쉬마의특명!영웅의서약(seven_five_eight) 7
 
-        # ? : 뱀파이어의50일연회(eight) 6
+        # ? : 뱀파이어의50일연회핫타임이벤트II(pass) 8
 
-        # ? : 보너스타임이벤트(pass) 10
+        # ? : 뱀파이어의50일연회II(eight) 9
 
         # ? :
 
@@ -409,7 +409,7 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         ##############################################
         # 삭제 : 3, 4, 6,
 
-        if num == "1":
+        if num == "1" or num == "7":
             kind = "seven_five_eight"
 
         elif num == "5":
@@ -421,13 +421,13 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         elif num == "3":
             kind = "random"
 
-        elif num == "2" or num == "4" or num == "9":
+        elif num == "2" or num == "4" or num == "0":
             kind = "seven"
 
-        elif num == "6" or num == "7" or num == "8" or num == "0":
+        elif num == "6" or num == "9":
             kind = "eight"
 
-        elif num == "10" or num == "0":
+        elif num == "8" or num == "0":
             kind = "pass"
 
         print("kind", kind)
