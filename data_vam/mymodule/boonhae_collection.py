@@ -399,7 +399,6 @@ def boonhae_start(cla):
                                 if imgs_ is not None and imgs_ != False:
                                     print("희귀 o", imgs_)
 
-                                else:
                                     full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\checked_boonhae.PNG"
                                     img_array = np.fromfile(full_path, np.uint8)
                                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -484,6 +483,26 @@ def boonhae_start(cla):
                             img_array = np.fromfile(full_path, np.uint8)
                             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                             imgs_ = imgs_set_(450, 880, 495, 920, cla, img, 0.75)
+                            if imgs_ is not None and imgs_ != False:
+                                print("not_checked", imgs_)
+                                click_pos_reg(imgs_.x, imgs_.y, cla)
+                        QTest.qWait(500)
+
+                    # 희귀
+                    print("희귀 체크중")
+                    for i in range(3):
+                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\checked_boonhae.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set_(520, 880, 570, 920, cla, img, 0.75)
+                        if imgs_ is not None and imgs_ != False:
+                            print("checked", imgs_)
+                            break
+                        else:
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\boonhae_collection\\not_checked_boonhae.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(520, 880, 570, 920, cla, img, 0.75)
                             if imgs_ is not None and imgs_ != False:
                                 print("not_checked", imgs_)
                                 click_pos_reg(imgs_.x, imgs_.y, cla)

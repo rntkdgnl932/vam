@@ -76,7 +76,7 @@ def close_click(cla):
                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\clean_screen\\close\\" + str(kind_close_list[i])
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
+                imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.7)
                 if imgs_ is not None and imgs_ != False:
                     print("close_list", kind_close_list[i], imgs_)
 
@@ -85,7 +85,7 @@ def close_click(cla):
                         full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\server.PNG"
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set_(280, 320, 340, 360, cla, img, 0.85)
+                        imgs_ = imgs_set_(280, 320, 340, 360, cla, img, 0.7)
                         if imgs_ is not None and imgs_ != False:
                             click_pos_2(833, 333, cla)
                             is_close = True
@@ -94,7 +94,7 @@ def close_click(cla):
                         full_path = "c:\\my_games\\vam\\data_vam\\imgs\\clean_screen\\close\\" + str(kind_close_list[i])
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
+                        imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.7)
                         if imgs_ is not None and imgs_ != False:
                             click_pos_reg(imgs_.x, imgs_.y, cla)
 

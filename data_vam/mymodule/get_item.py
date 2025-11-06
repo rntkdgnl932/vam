@@ -355,11 +355,11 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # 1 : 위대한시작!영웅의서약(seven_five_eight) o
 
-        # 2 : 스페셜출석이벤트II(seven) o
+        # 2 : 밤의영혼출석이벤트(seven) 2
 
-        # 3 : 카프의선물출석이벤트(seven) 3
+        # 3 : 카프의선물출석이벤트(seven) o
 
-        # 4 : 밀라의의뢰(eight) 4
+        # 4 : 밀라의의뢰(eight) o
 
         # 5 : 데일리출석(tewnty_one) o
 
@@ -367,11 +367,11 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # 7 : 쉬마의특명!영웅의서약(seven_five_eight) o
 
-        # 8 : 뱀파이어의50일연회핫타임이벤트II(pass) o
+        # 8 : 끓어오르는피,,혈계진화(eight) 8
 
-        # 9 : 뱀파이어의50일연회(eight) o
+        # 9 : 쉬마의보답(eight) 9
 
-        # 10 : 일반던전보너스타임이벤트(pass) 10
+        # 10 :
 
         # 11 :
 
@@ -390,11 +390,11 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # new
 
-        # ? : 카프의선물출석이벤트(seven) 3
+        # ? : 밤의영혼출석이벤트(seven) 2
 
-        # ? : 밀라의의뢰(eight) 4
+        # ? : 끓어오르는피,,혈계진화(eight) 8
 
-        # ? : 일반던전보너스타임이벤트(pass) 10
+        # ? : 쉬마의보답(eight) 9
 
         # ? :
 
@@ -424,10 +424,10 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         elif num == "2" or num == "3" or num == "0":
             kind = "seven"
 
-        elif num == "4" or num == "6" or num == "9":
+        elif num == "4" or num == "6" or num == "8" or num == "9":
             kind = "eight"
 
-        elif num == "8" or num == "10":
+        elif num == "0" or num == "0":
             kind = "pass"
 
         print("kind", kind)
@@ -456,7 +456,7 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                 full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\e_point\\" + str(point_kind)
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(e_x_reg - reg, e_y_reg - reg, e_x_reg + reg, e_y_reg + reg, cla, img, 0.8)
+                imgs_ = imgs_set_(e_x_reg - plus - reg, e_y_reg - reg, e_x_reg - plus + reg, e_y_reg + reg, cla, img, 0.8)
                 if imgs_ is not None and imgs_ != False:
                     print("get_event_start: get_e_ready_list", str(point_kind), imgs_)
                     click_pos_reg(imgs_.x - 50, imgs_.y + 20, cla)
@@ -477,59 +477,20 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                                 QTest.qWait(500)
                                 break
                         # common point
-                        for i in range(len(get_ready_list)):
-                            full_path = str(get_ready) + str(get_ready_list[i])
-                            img_array = np.fromfile(full_path, np.uint8)
-                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                            imgs_ = imgs_set_(0, 30, 960, 1040, cla, img, 0.85)
-                            if imgs_ is not None and imgs_ != False:
-                                print("get_ready_list", get_ready_list[i], imgs_)
-                                click_pos_reg(imgs_.x - 15, imgs_.y, cla)
-                                QTest.qWait(1000)
-                                skip_start(cla)
-                        # 435, 490, 545, 600...
-                        # 690
 
-                        is_checked = False
-
-                        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\checked.PNG"
-                        img_array = np.fromfile(full_path, np.uint8)
-                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_for = imgs_set_for(380, 650, 860, 730, cla, img, 0.8)
-                        if imgs_for is not None and imgs_for != False:
-                            print("checked", imgs_for)
-                            if len(imgs_for) > 0:
-                                is_checked = True
-                                print("g", imgs_for[len(imgs_for) - 1][0], imgs_[len(imgs_for) - 1][1])
-                                x_reg = imgs_for[len(imgs_for) - 1][0]
-                                y_reg = imgs_for[len(imgs_for) - 1][1]
-                                if x_reg < 790 + plus:
-
-                                    click_pos_reg(x_reg + 55, y_reg, cla)
-                                    QTest.qWait(1000)
-
-                                    full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\close_1.PNG"
-                                    img_array = np.fromfile(full_path, np.uint8)
-                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                    imgs_ = imgs_set_(550, 80, 610, 145, cla, img, 0.8)
-                                    if imgs_ is not None and imgs_ != False:
-                                        print("close_1", imgs_)
-                                        click_pos_reg(imgs_.x, imgs_.y, cla)
-                                    else:
-                                        skip_start(cla)
-                        if is_checked == False:
-                            click_pos_2(435, 690, cla)
-                            QTest.qWait(1000)
-                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\close_1.PNG"
-                            img_array = np.fromfile(full_path, np.uint8)
-                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                            imgs_ = imgs_set_(550, 80, 610, 145, cla, img, 0.8)
-                            if imgs_ is not None and imgs_ != False:
-                                print("close_1", imgs_)
-                                click_pos_reg(imgs_.x, imgs_.y, cla)
-                            else:
-                                skip_start(cla)
+                        for i in range(5):
+                            x_click = 430
+                            if i > 2:
+                                x_click = 700
+                            y_click = 480 + (i * 70)
+                            if i > 2:
+                                y_click = 480 + ((i - 3) * 70)
+                            click_pos_2(x_click, y_click, cla)
+                            time.sleep(0.5)
+                            skip_start(cla)
+                            time.sleep(0.5)
                     else:
+                        print("kindkindkindkindkind", kind)
                         if kind != "common":
                             path = checked + str(kind)
 
@@ -573,6 +534,20 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                             elif kind == "eight":
                                 reg_x = 430
                                 reg_y = 460
+
+                                for i in range(8):
+                                    x_click = 430
+                                    if i > 3:
+                                        x_click = 700
+                                    y_click = 460 + (i * 70)
+                                    if i > 3:
+                                        y_click = 460 + ((i - 4) * 70)
+                                    click_pos_2(x_click, y_click, cla)
+                                    time.sleep(0.5)
+                                    skip_start(cla)
+                                    time.sleep(0.5)
+
+
                             elif kind == "tewnty_one":
                                 get_checked_list = os.listdir(path)
                                 reg_x = 350
@@ -652,7 +627,7 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                                             point_kind)
                                         img_array = np.fromfile(full_path, np.uint8)
                                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                        imgs_ = imgs_set_(e_x_reg - reg, e_y_reg - reg, e_x_reg + reg, e_y_reg + reg,
+                                        imgs_ = imgs_set_(e_x_reg - plus - reg, e_y_reg - reg, e_x_reg - plus + reg, e_y_reg + reg,
                                                           cla, img, 0.8)
                                         if imgs_ is not None and imgs_ != False:
                                             print("get_event_start: get_e_ready_list", str(point_kind), imgs_)
@@ -688,6 +663,7 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                                     click_pos_2(760, 400, cla)
                                     QTest.qWait(500)
                                     confirm_all(cla)
+                            print("is_checked", is_checked)
                             if is_checked == False:
                                 click_pos_2(reg_x, reg_y, cla)
                                 QTest.qWait(1000)
