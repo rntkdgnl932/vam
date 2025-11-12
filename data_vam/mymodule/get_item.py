@@ -355,11 +355,11 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # 1 : 위대한시작!영웅의서약(seven_five_eight) o
 
-        # 2 : 밤의영혼출석이벤트(seven) 2
+        # 2 : 밤의영혼출석이벤트(seven) o
 
-        # 3 : 카프의선물출석이벤트(seven) o
+        # 3 : 카프의선물출석이벤트(seven)
 
-        # 4 : 밀라의의뢰(eight) o
+        # 4 : 밀라의의뢰(eight)
 
         # 5 : 데일리출석(tewnty_one) o
 
@@ -367,9 +367,9 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # 7 : 쉬마의특명!영웅의서약(seven_five_eight) o
 
-        # 8 : 끓어오르는피,,혈계진화(eight) 8
+        # 8 : 끓어오르는피,,혈계진화(eight) o
 
-        # 9 : 쉬마의보답(eight) 9
+        # 9 : 쉬마의보답(eight) o
 
         # 10 :
 
@@ -390,13 +390,13 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # new
 
-        # ? : 밤의영혼출석이벤트(seven) 2
+        # ? : 리즈비의은총출석이벤트(seven) 3
 
-        # ? : 끓어오르는피,,혈계진화(eight) 8
+        # ? : 영역침공이벤트(pass) 4
 
-        # ? : 쉬마의보답(eight) 9
+        # ? : 막아라영역침공(eight) 10
 
-        # ? :
+        # ? : 보너스영원의주화(eight) 11
 
         # ? :
 
@@ -408,6 +408,8 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         ######### 마지막 이벤트 확인하기  ###################
         ##############################################
         # 삭제 : 3, 4,
+
+        kind = "none"
 
         if num == "1" or num == "7":
             kind = "seven_five_eight"
@@ -424,10 +426,10 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         elif num == "2" or num == "3" or num == "0":
             kind = "seven"
 
-        elif num == "4" or num == "6" or num == "8" or num == "9":
+        elif num == "10" or num == "6" or num == "8" or num == "9" or num == "11":
             kind = "eight"
 
-        elif num == "0" or num == "0":
+        elif num == "4" or num == "0":
             kind = "pass"
 
         print("kind", kind)
