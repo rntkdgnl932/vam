@@ -34,7 +34,7 @@ def go_test():
     from potion import potion_check
 
 
-    cla = "five"
+    cla = "one"
 
     plus = 0
 

@@ -323,7 +323,7 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
     import cv2
 
     from clean_screen import skip_start
-    from function_game import click_pos_2, click_pos_reg, imgs_set_, imgs_set_for
+    from function_game import click_pos_2, click_pos_reg, imgs_set_, imgs_set_for, drag_pos
     from action import confirm_all
     from clean_screen import clean_screen_start
 
@@ -351,15 +351,15 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         num_ready = data.split(".")
         num = num_ready[0]
 
-        # 삭제 : 3, 4
+        # 삭제 : 2, 3, 4, 8, 9
 
         # 1 : 위대한시작!영웅의서약(seven_five_eight) o
 
-        # 2 : 밤의영혼출석이벤트(seven) o
+        # 2 : 100일전야제!밤의출석이벤트(fourteen) 2
 
-        # 3 : 카프의선물출석이벤트(seven)
+        # 3 : 피의강화(eight)  3
 
-        # 4 : 밀라의의뢰(eight)
+        # 4 : 리턴트리니티랭킹이벤트(right) 4
 
         # 5 : 데일리출석(tewnty_one) o
 
@@ -367,11 +367,11 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # 7 : 쉬마의특명!영웅의서약(seven_five_eight) o
 
-        # 8 : 끓어오르는피,,혈계진화(eight) o
+        # 8 : 블랙코인미션이벤트(eight) 8
 
-        # 9 : 쉬마의보답(eight) o
+        # 9 : 라즈비의은총출석이벤트(seven) 9
 
-        # 10 :
+        # 10 : 보너스!영원의주화(eight) 10
 
         # 11 :
 
@@ -390,17 +390,17 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # new
 
-        # ? : 리즈비의은총출석이벤트(seven) 3
+        # ? : 100일전야제!밤의출석이벤트(seven) 2
 
-        # ? : 영역침공이벤트(pass) 4
+        # ? : 피의강화(eight)  3
 
-        # ? : 막아라영역침공(eight) 10
+        # ? : 리턴트리니티랭킹이벤트(right) 4
 
-        # ? : 보너스영원의주화(eight) 11
+        # ? : 블랙코인미션이벤트(eight) 8
 
-        # ? :
+        # ? : 라즈비의은총출석이벤트(seven) 9
 
-        # ? :
+        # ? : 보너스!영원의주화(eight) 10
 
         # ? :
 
@@ -417,19 +417,22 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         elif num == "5":
             kind = "tewnty_one"
 
-        elif num == "0":
+        elif num == "2":
             kind = "common"
 
         elif num == "0":
             kind = "random"
 
-        elif num == "2" or num == "3" or num == "0":
+        elif num == "0" or num == "9" or num == "0":
             kind = "seven"
 
-        elif num == "10" or num == "6" or num == "8" or num == "9" or num == "11":
+        elif num == "10" or num == "6" or num == "3" or num == "8" or num == "11":
             kind = "eight"
 
-        elif num == "4" or num == "0":
+        elif num == "4":
+            kind = "right"
+
+        elif num == "0" or num == "0":
             kind = "pass"
 
         print("kind", kind)
@@ -491,6 +494,23 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                             time.sleep(0.5)
                             skip_start(cla)
                             time.sleep(0.5)
+                        for i in range(8):
+                            x_click = 440 + (i*55)
+                            y_click = 690
+                            click_pos_2(x_click, y_click, cla)
+                            time.sleep(0.5)
+                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\close_1.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(550, 80, 610, 145, cla, img, 0.8)
+                            if imgs_ is not None and imgs_ != False:
+                                print("close_1", imgs_)
+                                click_pos_reg(imgs_.x, imgs_.y, cla)
+                                break
+                            else:
+
+                                skip_start(cla)
+                            time.sleep(0.5)
                     else:
                         print("kindkindkindkindkind", kind)
                         if kind != "common":
@@ -544,6 +564,31 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                                     y_click = 460 + (i * 70)
                                     if i > 3:
                                         y_click = 460 + ((i - 4) * 70)
+                                    click_pos_2(x_click, y_click, cla)
+                                    time.sleep(0.5)
+                                    skip_start(cla)
+                                    time.sleep(0.5)
+
+                            elif kind == "right":
+                                reg_x = 430
+                                reg_y = 460
+
+                                for i in range(4):
+                                    x_click = 700
+                                    y_click = 515 + (i * 70)
+                                    click_pos_2(x_click, y_click, cla)
+                                    time.sleep(0.5)
+                                    skip_start(cla)
+                                    time.sleep(0.5)
+
+                                drag_pos(700, 720, 700, 500, cla)
+                                time.sleep(0.5)
+                                drag_pos(700, 720, 700, 500, cla)
+                                time.sleep(0.5)
+
+                                for i in range(2):
+                                    x_click = 700
+                                    y_click = 630 + (i * 70)
                                     click_pos_2(x_click, y_click, cla)
                                     time.sleep(0.5)
                                     skip_start(cla)
