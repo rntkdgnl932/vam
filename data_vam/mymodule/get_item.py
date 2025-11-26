@@ -351,15 +351,15 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         num_ready = data.split(".")
         num = num_ready[0]
 
-        # 삭제 : 2, 3, 4, 8, 9
+        # 삭제 : 9, 10
 
         # 1 : 위대한시작!영웅의서약(seven_five_eight) o
 
-        # 2 : 100일전야제!밤의출석이벤트(fourteen) 2
+        # 2 : 100일전야제!밤의출석이벤트(fourteen) o
 
-        # 3 : 피의강화(eight)  3
+        # 3 : 피의강화(eight) o
 
-        # 4 : 리턴트리니티랭킹이벤트(right) 4
+        # 4 : 리턴트리니티랭킹이벤트(right) o
 
         # 5 : 데일리출석(tewnty_one) o
 
@@ -367,11 +367,11 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # 7 : 쉬마의특명!영웅의서약(seven_five_eight) o
 
-        # 8 : 블랙코인미션이벤트(eight) 8
+        # 8 : 블랙코인미션이벤트(eight) o
 
-        # 9 : 라즈비의은총출석이벤트(seven) 9
+        # 9 :
 
-        # 10 : 보너스!영원의주화(eight) 10
+        # 10 :
 
         # 11 :
 
@@ -390,17 +390,17 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # new
 
-        # ? : 100일전야제!밤의출석이벤트(seven) 2
+        # ? : 피의결속!출석이벤트(seven) 9
 
-        # ? : 피의강화(eight)  3
+        # ? : 100일전야제준비이벤트(eight) 10
 
-        # ? : 리턴트리니티랭킹이벤트(right) 4
+        # ? : 영역침공이벤트(pass) 11
 
-        # ? : 블랙코인미션이벤트(eight) 8
+        # ? : 막아라!영역침공(eight) 12
 
-        # ? : 라즈비의은총출석이벤트(seven) 9
+        # ? :
 
-        # ? : 보너스!영원의주화(eight) 10
+        # ? :
 
         # ? :
 
@@ -423,16 +423,16 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         elif num == "0":
             kind = "random"
 
-        elif num == "0" or num == "9" or num == "0":
+        elif num == "9" or num == "0" or num == "0":
             kind = "seven"
 
-        elif num == "10" or num == "6" or num == "3" or num == "8" or num == "11":
+        elif num == "10" or num == "6" or num == "3" or num == "8" or num == "12":
             kind = "eight"
 
         elif num == "4":
             kind = "right"
 
-        elif num == "0" or num == "0":
+        elif num == "11" or num == "0":
             kind = "pass"
 
         print("kind", kind)
