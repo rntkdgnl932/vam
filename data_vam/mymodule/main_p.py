@@ -204,6 +204,8 @@ class MyApp(QDialog):
         elif last_monitor_number == 3:
             x_reg = 960 * 4
 
+        print("last_monitor_number", last_monitor_number)
+
         monitor_position = "topleft"
         if x_reg == 3840:
             my_monitor = 2
