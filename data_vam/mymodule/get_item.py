@@ -417,7 +417,7 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         elif num == "11":
             kind = "tewnty_one"
 
-        elif num == "2":
+        elif num == "0":
             kind = "common"
 
         elif num == "0":
@@ -426,7 +426,7 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         elif num == "0" or num == "0" or num == "0":
             kind = "seven"
 
-        elif num == "3":
+        elif num == "3" or num == "2":
             kind = "fourteen"
 
         elif num == "10" or num == "6" or num == "5" or num == "9" or num == "0":
@@ -564,7 +564,7 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                                     full_path = str(checked) + str(kind) + "\\" +str(get_checked_list[i])
                                     img_array = np.fromfile(full_path, np.uint8)
                                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                    imgs_for = imgs_set_for(280, 550, 850, 700, cla, img, 0.8)
+                                    imgs_for = imgs_set_for(280, 550, 850, 750, cla, img, 0.7)
                                     if imgs_for is not None and imgs_for != False:
 
                                         if len(imgs_for) > 0:
@@ -574,7 +574,7 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
                                             for_y = imgs_for[len(imgs_for) - 1][1]
 
 
-                                            if for_x > 760:
+                                            if for_x > 760 + plus:
                                                 if for_y > 630:
                                                     break
                                                 else:
