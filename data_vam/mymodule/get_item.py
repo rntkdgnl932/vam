@@ -351,29 +351,29 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         num_ready = data.split(".")
         num = num_ready[0]
 
-        # 삭제 : 9, 10
+        # 삭제 : 3, 5, 8, 9, 11, 12
 
         # 1 : 위대한시작!영웅의서약(seven_five_eight) o
 
         # 2 : 100일전야제!밤의출석이벤트(fourteen) o
 
-        # 3 : 피의강화(eight) o
+        # 3 : 100일스페셜출석이벤트(fourteen) 3
 
         # 4 : 리턴트리니티랭킹이벤트(right) o
 
-        # 5 : 데일리출석(tewnty_one) o
+        # 5 : 100일스페셜미션이벤트(eight) 5
 
         # 6 : 트리니티사용!(eight) o
 
         # 7 : 쉬마의특명!영웅의서약(seven_five_eight) o
 
-        # 8 : 블랙코인미션이벤트(eight) o
+        # 8 : 100일이벤트월드보스등장!(pass) 8
 
-        # 9 :
+        # 9 : 100일이벤트월드보스등장!미션이벤트(eight) 9
 
-        # 10 :
+        # 10 : 100일전야제준비이벤트(eight) o
 
-        # 11 :
+        # 11 : NEW데일리출석(tewnty_one) 11
 
         # 12 :
 
@@ -390,15 +390,15 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
         # new
 
-        # ? : 피의결속!출석이벤트(seven) 9
+        # ? : 100일스페셜출석이벤트(fourteen) 3
 
-        # ? : 100일전야제준비이벤트(eight) 10
+        # ? : 100일스페셜미션이벤트(eight) 5
 
-        # ? : 영역침공이벤트(pass) 11
+        # ? : 100일이벤트월드보스등장!(pass) 8
 
-        # ? : 막아라!영역침공(eight) 12
+        # ? : 100일이벤트월드보스등장!미션이벤트(eight) 9
 
-        # ? :
+        # ? : NEW데일리출석(tewnty_one) 11
 
         # ? :
 
@@ -414,7 +414,7 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         if num == "1" or num == "7":
             kind = "seven_five_eight"
 
-        elif num == "5":
+        elif num == "11":
             kind = "tewnty_one"
 
         elif num == "2":
@@ -423,16 +423,19 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
         elif num == "0":
             kind = "random"
 
-        elif num == "9" or num == "0" or num == "0":
+        elif num == "0" or num == "0" or num == "0":
             kind = "seven"
 
-        elif num == "10" or num == "6" or num == "3" or num == "8" or num == "12":
+        elif num == "3":
+            kind = "fourteen"
+
+        elif num == "10" or num == "6" or num == "5" or num == "9" or num == "0":
             kind = "eight"
 
         elif num == "4":
             kind = "right"
 
-        elif num == "11" or num == "0":
+        elif num == "8" or num == "0":
             kind = "pass"
 
         print("kind", kind)
@@ -552,7 +555,46 @@ def get_event_start(cla, data, e_x_reg, e_y_reg, point_kind):
 
                                                 skip_start(cla)
                                             is_checked = True
+                            elif kind == "fourteen":
+                                get_checked_list = os.listdir(path)
+                                reg_x = 350
+                                reg_y = 590
 
+                                for i in range(len(get_checked_list)):
+                                    full_path = str(checked) + str(kind) + "\\" +str(get_checked_list[i])
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_for = imgs_set_for(280, 550, 850, 700, cla, img, 0.8)
+                                    if imgs_for is not None and imgs_for != False:
+
+                                        if len(imgs_for) > 0:
+                                            print("get_ready_list", get_checked_list[i], imgs_for)
+
+                                            for_x = imgs_for[len(imgs_for) - 1][0]
+                                            for_y = imgs_for[len(imgs_for) - 1][1]
+
+
+                                            if for_x > 760:
+                                                if for_y > 630:
+                                                    break
+                                                else:
+                                                    click_pos_2(350, 680, cla)
+                                            else:
+                                                click_pos_reg(for_x + 70, for_y, cla)
+                                            QTest.qWait(1000)
+
+                                            full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\close_1.PNG"
+                                            img_array = np.fromfile(full_path, np.uint8)
+                                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                            imgs_ = imgs_set_(550, 80, 610, 145, cla, img, 0.8)
+                                            if imgs_ is not None and imgs_ != False:
+                                                print("close_1", imgs_)
+                                                click_pos_reg(imgs_.x, imgs_.y, cla)
+                                                break
+                                            else:
+
+                                                skip_start(cla)
+                                            is_checked = True
                             elif kind == "eight":
                                 reg_x = 430
                                 reg_y = 460

@@ -56,7 +56,12 @@ def go_test():
 
         print("test")
 
-        get_event(cla)
+        full_path = "c:\\my_games\\vam\\data_vam\\imgs\\get_item\\event\\server.PNG"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set_(280, 320, 340, 360, cla, img, 0.85)
+        if imgs_ is not None and imgs_ != False:
+            print("server", imgs_)
 
 
 
